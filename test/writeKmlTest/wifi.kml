@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <Document>
+        <name>MyWifi</name>
+        <Folder>
+            <name>2017-10-27 16:34:47</name>
+            <TimeStamp>
+                <when>2017-10-27T16:34:47Z</when>
+            </TimeStamp>
+            <Placemark>
+                <name>2017-10-27 16:34:47</name>
+                <open>1</open>
+                <description> &lt;br/&gt;1: &lt;br/&gt;SSID: &lt;b&gt;Mouly  &lt;br/&gt;MAC: &lt;b&gt;7c:b7:33:2e:76:73  &lt;br/&gt;Channel: &lt;b&gt;11  &lt;br/&gt;Freqency: &lt;b&gt;-78 &lt;br/&gt;2: &lt;br/&gt;SSID: &lt;b&gt;888Corp  &lt;br/&gt;MAC: &lt;b&gt;0a:8d:db:6e:71:6d  &lt;br/&gt;Channel: &lt;b&gt;1  &lt;br/&gt;Freqency: &lt;b&gt;-84 &lt;br/&gt;3: &lt;br/&gt;SSID: &lt;b&gt;888Corp  &lt;br/&gt;MAC: &lt;b&gt;0a:8d:db:6e:71:bf  &lt;br/&gt;Channel: &lt;b&gt;1  &lt;br/&gt;Freqency: &lt;b&gt;-84 &lt;br/&gt;4: &lt;br/&gt;SSID: &lt;b&gt;smartsell  &lt;br/&gt;MAC: &lt;b&gt;78:e8:b6:69:2a:e9  &lt;br/&gt;Channel: &lt;b&gt;11  &lt;br/&gt;Freqency: &lt;b&gt;-87</description>
+                <Point>
+                    <coordinates>34.8099447973073,32.1675586234778</coordinates>
+                </Point>
+            </Placemark>
+        </Folder>
+    </Document>
+</kml>

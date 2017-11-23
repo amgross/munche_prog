@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="התוכנה"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/JavaAPIforKml-2.2.0.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/JavaAPIforKml-2.2.1.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/jaxb-impl-2.1.17.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/junit.jar"/>
+	<classpathentry kind="lib" path="התוכנה/ספריות/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

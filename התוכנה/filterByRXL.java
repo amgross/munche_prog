@@ -1,4 +1,3 @@
-package arye;
 /**
  * 
  * implement of filter to line for the kml file by ID

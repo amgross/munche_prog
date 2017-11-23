@@ -1,4 +1,3 @@
-package arye;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +11,7 @@ public class test {
 	@Test
 	public void test1ToCsv() throws IOException {
 		System.out.println("if their was a problem, be sure that the test folder is in the project");
-		ex0.toCsv("test\\toCsvTest\\test1");
+		toCsv.writeCsv("test\\toCsvTest\\test1");
 		FileReader fr = new FileReader("test\\toCsvTest\\test1\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		Scanner scanner = new Scanner(br.readLine());
@@ -23,7 +22,7 @@ public class test {
 
 	@Test
 	public void test2ToCsv() throws IOException {
-		ex0.toCsv("test\\toCsvTest\\test2");
+		toCsv.writeCsv("test\\toCsvTest\\test2");
 		FileReader fr = new FileReader("test\\toCsvTest\\test2\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		Scanner scanner = new Scanner(br.readLine());
@@ -33,7 +32,7 @@ public class test {
 	}
 	@Test
 	public void test3ToCsv() throws IOException {
-		ex0.toCsv("test\\toCsvTest\\test3");
+		toCsv.writeCsv("test\\toCsvTest\\test3");
 		FileReader fr = new FileReader("test\\toCsvTest\\test3\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		Scanner scanner = new Scanner(br.readLine());
@@ -43,7 +42,7 @@ public class test {
 	}
 	@Test
 	public void test4ToCsv() throws IOException {
-		ex0.toCsv("test\\toCsvTest\\test4");
+		toCsv.writeCsv("test\\toCsvTest\\test4");
 		FileReader fr = new FileReader("test\\toCsvTest\\test4\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		Scanner scanner = new Scanner(br.readLine());
@@ -56,21 +55,21 @@ public class test {
 	@Test
 	public void test1WriteKml() {
 		System.out.println("press 'n' three times with enter");
-		assertEquals(0, ex0.writeKml("test\\writeKmlTest\\bad1.csv","test\\writeKmlTest"));
+		assertEquals(0, toKml.writeKml("test\\writeKmlTest\\bad1.csv","test\\writeKmlTest"));
 	}
 	@Test
 	public void test2WriteKml() {
 		System.out.println("press 'n' three times with enter");
-		assertEquals(0, ex0.writeKml("test\\writeKmlTest\\bad2.csv","test\\writeKmlTest"));
+		assertEquals(0, toKml.writeKml("test\\writeKmlTest\\bad2.csv","test\\writeKmlTest"));
 	}
 	@Test
 	public void test3WriteKml() {
 		System.out.println("press 'n' three times with enter");
-		assertEquals(1,ex0.writeKml("test\\writeKmlTest\\good1.csv","test\\writeKmlTest"));
+		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good1.csv","test\\writeKmlTest"));
 	}
 	@Test
 	public void test4WriteKml() {
 		System.out.println("press 'n' three times with enter");
-		assertEquals(1,ex0.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
+		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
 	}
 }
