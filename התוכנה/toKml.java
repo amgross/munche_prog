@@ -103,7 +103,7 @@ public class toKml {
 				br.close();
 				return 0;//fail
 			}
-			for (int i=0;i<genericFunctions.countLines(path);i++){
+			for (int i=1;i<genericFunctions.countLines(path);i++){
 				try {
 					String[] parts = br.readLine().split(",");
 					check.checkLine(parts);
