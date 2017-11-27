@@ -3,18 +3,18 @@ public class check {
 	public static final Exception Exception = null;
 	/**
 	 * if line in info is not good, throw exeption
-	 * @param info
+	 * @param wifis
 	 * @param lineNum
 	 * @throws java.lang.Exception 
 	 */
-	public static void checkInfo(String[][] info, int lineNum) throws java.lang.Exception {
+	public static void checkInfo(wifi[] wifis, int lineNum) throws java.lang.Exception {
 		// TODO Auto-generated method stub
-		checkTime(info[2][lineNum]);
-		Integer.parseInt(info[3][lineNum]);
-		Integer.parseInt(info[4][lineNum]);
-		Double.parseDouble(info[5][lineNum]);
-		Double.parseDouble(info[6][lineNum]);
-		Double.parseDouble(info[7][lineNum]);
+		checkTime(wifis[lineNum].getTime());
+		Integer.parseInt(wifis[lineNum].getChannel());
+		Integer.parseInt(wifis[lineNum].getRSSI());
+		Double.parseDouble(wifis[lineNum].getLatitude());
+		Double.parseDouble(wifis[lineNum].getLongitude());
+		Double.parseDouble(wifis[lineNum].getAltitude());
 	}
 	
 	/**
