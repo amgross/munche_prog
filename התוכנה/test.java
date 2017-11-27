@@ -9,6 +9,10 @@ import java.util.Scanner;
 import org.junit.Test;
 
 public class test {
+	/**
+	 * checks the toCsv class
+	 * @throws IOException
+	 */
 	@Test
 	public void test1ToCsv() throws IOException {
 		toCsv.writeCsv("test\\toCsvTest\\test1");
@@ -53,7 +57,9 @@ public class test {
 	}
 	
 	
-
+	/**
+	 * check the toKml class
+	 */
 	@Test
 	public void test1WriteKml() {
 		System.out.println("press 'n' three times with enter");
@@ -75,6 +81,9 @@ public class test {
 		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
 	}
 	
+	/**
+	 * check the check class
+	 */
 	@Test
 	public void checkGoodTimeTest(){
 		try {
@@ -96,7 +105,9 @@ public class test {
 			check.checkTime("2007-12-01 23:00:60");
 	}
 	
-	
+	/**
+	 * check the filters
+	 */
 	@Test
 	public void FilterByTimeGoodTest() {
 		String[] time={"2007-12-01 23:00:59"};
