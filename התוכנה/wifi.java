@@ -4,30 +4,13 @@ public class wifi {
 	 //0 MAC,1 SSID,2 Time,3 Channel,4 RSSI,5 Latitude,6 Longitude,7 Altitude,8 Type,9 ID
 	private String _MAC;
 	private String _SSID;
-	private String _Time;
-	private String _Channel;
-	private String _RSSI;
-	private String _Latitude;
-	private String _Longitude;
-	private String _Altitude;
-	private String _Type;
-	private String _ID;
+	private int _Channel;
+	private int _RSSI;
 	
 	public  wifi() {
 		
 	}
-	public wifi(String MAC,String SSID,String Time,String Channel,String RSSI,String Latitude,String Longitude,String Altitude,String Type,String ID) {
-		this._MAC=MAC;
-		this._SSID=SSID;
-		this._Time=Time;
-		this._Channel=Channel;
-		this._RSSI=RSSI;
-		this._Latitude=Latitude;
-		this._Longitude=Longitude;
-		this._Altitude=Altitude;
-		this._Type=Type;
-		this._ID=ID;
-	}
+
 	
 	public void setMAC(String mAC) {
 		_MAC = mAC;
@@ -41,58 +24,21 @@ public class wifi {
 	public String getSSID() {
 		return _SSID;
 	}
-	public void setTime(String time) {
-		_Time = time;
-	}
-	public String getTime() {
-		return _Time;
-	}
+	
+	
 	public void setChannel(String channel) {
-		_Channel = channel;
+		_Channel = Integer.parseInt(channel);
+		
 	}
-	public String getChannel() {
+	public int getChannel() {
 		return _Channel;
 	}
 	public void setRSSI(String rSSI) {
-		_RSSI = rSSI;
+		_RSSI = Integer.parseInt(rSSI);
 	}
-	public String getRSSI() {
+	public int getRSSI() {
 		return _RSSI;
 	}
-	public void setLatitude(String latitude) {
-		_Latitude = latitude;
-	}
-	public String getLatitude() {
-		return _Latitude;
-	}
-	public void setLongitude(String longitude) {
-		_Longitude = longitude;
-	}
-	public String getLongitude() {
-		return _Longitude;
-	}
-	public void setAltitude(String altitude) {
-		_Altitude = altitude;
-	}
-	public String getAltitude() {
-		return _Altitude;
-	}
-	public void setType(String type) {
-		_Type = type;
-	}
-	public String getType() {
-		return _Type;
-	}
-	public void setID(String iD) {
-		_ID = iD;
-	}
-	public String getID() {
-		return _ID;
-	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

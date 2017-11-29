@@ -6,18 +6,17 @@
  *else returning true
  */
 public class filterByRXL implements filter{
-	public boolean filters(String[] line,String min) {
+	public boolean filters(sameScanWifi info,String min) {
 		// TODO Auto-generated method stub
-		int numOfWIFIs=Integer.parseInt(line[5]);
-		boolean ans=false;
-		for(int i=0;i<numOfWIFIs;i++){
-			if(Integer.parseInt(line[i*4+9])<Integer.parseInt(min)){
-				line[i*4+9]="0";
-			}
-			else{
-				ans=true;
+		
+		for(wifi current:info){
+			if(current.getRSSI()<Integer.parseInt(min)){
+				info.remove(current);
 			}
 		}
-		return ans;
+		if(info.size()==0){
+			return false;
+		}
+		return true;
 	}
 }

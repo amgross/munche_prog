@@ -8,6 +8,6 @@ import java.util.List;
  *else returning true
  */
 public interface filter {
-	boolean filters(String[] line, String par);
+	boolean filters(sameScanWifi info, String par);
 
 }
