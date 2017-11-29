@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
 import org.junit.Test;
 
 public class test {
@@ -103,32 +101,40 @@ public class test {
 	
 	/**
 	 * check the filters
+	 * @throws Exception 
 	 */
 	@Test
-	public void FilterByTimeGoodTest() {
-		String[] time={"2007-12-01 23:00:59"};
+	public void FilterByTimeGoodTest() throws Exception {
+		sameScanWifi checkTime=new  sameScanWifi();
+		checkTime.setTime("2007-12-01 23:00:59");
 		filter TimeFilterTest= new filterByTime();
-		assertTrue(TimeFilterTest.filters(time,"95-04-26 15:25:56"));
-		assertTrue(TimeFilterTest.filters(time,"2007-12-01 22:15:59"));
-		assertTrue(TimeFilterTest.filters(time,time[0]));
+		assertTrue(TimeFilterTest.filters(checkTime,"95-04-26 15:25:56"));
+		assertTrue(TimeFilterTest.filters(checkTime,"2007-12-01 22:15:59"));
+		assertTrue(TimeFilterTest.filters(checkTime,checkTime.getTime()));
 	} 
 	@Test
-	public void FilterByTimeBadTest() {
-		String[] time={"2007-12-01 23:00:59"};
+	public void FilterByTimeBadTest() throws Exception {
+		sameScanWifi checkTime=new  sameScanWifi();
+		checkTime.setTime("2007-12-01 23:00:59");
 		filter TimeFilterTest= new filterByTime();
-		assertFalse(TimeFilterTest.filters(time,"2008-04-26 15:25:56"));
-		assertFalse(TimeFilterTest.filters(time,"2007-12-01 23:01:00"));
+		assertFalse(TimeFilterTest.filters(checkTime,"2008-04-26 15:25:56"));
+		assertFalse(TimeFilterTest.filters(checkTime,"2007-12-01 23:01:00"));
 	} 
 	
 	
 	@Test
 	public void FilterByRXLTest() {
-		String[] line="2017-10-27 16:13:51,ONEPLUS A3003_28_171012,32.16876665,34.81320794,37,2,osnatg370,c0:ac:54:f5:7b:a7,11,-86,NGOGA,30:b5:c2:fe:aa:56,6,-87".split(",");
-		String[] check="2017-10-27 16:13:51,ONEPLUS A3003_28_171012,32.16876665,34.81320794,37,2,osnatg370,c0:ac:54:f5:7b:a7,11,-86,NGOGA,30:b5:c2:fe:aa:56,6,-87".split(",");
+		sameScanWifi checkRXL=new  sameScanWifi();
+		wifi test=new wifi();
+		test.setRSSI("-87");
+		checkRXL.insert(test);
+		test=new wifi();
+		test.setRSSI("-86");
+		checkRXL.insert(test);
 		filter RXLFilterTest= new filterByRXL();
-		assertTrue(RXLFilterTest.filters(line,"-88")&&Arrays.equals(check, line));
-		assertTrue(RXLFilterTest.filters(line,"-86")&&line[13].equals("0"));
-		assertFalse(RXLFilterTest.filters(check,"-85"));
+		assertTrue(RXLFilterTest.filters(checkRXL,"-88")&&checkRXL.size()==2);
+		assertTrue(RXLFilterTest.filters(checkRXL,"-86")&&checkRXL.size()==1);
+		assertFalse(RXLFilterTest.filters(checkRXL,"-85")||checkRXL.size()!=0);
 	} 
 	
 	@Test
