@@ -65,7 +65,7 @@ public class toCsv {
 		return finalPathes;
 	}
 	/** 
-	 *  gets array[][] of the info and PrintWriter to wifi.csv (format)
+	 *  gets vector of the info and PrintWriter to wifi.csv (format)
 	 *  printing into the new csv file all the data
 	 * 
 	 * @param info-
@@ -81,8 +81,7 @@ public class toCsv {
 	
 	/**
 	 * Get an array of the relevant path names. 
-	 * Return the relevant info from the files in String array[][], The order is:
-	 * 0 MAC,1 SSID,2 Time,3 Channel,4 RSSI,5 Latitude,6 Longitude,7 Altitude,8 Type,9 ID
+	 * Return the relevant info from the files in vector<sameScanWifi>
 	 * @param pathes-
 	 * @return info-matrix of parameters 
 	 */
@@ -139,7 +138,7 @@ public class toCsv {
 						tempSameScanWifiVector.add(tempSameScanWifi);
 					}
 				}
-				unit(wifis,tempSameScanWifiVector);
+				 genericFunctions.unit(wifis,tempSameScanWifiVector);
 				scanner.close();
 				br.close();
 			} catch (Exception e) {               // if their is a problem with the csv file, it won't convert to the new csv file
@@ -149,20 +148,5 @@ public class toCsv {
 		return wifis;
 
 	}
-	private static void unit(Vector<sameScanWifi> wifis, Vector<sameScanWifi> tempSameScanWifiVector) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<tempSameScanWifiVector.size();i++){
-			boolean add=false;
-			for(int j=0;j<wifis.size();j++){
-				if(tempSameScanWifiVector.elementAt(i).compare(wifis.elementAt(j))){
-					wifis.elementAt(j).insert(tempSameScanWifiVector.elementAt(i));
-					add=true;
-					break;
-				}
-			}
-			if(!add){
-				wifis.add(tempSameScanWifiVector.elementAt(i));
-			}
-		}
-	}
+	
 }

@@ -1,6 +1,6 @@
 /**
  * 
- * implement of filter to line for the kml file by ID
+ * implement of filter to 'sameScanWifi' for the kml file by ID
  *if it is before the relevant time return false
  *else returning true
  */

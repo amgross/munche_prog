@@ -111,20 +111,30 @@ public class sameScanWifi implements Iterable<wifi>{
 		return discription;
 	}
 	
-	public void remove(wifi delete){
+	/**
+	 *  remove one wifi
+	 * @param wifi
+	 * @return true if the object didn't emptied, else false
+	 */
+	public boolean remove(wifi delete){
 		for(int i=0;i<this.num-1;i++){
 			if(delete==this.wifis[i]){
 				this.wifis[i]=this.wifis[this.num-1];
 				this.num--;
-				return;
+				return true;
 			}
 		}
 		if(delete==this.wifis[this.num-1]){
 			this.num--;
 		}
+		if(this.num==0)return false;
+		return true;
 	}
 
-
+	/**
+	 * 
+	 * setters return exception if the values are non good
+	 */
 	public void setAltitude(String altitude) {
 		this.altitude = Double.parseDouble(altitude);
 	}
@@ -178,6 +188,9 @@ public class sameScanWifi implements Iterable<wifi>{
 		return time;
 	}
 
+	/**
+	 * iterator for scanning all the wifis that contained
+	 */
 	@Override
 	public Iterator<wifi> iterator() {
 		// TODO Auto-generated method stub

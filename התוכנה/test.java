@@ -137,6 +137,10 @@ public class test {
 		assertFalse(RXLFilterTest.filters(checkRXL,"-85")||checkRXL.size()!=0);
 	} 
 	
+	/**
+	 * check that the counting line function returns the right numbers
+	 * @throws IOException
+	 */
 	@Test
 	public void CountLineTest() throws IOException {
 		//test when their is no enter in the end of the file
