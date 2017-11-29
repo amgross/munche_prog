@@ -99,7 +99,6 @@ public class toKml {
 		try {
 			final Kml kml = new Kml();
 			Document document = kml.createAndSetDocument().withName("MyWifi");
-
 			Vector<sameScanWifi> Info=collectInfo(path,myFilter, filter);
 			for(sameScanWifi current:Info){
 				Folder y =document.createAndAddFolder();
@@ -126,7 +125,7 @@ public class toKml {
 			br.close();
 			throw Exception;
 		}
-		for (int i=0;i<genericFunctions.countLines(path);i++){
+		for (int i=1;i<genericFunctions.countLines(path);i++){
 			sameScanWifi tempSameScanWifi=new sameScanWifi();
 			String[] parts = br.readLine().split(",");
 			tempSameScanWifi.setAltitude(parts[4]);
