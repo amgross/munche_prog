@@ -1,7 +1,7 @@
 /**
  * 
- * implement of filter to line for the kml file by ID
- *every wifi that his rxl to low, changes his rxl to 0
+ * implement of filter to 'sameScanWifi' for the kml file by ID
+ *every wifi that his rxl to low, remove it
  *if all the items 'removed' return false
  *else returning true
  */
@@ -11,11 +11,10 @@ public class filterByRXL implements filter{
 		
 		for(wifi current:info){
 			if(current.getRSSI()<Integer.parseInt(min)){
-				info.remove(current);
+				if(!info.remove(current)){
+					return false;
+				}
 			}
-		}
-		if(info.size()==0){
-			return false;
 		}
 		return true;
 	}

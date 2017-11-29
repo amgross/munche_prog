@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -27,6 +25,7 @@ public class toKml {
 	public static int writeKml(String csvPath, String newKmlPath){
 		String userAns;
 		filter myFilter=null;
+		////////get the filter from the client
 		console = new Scanner(System.in);
 		do{
 			System.out.println("do you want to filter the low rxl? y/n");
@@ -93,7 +92,7 @@ public class toKml {
 	 * Write the KML file with the filter that the user wanted.
 	 * @param outs-
 	 * @param filePlace-
-	 * @return 
+	 * @return 0 if the csv file was'nt good, else return 1
 	 */
 	private static int editPlacesToKml(String newKmlPath,String path,filter myFilter, String filter){
 		try {
@@ -114,7 +113,14 @@ public class toKml {
 		}
 	}
 	
-	
+	/**
+	 * collect the info into Vector<sameScanWifi> with the filter
+	 * @param path
+	 * @param myFilter
+	 * @param filter
+	 * @return
+	 * @throws Exception if the csv file is'nt good
+	 */
 	private static Vector<sameScanWifi> collectInfo(String path,filter myFilter,String filter) throws Exception{
 		Vector<sameScanWifi> wifis=new Vector<sameScanWifi>();
 		FileReader fr = new FileReader(path);

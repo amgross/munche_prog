@@ -1,7 +1,6 @@
 
 public class wifi {
-
-	 //0 MAC,1 SSID,2 Time,3 Channel,4 RSSI,5 Latitude,6 Longitude,7 Altitude,8 Type,9 ID
+	
 	private String _MAC;
 	private String _SSID;
 	private int _Channel;
