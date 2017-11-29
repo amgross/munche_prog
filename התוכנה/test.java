@@ -4,13 +4,17 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import org.junit.Test;
 
 public class test {
+	/**
+	 * checks the toCsv class
+	 * @throws IOException
+	 */
 	@Test
 	public void test1ToCsv() throws IOException {
-		System.out.println("if their was a problem, be sure that the test folder is in the project");
 		toCsv.writeCsv("test\\toCsvTest\\test1");
 		FileReader fr = new FileReader("test\\toCsvTest\\test1\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
@@ -47,7 +51,11 @@ public class test {
 		assertEquals(null,br.readLine());
 		br.close();
 	}
-
+	
+	
+	/**
+	 * check the toKml class
+	 */
 	@Test
 	public void test1WriteKml() {
 		System.out.println("press 'n' three times with enter");
@@ -68,4 +76,66 @@ public class test {
 		System.out.println("press 'n' three times with enter");
 		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
 	}
+	
+	/**
+	 * check the check class
+	 */
+	@Test
+	public void checkGoodTimeTest(){
+		try {
+			check.checkTime("95-04-26 15:25:56");
+			check.checkTime("2007-12-01 23:00:59");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			fail();
+		}
+	}
+	@Test(expected = java.lang.Exception.class)
+	public void checkBadTimeTest1() throws Exception{
+		
+			check.checkTime("95/04/26 15:25:56");
+	}
+	@Test(expected = java.lang.Exception.class)
+	public void checkBadTimeTest2() throws Exception{
+		
+			check.checkTime("2007-12-01 23:00:60");
+	}
+	
+	/**
+	 * check the filters
+	 */
+	@Test
+	public void FilterByTimeGoodTest() {
+		String[] time={"2007-12-01 23:00:59"};
+		filter TimeFilterTest= new filterByTime();
+		assertTrue(TimeFilterTest.filters(time,"95-04-26 15:25:56"));
+		assertTrue(TimeFilterTest.filters(time,"2007-12-01 22:15:59"));
+		assertTrue(TimeFilterTest.filters(time,time[0]));
+	} 
+	@Test
+	public void FilterByTimeBadTest() {
+		String[] time={"2007-12-01 23:00:59"};
+		filter TimeFilterTest= new filterByTime();
+		assertFalse(TimeFilterTest.filters(time,"2008-04-26 15:25:56"));
+		assertFalse(TimeFilterTest.filters(time,"2007-12-01 23:01:00"));
+	} 
+	
+	
+	@Test
+	public void FilterByRXLTest() {
+		String[] line="2017-10-27 16:13:51,ONEPLUS A3003_28_171012,32.16876665,34.81320794,37,2,osnatg370,c0:ac:54:f5:7b:a7,11,-86,NGOGA,30:b5:c2:fe:aa:56,6,-87".split(",");
+		String[] check="2017-10-27 16:13:51,ONEPLUS A3003_28_171012,32.16876665,34.81320794,37,2,osnatg370,c0:ac:54:f5:7b:a7,11,-86,NGOGA,30:b5:c2:fe:aa:56,6,-87".split(",");
+		filter RXLFilterTest= new filterByRXL();
+		assertTrue(RXLFilterTest.filters(line,"-88")&&Arrays.equals(check, line));
+		assertTrue(RXLFilterTest.filters(line,"-86")&&line[13].equals("0"));
+		assertFalse(RXLFilterTest.filters(check,"-85"));
+	} 
+	
+	@Test
+	public void CountLineTest() throws IOException {
+		//test when their is no enter in the end of the file
+		assertEquals(1281,genericFunctions.countLines("test\\writeKmlTest\\good1.csv"));
+		//test when their is enter in the end of the file
+		assertEquals(1313,genericFunctions.countLines("test\\toCsvTest\\test2\\WigleWifi_20171107085918.csv"));
+	} 
 }

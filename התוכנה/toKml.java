@@ -99,6 +99,7 @@ public class toKml {
 		try {
 			final Kml kml = new Kml();
 			Document document = kml.createAndSetDocument().withName("MyWifi");
+
 			Vector<sameScanWifi> Info=collectInfo(path,myFilter, filter);
 			for(sameScanWifi current:Info){
 				Folder y =document.createAndAddFolder();

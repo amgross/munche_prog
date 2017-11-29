@@ -26,7 +26,7 @@ public class check {
 		if(Integer.parseInt(Checker[1])>59||Integer.parseInt(Checker[1])<0){
 			throw Exception;
 		}
-		if(Integer.parseInt(Checker[1])>59||Integer.parseInt(Checker[1])<0){
+		if(Integer.parseInt(Checker[2])>59||Integer.parseInt(Checker[2])<0){
 			throw Exception;
 		}
 	}
