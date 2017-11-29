@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Vector;
 
 import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Folder;
@@ -20,10 +22,12 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
  */
 public class toKml {
 	
+	private static final Exception Exception = null;
+	private static Scanner console;
 	public static int writeKml(String csvPath, String newKmlPath){
 		String userAns;
 		filter myFilter=null;
-		Scanner console = new Scanner(System.in);
+		console = new Scanner(System.in);
 		do{
 			System.out.println("do you want to filter the low rxl? y/n");
 			userAns=console.next();
@@ -95,60 +99,58 @@ public class toKml {
 		try {
 			final Kml kml = new Kml();
 			Document document = kml.createAndSetDocument().withName("MyWifi");
-			FileReader fr = new FileReader(path);
-			BufferedReader br = new BufferedReader(fr);
-			String str;
-			str = br.readLine();
-			if (!str.equals("Time, ID, Lat, Lon, Alt, #WiFi networks (up to 10), SSID1, MAC1, Frequncy1, Signal1,SSID2, MAC2, Frequncy2, Signal2, SSID3, MAC3, Frequncy3, Signal3,SSID4, MAC4, Frequncy4, Signal4, SSID5, MAC5, Frequncy5, Signal5,SSID6, MAC6, Frequncy6, Signal6, SSID7, MAC7, Frequncy7, Signal7,SSID8, MAC8, Frequncy8, Signal8, SSID9, MAC9, Frequncy9, Signal9,SSID10, MAC10, Frequncy10, Signal10" )){
-				br.close();
-				return 0;//fail
-			}
-			for (int i=1;i<genericFunctions.countLines(path);i++){
-				try {
-					String[] parts = br.readLine().split(",");
-					check.checkLine(parts);
-					if(! myFilter.filters(parts,filter)){
-						continue;
-					}
-					String[] time = parts[0].split(" ");
-					Folder y =document.createAndAddFolder();
-					y.withName(parts[0]).createAndSetTimeStamp().setWhen(time[0]+"T"+time[1]+"Z");
-					y.createAndAddPlacemark().withName(parts[0]).withDescription(getDiscription(parts)).withOpen(Boolean.TRUE)  
-					.createAndSetPoint().addToCoordinates(Double.parseDouble(parts[3]), Double.parseDouble(parts[2]));
-				}
-				catch(Exception ex) {
-					System.out.println(ex);
-					br.close();// exception
-					return (0);//fail
-				}
 
-
+			Vector<sameScanWifi> Info=collectInfo(path,myFilter, filter);
+			for(sameScanWifi current:Info){
+				Folder y =document.createAndAddFolder();
+				current.placeMark(y);
 			}
 			//marshals into file
 			kml.marshal(new File(newKmlPath+"\\wifi.kml"));
-			br.close();
-			fr.close();
 			return 1;
 		}
-		catch(IOException ex) {                            // exception
-			System.out.print("Error reading file\n" + ex);
-			System.exit(2);
+		catch(Exception ex) {                            // exception
+			//System.exit(2);
 			return 0;
 		}
 	}
-	/**
-	 * 
-	 * @param array of one line from the csv file
-	 * @return String of all the discription of wifi's in the point
-	 */
-	private static String getDiscription(String[] info){
-		String discription="";
-		for(int j=6,counter=1;j<Integer.parseInt(info[5])*4+6;j+=4,counter++){
-			if(info[j+3]!="0"){
-				discription +=" <br/>"+counter+": <br/>SSID: <b>"+info[j]+"  <br/>MAC: <b>"+info[j+1]+"  <br/>Channel: <b>"+info[j+2]+"  <br/>Freqency: <b>"+info[j+3];
+	
+	
+	private static Vector<sameScanWifi> collectInfo(String path,filter myFilter,String filter) throws Exception{
+		Vector<sameScanWifi> wifis=new Vector<sameScanWifi>();
+		FileReader fr = new FileReader(path);
+		BufferedReader br = new BufferedReader(fr);
+		String str;
+		str = br.readLine();
+		if (!str.equals("Time, ID, Lat, Lon, Alt, #WiFi networks (up to 10), SSID1, MAC1, Frequncy1, Signal1,SSID2, MAC2, Frequncy2, Signal2, SSID3, MAC3, Frequncy3, Signal3,SSID4, MAC4, Frequncy4, Signal4, SSID5, MAC5, Frequncy5, Signal5,SSID6, MAC6, Frequncy6, Signal6, SSID7, MAC7, Frequncy7, Signal7,SSID8, MAC8, Frequncy8, Signal8, SSID9, MAC9, Frequncy9, Signal9,SSID10, MAC10, Frequncy10, Signal10" )){
+			br.close();
+			throw Exception;
+		}
+		for (int i=0;i<genericFunctions.countLines(path);i++){
+			sameScanWifi tempSameScanWifi=new sameScanWifi();
+			String[] parts = br.readLine().split(",");
+			tempSameScanWifi.setAltitude(parts[4]);
+			tempSameScanWifi.setID(parts[1]);
+			tempSameScanWifi.setLatitude(parts[2]);
+			tempSameScanWifi.setLongitude(parts[3]);
+			tempSameScanWifi.setTime(parts[0]);
+			for(int j=6;j<Integer.parseInt(parts[5])*4+6;j+=4){
+				wifi tempWifi=new wifi();
+				tempWifi.setChannel(parts[j+2]);
+				tempWifi.setMAC(parts[j+1]);
+				tempWifi.setRSSI(parts[j+3]);
+				tempWifi.setSSID(parts[j]);
+				tempSameScanWifi.insert(tempWifi);
+			}
+			if(myFilter.filters(tempSameScanWifi,filter)){
+				wifis.add(tempSameScanWifi);
 			}
 		}
-		return discription;
+		
+		br.close();
+		return wifis;
 	}
+	
+	
 	
 }

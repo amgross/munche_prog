@@ -1,21 +1,7 @@
 
 public class check {
 	public static final Exception Exception = null;
-	/**
-	 * if line in info is not good, throw exeption
-	 * @param wifis
-	 * @param lineNum
-	 * @throws java.lang.Exception 
-	 */
-	public static void checkInfo(wifi[] wifis, int lineNum) throws java.lang.Exception {
-		// TODO Auto-generated method stub
-		checkTime(wifis[lineNum].getTime());
-		Integer.parseInt(wifis[lineNum].getChannel());
-		Integer.parseInt(wifis[lineNum].getRSSI());
-		Double.parseDouble(wifis[lineNum].getLatitude());
-		Double.parseDouble(wifis[lineNum].getLongitude());
-		Double.parseDouble(wifis[lineNum].getAltitude());
-	}
+	
 	
 	/**
 	 * if the string is not good, throws exeption
@@ -44,20 +30,5 @@ public class check {
 			throw Exception;
 		}
 	}
-	/**
-	 * if line from csv file is not good, throw exeption
-	 * @param info
-	 * @throws java.lang.Exception 
-	 */
-	public static void checkLine(String[] parts) throws java.lang.Exception {
-		// TODO Auto-generated method stub
-		check.checkTime(parts[0]);
-		Double.parseDouble(parts[2]);
-		Double.parseDouble(parts[3]);
-		Double.parseDouble(parts[4]);
-		for(int j=6;j<Integer.parseInt(parts[5])*4+6;j+=4){
-			Integer.parseInt(parts[j+2]);
-			Integer.parseInt(parts[j+3]);
-		}
-	}
+	
 }

@@ -5,9 +5,9 @@
  *else returning true
  */
 public class filterByTime implements filter{
-	public boolean filters(String[] line,String beginTime) {
+	public boolean filters(sameScanWifi info,String beginTime) {
 		
-		String[] partsCheck=line[0].split("-");
+		String[] partsCheck=info.getTime().split("-");
 		String[] partsChecker=beginTime.split("-");
 		if(Integer.parseInt(partsCheck[0])<Integer.parseInt(partsChecker[0])){
 			return false;
