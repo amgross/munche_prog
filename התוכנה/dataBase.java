@@ -23,6 +23,7 @@ public class dataBase {
 	    					  }
 	    					  else{
 	    						  hmap.get(currentWifi.getMAC()).remove(sameMac);
+	    						  hmap.replace(currentWifi.getMAC(),  currentSameScanWifi);
 	    					  }
 	    				  }
 	    			  }
