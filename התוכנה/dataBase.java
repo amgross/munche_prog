@@ -3,28 +3,32 @@ import java.util.Iterator;
 import java.util.Vector;
 
 public class dataBase {
+	/**
+	 * delete extra mac from database
+	 * @param database
+	 */
 	public static void deleteExtraMac(Vector<sameScanWifi> wifis){
 		 HashMap< String,sameScanWifi> hmap = new HashMap< String,sameScanWifi>();
 		 for (Iterator<sameScanWifi> sameScanWifiIterator = wifis.iterator(); sameScanWifiIterator.hasNext(); ) {
-			 sameScanWifi a=sameScanWifiIterator.next();
-	    	  for(wifi b:a){
-	    		  if(hmap.get(b.getMAC())==null){
-	    			  hmap.put(b.getMAC(), a);
+			 sameScanWifi currentSameScanWifi=sameScanWifiIterator.next();
+	    	  for(wifi currentWifi:currentSameScanWifi){
+	    		  if(hmap.get(currentWifi.getMAC())==null){
+	    			  hmap.put(currentWifi.getMAC(), currentSameScanWifi);
 	    		  }
 	    		  else{
-	    			  for(wifi c:hmap.get(b.getMAC())){
-	    				  if(c.getMAC().equals(b.getMAC())){
-	    					  if(c.getRSSI()>b.getRSSI()){
-	    						  a.remove(b);
+	    			  for(wifi sameMac:hmap.get(currentWifi.getMAC())){
+	    				  if(sameMac.getMAC().equals(currentWifi.getMAC())){
+	    					  if(sameMac.getRSSI()>currentWifi.getRSSI()){
+	    						  currentSameScanWifi.remove(currentWifi);
 	    					  }
 	    					  else{
-	    						  hmap.get(b.getMAC()).remove(c);
+	    						  hmap.get(currentWifi.getMAC()).remove(sameMac);
 	    					  }
 	    				  }
 	    			  }
 	    		  }
 	    	  }
-	    	  if(a.size()==0){
+	    	  if(currentSameScanWifi.size()==0){
 	    		  sameScanWifiIterator.remove();
 	    	  }
 	      }
