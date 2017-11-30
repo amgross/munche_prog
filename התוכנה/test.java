@@ -65,14 +65,16 @@ public class test {
 		assertEquals(0, toKml.writeKml("test\\writeKmlTest\\bad2.csv","test\\writeKmlTest"));
 	}
 	@Test
-	public void test3WriteKml() {
+	public void test3WriteKml() throws IOException {
 		System.out.println("press 'n' three times with enter");
 		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good1.csv","test\\writeKmlTest"));
+		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>100);
 	}
 	@Test
-	public void test4WriteKml() {
+	public void test4WriteKml() throws IOException {
 		System.out.println("press 'n' three times with enter");
 		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
+		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>18);
 	}
 	
 	/**
@@ -123,7 +125,7 @@ public class test {
 	
 	
 	@Test
-	public void FilterByRXLTest() {
+	public void FilterByRXLAndRemoveTest() {
 		sameScanWifi checkRXL=new  sameScanWifi();
 		wifi test=new wifi();
 		test.setRSSI("-87");
