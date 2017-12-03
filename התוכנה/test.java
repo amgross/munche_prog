@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Vector;
+
 import org.junit.Test;
 
 public class test {
@@ -149,5 +151,33 @@ public class test {
 		assertEquals(1281,genericFunctions.countLines("test\\writeKmlTest\\good1.csv"));
 		//test when their is enter in the end of the file
 		assertEquals(1313,genericFunctions.countLines("test\\toCsvTest\\test2\\WigleWifi_20171107085918.csv"));
+	} 
+	/**
+	 * test the function collectIdenticalMAC with database that have two wifis, 
+	 * one of them five times and one have three
+	 */
+	@Test
+	public void collectDoubleMACTest(){
+		Vector<sameScanWifi> myDatabase=new Vector<sameScanWifi>();
+		sameScanWifi temp=new sameScanWifi();
+		wifi Awifi=new wifi();Awifi.setMAC("AA:AA:AA:AA");Awifi.setChannel("1");temp.insert(Awifi);
+		wifi Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("1");temp.insert(Bwifi);
+		Awifi=new wifi();Awifi.setMAC("AA:AA:AA:AA");Awifi.setChannel("2");temp.insert(Awifi);
+		Awifi=new wifi();Awifi.setMAC("AA:AA:AA:AA");Awifi.setChannel("3");temp.insert(Awifi);
+		myDatabase.add(temp);
+
+		temp=new sameScanWifi();
+		Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("2");temp.insert(Bwifi);
+		Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("3");temp.insert(Bwifi);
+		Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("4");temp.insert(Bwifi);
+		Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("5");temp.insert(Bwifi);
+		
+		myDatabase.add(temp);
+		Vector<Vector<wifiWithCoordinate>> ans=dataBase.collectIdenticalMAC(myDatabase);
+		
+		assertEquals(2,ans.size());
+		
+		assertTrue((ans.firstElement().size()==3&&ans.lastElement().size()==5)||
+				(ans.firstElement().size()==5&&ans.lastElement().size()==3));
 	} 
 }
