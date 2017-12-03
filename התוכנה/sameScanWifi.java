@@ -168,15 +168,15 @@ public class sameScanWifi implements Iterable<wifi>{
 		return num;
 	}
 
-	private double getAltitude() {
+	public double getAltitude() {
 		return altitude;
 	}
 
-	private double getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 
-	private double getLatitude() {
+	public double getLatitude() {
 		return Latitude;
 	}
 
