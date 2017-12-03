@@ -188,7 +188,7 @@ public class test {
 		Bwifi=new wifi();Bwifi.setMAC("BB:BB:BB:BB");Bwifi.setChannel("5");temp.insert(Bwifi);
 		
 		myDatabase.add(temp);
-		Vector<Vector<wifiWithCoordinate>> ans=dataBase.collectIdenticalMAC(myDatabase);
+		Vector<Vector<wifiWithCoordinate>> ans=dataBaseFunctions.collectIdenticalMAC(myDatabase);
 		
 		assertEquals(2,ans.size());
 		
