@@ -42,27 +42,5 @@ public class genericFunctions {
 
 		}
 	}
-	/**
-	 * add all the sameScanWifi that in tempSameScanWifiVector into  wifis
-	 * if their was an ellement from the same scan it units them,
-	 *  else it add it to the end of the vector
-	 * @param wifis
-	 * @param tempSameScanWifiVector
-	 */
-	public static void unit(Vector<sameScanWifi> wifis, Vector<sameScanWifi> tempSameScanWifiVector) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<tempSameScanWifiVector.size();i++){
-			boolean add=false;
-			for(int j=0;j<wifis.size();j++){
-				if(tempSameScanWifiVector.elementAt(i).compare(wifis.elementAt(j))){
-					wifis.elementAt(j).insert(tempSameScanWifiVector.elementAt(i));
-					add=true;
-					break;
-				}
-			}
-			if(!add){
-				wifis.add(tempSameScanWifiVector.elementAt(i));
-			}
-		}
-	}
+	
 }

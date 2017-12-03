@@ -15,23 +15,23 @@ public class sameScanWifi implements Iterable<wifi>{
 	private String time;
 	private String ID;
 	private wifi[] wifis=new wifi[10];
-	
+
 	public sameScanWifi(){
 		num=0;
 	}
-	
+
 	/**
 	 * this methode get another sameScanWifi and check if they are from the same scan
 	 */
 	public boolean compare(sameScanWifi a){
 		if(a.getAltitude()==this.altitude&&a.getID().equals(this.ID)&&
-		a.getLatitude()==this.Latitude&&a.getLongitude()==this.longitude&&
-		a.getTime().equals(this.time)){
+				a.getLatitude()==this.Latitude&&a.getLongitude()==this.longitude&&
+				a.getTime().equals(this.time)){
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void insert(sameScanWifi a){
 		for(wifi current:a){
 			this.insert(current);
@@ -73,22 +73,22 @@ public class sameScanWifi implements Iterable<wifi>{
 			}
 		}
 	}
-	
 
-	
+
+
 	/**
 	 * 
 	 * @return the wifis in the format for csv
 	 */
 	public String toStringForCsv(){
-		
+
 		String toCsv=this.time+","+this.ID+","+this.Latitude+","+this.longitude+","+this.altitude+","+this.num;
 		for(int i=0;i<num;i++){
 			toCsv+=","+wifis[i].getSSID()+","+wifis[i].getMAC()+","+wifis[i].getChannel()+","+wifis[i].getRSSI();
 		}
 		return toCsv;
 	}
-	
+
 	/**
 	 * add placeMark to folder
 	 */
@@ -98,7 +98,7 @@ public class sameScanWifi implements Iterable<wifi>{
 		y.createAndAddPlacemark().withName(this.time).withDescription(getDiscription()).withOpen(Boolean.TRUE)  
 		.createAndSetPoint().addToCoordinates(this.longitude, this.Latitude);
 	}
-	
+
 	/**
 	 * 
 	 * @return String of all the discription of wifi's in the point for kml
@@ -106,11 +106,11 @@ public class sameScanWifi implements Iterable<wifi>{
 	private String getDiscription(){
 		String discription="";
 		for(int i=0;i<num;i++){
-				discription +=" <br/>"+(i+1)+": <br/>SSID: <b>"+wifis[i].getSSID()+"  <br/>MAC: <b>"+wifis[i].getMAC()+"  <br/>Channel: <b>"+wifis[i].getChannel()+"  <br/>Freqency: <b>"+wifis[i].getRSSI();
+			discription +=" <br/>"+(i+1)+": <br/>SSID: <b>"+wifis[i].getSSID()+"  <br/>MAC: <b>"+wifis[i].getMAC()+"  <br/>Channel: <b>"+wifis[i].getChannel()+"  <br/>Freqency: <b>"+wifis[i].getRSSI();
 		}
 		return discription;
 	}
-	
+
 	/**
 	 *  remove one wifi
 	 * @param wifi
@@ -183,7 +183,7 @@ public class sameScanWifi implements Iterable<wifi>{
 	public String getID() {
 		return ID;
 	}
-	
+
 	public String getTime() {
 		return time;
 	}
@@ -194,27 +194,34 @@ public class sameScanWifi implements Iterable<wifi>{
 	@Override
 	public Iterator<wifi> iterator() {
 		// TODO Auto-generated method stub
-		 Iterator<wifi> iter=new Iterator<wifi>(){
-			private int current=0;
-			@Override
-			public boolean hasNext() {
-				// TODO Auto-generated method stub
-				if(current<num){
-					return true;
-				}
-				return false;
+		Iterator<wifi> iter=new Iterator<wifi>(){
+		private int next=0;
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			wifis[next-1]=wifis[num-1];
+			num--;
+			next--;
+		}
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			if(next<num){
+				return true;
 			}
+			return false;
+		}
 
-			@Override
-			public wifi next() {
-				// TODO Auto-generated method stub
-				current++;
-				return wifis[current-1];
-			}
-			 
-		 };
+		@Override
+		public wifi next() {
+			// TODO Auto-generated method stub
+			next++;
+			return wifis[next-1];
+		}
+
+		};
 		return iter;
 	}
 
-	
+
 }

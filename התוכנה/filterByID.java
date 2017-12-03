@@ -9,8 +9,8 @@ public class filterByID implements filter{
 
 
 	@Override
-	public boolean filters(sameScanWifi info, String ID) {
-		if(info.getID().equals(ID)){
+	public boolean filters(sameScanWifi info) {
+		if(info.getID().equals(filter.parm.getParm())){
 			
 			return true;
 		}

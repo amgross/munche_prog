@@ -15,7 +15,8 @@ public class test {
 	 */
 	@Test
 	public void test1ToCsv() throws IOException {
-		toCsv.writeCsv("test\\toCsvTest\\test1");
+		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi("test\\toCsvTest\\test1");
+		CSV.printFileFromDataBaseToCSV(dataBase,"test\\toCsvTest\\test1");
 		FileReader fr = new FileReader("test\\toCsvTest\\test1\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		br.readLine();
@@ -25,7 +26,8 @@ public class test {
 
 	@Test
 	public void test2ToCsv() throws IOException {
-		toCsv.writeCsv("test\\toCsvTest\\test2");
+		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi("test\\toCsvTest\\test2");
+		CSV.printFileFromDataBaseToCSV(dataBase,"test\\toCsvTest\\test2");
 		FileReader fr = new FileReader("test\\toCsvTest\\test2\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		br.readLine();
@@ -34,7 +36,8 @@ public class test {
 	}
 	@Test
 	public void test3ToCsv() throws IOException {
-		toCsv.writeCsv("test\\toCsvTest\\test3");
+		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi("test\\toCsvTest\\test3");
+		CSV.printFileFromDataBaseToCSV(dataBase,"test\\toCsvTest\\test3");
 		FileReader fr = new FileReader("test\\toCsvTest\\test3\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		br.readLine();
@@ -43,7 +46,8 @@ public class test {
 	}
 	@Test
 	public void test4ToCsv() throws IOException {
-		toCsv.writeCsv("test\\toCsvTest\\test4");
+		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi("test\\toCsvTest\\test4");
+		CSV.printFileFromDataBaseToCSV(dataBase,"test\\toCsvTest\\test4");
 		FileReader fr = new FileReader("test\\toCsvTest\\test4\\wifi.csv");
 		BufferedReader br = new BufferedReader(fr);
 		br.readLine();
@@ -54,28 +58,31 @@ public class test {
 	
 	
 	/**
+	 * check the collectInfoFromCSV with bad values
+	 * @throws Exception
+	 */
+	@Test(expected = java.lang.Exception.class)
+	public void test1collectInfoFromCSV() throws Exception {
+		CSV.collectInfoFromCSV("test\\writeKmlTest\\bad1.csv");
+	}
+	@Test(expected = java.lang.Exception.class)
+	public void test2WriteKml() throws Exception {
+		CSV.collectInfoFromCSV("test\\writeKmlTest\\bad2.csv");
+	}
+	/**
 	 * check the toKml class
+	 * @throws Exception 
 	 */
 	@Test
-	public void test1WriteKml() {
-		System.out.println("press 'n' three times with enter");
-		assertEquals(0, toKml.writeKml("test\\writeKmlTest\\bad1.csv","test\\writeKmlTest"));
-	}
-	@Test
-	public void test2WriteKml() {
-		System.out.println("press 'n' three times with enter");
-		assertEquals(0, toKml.writeKml("test\\writeKmlTest\\bad2.csv","test\\writeKmlTest"));
-	}
-	@Test
-	public void test3WriteKml() throws IOException {
-		System.out.println("press 'n' three times with enter");
-		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good1.csv","test\\writeKmlTest"));
+	public void test3WriteKml() throws Exception {
+		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV("test\\writeKmlTest\\good1.csv");
+		assertEquals(1,KML.printFileFromDataBaseToKML("test\\writeKmlTest",dataBase));
 		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>100);
 	}
 	@Test
-	public void test4WriteKml() throws IOException {
-		System.out.println("press 'n' three times with enter");
-		assertEquals(1,toKml.writeKml("test\\writeKmlTest\\good2.csv","test\\writeKmlTest"));
+	public void test4WriteKml() throws Exception {
+		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV("test\\writeKmlTest\\good2.csv");
+		assertEquals(1,KML.printFileFromDataBaseToKML("test\\writeKmlTest",dataBase));
 		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>18);
 	}
 	
@@ -112,17 +119,22 @@ public class test {
 		sameScanWifi checkTime=new  sameScanWifi();
 		checkTime.setTime("2007-12-01 23:00:59");
 		filter TimeFilterTest= new filterByTime();
-		assertTrue(TimeFilterTest.filters(checkTime,"95-04-26 15:25:56"));
-		assertTrue(TimeFilterTest.filters(checkTime,"2007-12-01 22:15:59"));
-		assertTrue(TimeFilterTest.filters(checkTime,checkTime.getTime()));
+		filter.parm.setParm("95-04-26 15:25:56");
+		assertTrue(TimeFilterTest.filters(checkTime));
+		filter.parm.setParm("2007-12-01 22:15:59");
+		assertTrue(TimeFilterTest.filters(checkTime));
+		filter.parm.setParm(checkTime.getTime());
+		assertTrue(TimeFilterTest.filters(checkTime));
 	} 
 	@Test
 	public void FilterByTimeBadTest() throws Exception {
 		sameScanWifi checkTime=new  sameScanWifi();
 		checkTime.setTime("2007-12-01 23:00:59");
 		filter TimeFilterTest= new filterByTime();
-		assertFalse(TimeFilterTest.filters(checkTime,"2008-04-26 15:25:56"));
-		assertFalse(TimeFilterTest.filters(checkTime,"2007-12-01 23:01:00"));
+		filter.parm.setParm("2008-04-26 15:25:56");
+		assertFalse(TimeFilterTest.filters(checkTime));
+		filter.parm.setParm("2007-12-01 23:01:00");
+		assertFalse(TimeFilterTest.filters(checkTime));
 	} 
 	
 	
@@ -136,9 +148,12 @@ public class test {
 		test.setRSSI("-86");
 		checkRXL.insert(test);
 		filter RXLFilterTest= new filterByRXL();
-		assertTrue(RXLFilterTest.filters(checkRXL,"-88")&&checkRXL.size()==2);
-		assertTrue(RXLFilterTest.filters(checkRXL,"-86")&&checkRXL.size()==1);
-		assertFalse(RXLFilterTest.filters(checkRXL,"-85")||checkRXL.size()!=0);
+		filter.parm.setParm("-88");
+		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==2);
+		filter.parm.setParm("-86");
+		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==1);
+		filter.parm.setParm("-85");
+		assertFalse(RXLFilterTest.filters(checkRXL)||checkRXL.size()!=0);
 	} 
 	
 	/**
@@ -180,4 +195,5 @@ public class test {
 		assertTrue((ans.firstElement().size()==3&&ans.lastElement().size()==5)||
 				(ans.firstElement().size()==5&&ans.lastElement().size()==3));
 	} 
+
 }
