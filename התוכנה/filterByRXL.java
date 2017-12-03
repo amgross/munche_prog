@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /**
  * 
  * implement of filter to 'sameScanWifi' for the kml file by ID
@@ -6,15 +8,16 @@
  *else returning true
  */
 public class filterByRXL implements filter{
-	public boolean filters(sameScanWifi info,String min) {
+	public boolean filters(sameScanWifi info) {
 		// TODO Auto-generated method stub
-		
-		for(wifi current:info){
-			if(current.getRSSI()<Integer.parseInt(min)){
-				if(!info.remove(current)){
-					return false;
-				}
+		for(Iterator<wifi> iter = info.iterator(); iter.hasNext(); ) {
+			wifi current=iter.next();
+			if(current.getRSSI()<Integer.parseInt(filter.parm.getParm())){
+				iter.remove();
 			}
+		}
+		if(info.size()==0){
+			return false;
 		}
 		return true;
 	}

@@ -1,0 +1,142 @@
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class dataBaseFunctions {
+	/**
+	 * delete double mac from database
+	 * @param database
+	 */
+	public static void deleteDoubleMacFromDataBase(Vector<sameScanWifi> dataBase){
+		 HashMap< String,sameScanWifi> hmap = new HashMap< String,sameScanWifi>();
+		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			 sameScanWifi currentSameScanWifi=sameScanWifiIterator.next();
+			 for(Iterator<wifi> iter = currentSameScanWifi.iterator(); iter.hasNext(); ) {
+				 wifi currentWifi=iter.next();
+			 
+	    	 // for(wifi currentWifi:currentSameScanWifi){
+	    		  if(hmap.get(currentWifi.getMAC())==null){
+	    			  hmap.put(currentWifi.getMAC(), currentSameScanWifi);
+	    		  }
+	    		  else{
+	    			  for(wifi sameMac:hmap.get(currentWifi.getMAC())){
+	    				  if(sameMac.getMAC().equals(currentWifi.getMAC())){
+	    					  if(sameMac.getRSSI()>currentWifi.getRSSI()){
+	    						  iter.remove();
+	    					  }
+	    					  else{
+	    						  hmap.get(currentWifi.getMAC()).remove(sameMac);
+	    						  hmap.replace(currentWifi.getMAC(),  currentSameScanWifi);
+	    					  }
+	    				  }
+	    			  }
+	    		  }
+	    	  }
+	      }
+		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			 if(sameScanWifiIterator.next().size()==0){
+	    		  sameScanWifiIterator.remove();
+	    	  }
+		 }
+
+	}
+	
+	/**
+	 * add all the sameScanWifi that in tempSameScanWifiVector into  wifis
+	 * if their was an ellement from the same scan it units them,
+	 *  else it add it to the end of the vector
+	 * @param dataBase
+	 * @param tempDataBase
+	 */
+	public static void unit(Vector<sameScanWifi> dataBase, Vector<sameScanWifi> tempDataBase) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<tempDataBase.size();i++){
+			boolean add=false;
+			for(int j=0;j<dataBase.size();j++){
+				if(tempDataBase.elementAt(i).compare(dataBase.elementAt(j))){
+					dataBase.elementAt(j).insert(tempDataBase.elementAt(i));
+					add=true;
+					break;
+				}
+			}
+			if(!add){
+				dataBase.add(tempDataBase.elementAt(i));
+			}
+		}
+	}
+
+	private static Scanner console;
+	public static filter chooseFilter(){
+		String userAns;
+		
+		
+		filter myFilter=null;
+		console = new Scanner(System.in);
+		do{
+			System.out.println("do you want to filter the low rxl? y/n");
+			userAns=console.next();
+		}while(!userAns.equals("n")&&!userAns.equals("y"));
+		if(userAns.equals("y")){
+			while(true){
+				try{
+					System.out.println("what is the min rxl?");
+					userAns=console.next();
+					Integer.parseInt(userAns);
+					break;
+				}catch(Exception e){
+
+				}
+			}
+			myFilter=new filterByRXL();
+
+		}
+		else{
+			do{
+				System.out.println("do you want to filter just one ID? y/n");
+				userAns=console.next();
+			}while(!userAns.equals("n")&&!userAns.equals("y"));
+			if(userAns.equals("y")){
+				System.out.println("what is the ID?");
+				console.nextLine();
+				userAns=console.nextLine();
+				
+				myFilter=new filterByID();
+
+
+			}else{
+				do{
+					System.out.println("do you want to filter just the recent time? y/n");
+					userAns=console.next();
+				}while(!userAns.equals("n")&&!userAns.equals("y"));
+				if(userAns.equals("y")){
+					System.out.println("data from which time you want? tipe it: year-month-day hour:minut:second");
+					console.nextLine();
+					while(true){
+						try{
+							userAns=console.nextLine();
+							check.checkTime(userAns);
+							myFilter=new filterByTime();
+							break;
+						}catch(Exception e){
+							System.out.println("tipe it: year-month-day hour:minut:second");
+						}
+					}
+				}else{
+					myFilter=new dontFilter();
+				}
+			}
+		}
+		filter.parm.setParm(userAns);			
+		return myFilter;
+	}
+	
+	public static void filterDataBase(filter myFilter,Vector<sameScanWifi> dataBase){
+		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			 if(!myFilter.filters(sameScanWifiIterator.next())){
+				 sameScanWifiIterator.remove();
+			 }
+		 }
+
+	}
+}

@@ -8,6 +8,19 @@ import java.util.List;
  *else returning true
  */
 public interface filter {
-	boolean filters(sameScanWifi info, String par);
+	class parm{
+		static String myParm;
+
+		public static void setParm(String parm) {
+			filter.parm.myParm = parm;
+		}
+
+		public static String getParm() {
+			return myParm;
+		}
+
+		
+	}
+	boolean filters(sameScanWifi dataBase);
 
 }
