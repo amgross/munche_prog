@@ -13,7 +13,7 @@ public class ex2 {
 		dataBaseFunctions.filterDataBase(myFilter, dataBase);
 		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
 		Vector<wifiWithCoordinate> realPlaces=dataBaseFunctions.realPlaces(IdenticalMAC);
-		KML.printFileFromRealPlacesToKML(path, realPlaces);
+		KML.printFileFromWifiWithCoordinateToKML(path, realPlaces);
 		/////////////////////////////////////////////////////////////////
 		//KML.printFileFromDataBaseToKML(path, dataBase);
 		//CSV.printFileFromDataBaseToCSV(dataBase, path);

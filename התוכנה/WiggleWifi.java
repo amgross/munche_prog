@@ -13,7 +13,8 @@ public class WiggleWifi {
 	 * @return array of path names to the relevant files.   
 	 */
 	private static String[] whichFiles(String path){
-		File folder = new File(path);
+		try{
+			File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		String[] pathes=new String[listOfFiles.length];
 		int counter=0;
@@ -29,6 +30,11 @@ public class WiggleWifi {
 			finalPathes[i]=pathes[i];
 		}
 		return finalPathes;
+		}catch(NullPointerException ex){
+			System.out.println("there is no folder in that path");
+			ex.printStackTrace();
+		}
+		return null;
 	}
 	/**
 	 * Get an path of folder that contains wiggle wifi files. 
@@ -96,7 +102,9 @@ public class WiggleWifi {
 			} catch (Exception e) {               // if their is a problem with the csv file, it won't convert to the new csv file
 				// TODO Auto-generated catch block
 			}
+			
 		}
+		
 		return dataBase;
 
 	}
