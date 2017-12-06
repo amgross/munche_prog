@@ -164,4 +164,14 @@ public class dataBaseFunctions {
 		 }
 
 	}
+	public static Vector<wifiWithCoordinate> realPlaces(Vector<Vector<wifiWithCoordinate>> IdenticalMAC){
+		Vector<wifiWithCoordinate> realePlace=new Vector<wifiWithCoordinate>();
+		for(Vector<wifiWithCoordinate> sameWifi: IdenticalMAC ){
+			realePlace.add(cal.avgcomp(sameWifi));
+		}
+		
+		
+		
+		return realePlace;
+	}
 }

@@ -4,6 +4,9 @@ public class wifiWithCoordinate extends wifi {
 	private double altitude;
 	private double longitude;
 	private double Latitude;
+	public wifiWithCoordinate(){
+		super();
+	}
 	public wifiWithCoordinate(sameScanWifi coordinates, wifi details){
 		super();
 		altitude=coordinates.getAltitude();
@@ -38,6 +41,15 @@ public class wifiWithCoordinate extends wifi {
 	private String getDiscription(){
 		String discription=" <br/>SSID: <b>"+super.getSSID()+"  <br/>MAC: <b>"+super.getMAC();
 		return discription;
+	}
+	public void setAltitude(double altitude) {
+		this.altitude = altitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public void setLatitude(double latitude) {
+		Latitude = latitude;
 	}
 	
 }
