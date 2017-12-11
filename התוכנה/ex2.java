@@ -3,20 +3,20 @@ import java.util.Vector;
 public class ex2 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		fromAppToCSV("ex2");
+		algorithm_1("ex2\\bm2","ex2\\bm2",3);
 	}
-
-	public static void fromAppToCSV(String path){
-		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi(path);	
-		filter myFilter=new filterBySSID();
-		filter.parm.setParm("Ariel_University");
-		dataBaseFunctions.filterDataBase(myFilter, dataBase);
+	/**
+	 * 
+	 * @param reading_path path of folder with all the wiggle data
+	 * @param writing_path path of folder to put the kml with the places of the routers
+	 * @param num_of_points num of points to check with them where is the routers
+	 * prints kml file that called wifi.kml that presents the routers
+	 */
+	public static void algorithm_1(String reading_path,String writing_path,int num_of_points){
+		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi(reading_path);	
 		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
-		Vector<wifiWithCoordinate> realPlaces=dataBaseFunctions.realPlaces(IdenticalMAC);
-		KML.printFileFromRealPlacesToKML(path, realPlaces);
-		/////////////////////////////////////////////////////////////////
-		//KML.printFileFromDataBaseToKML(path, dataBase);
-		//CSV.printFileFromDataBaseToCSV(dataBase, path);
+		Vector<wifiWithCoordinate> realPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
+		KML.printFileFromWifiWithCoordinateToKML(writing_path, realPlaces);
 	}
 	
 }

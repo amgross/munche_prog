@@ -19,7 +19,7 @@ public class KML {
 	
 	
 	/**
-	 * Write the KML file from databace to folder.
+	 * Write the KML file from database to folder.
 	 * @param filePlace-
 	 * @return 0 if the csv file was'nt good, else return 1
 	 */
@@ -41,7 +41,28 @@ public class KML {
 		}
 	}
 	
-	
+	/**
+	 * Write the KML file from databace to folder.
+	 * @param filePlace-
+	 * @return 0 if the csv file was'nt good, else return 1
+	 */
+	public static int printFileFromWifiWithCoordinateToKML(String folderPath,Vector<wifiWithCoordinate> dataBase){
+		try {
+			final Kml kml = new Kml();
+			Document document = kml.createAndSetDocument().withName("MyWifi");
+			for(wifiWithCoordinate current:dataBase){
+				Folder y =document.createAndAddFolder();
+				current.placeMark(y);
+			}
+			//marshals into file
+			kml.marshal(new File(folderPath+"\\wifi.kml"));
+			return 1;
+		}
+		catch(Exception ex) {                            // exception
+			//System.exit(2);
+			return 0;
+		}
+	}
 	
 	
 }
