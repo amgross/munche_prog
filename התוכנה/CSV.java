@@ -23,8 +23,6 @@ import java.util.Vector;
  * @param path-
  */
 public class CSV {
-	private static final Exception Exception = null;
-
 
 	/** 
 	 *  gets vector of the info and PrintWriter to wifi.csv (format)
@@ -38,7 +36,6 @@ public class CSV {
 		try {                 //   try write the file 
 			fw = new FileWriter(path+"\\wifi.csv");
 			PrintWriter outs = new PrintWriter(fw);
-			outs.println("Time, ID, Lat, Lon, Alt, #WiFi networks (up to 10), SSID1, MAC1, Frequncy1, Signal1,SSID2, MAC2, Frequncy2, Signal2, SSID3, MAC3, Frequncy3, Signal3,SSID4, MAC4, Frequncy4, Signal4, SSID5, MAC5, Frequncy5, Signal5,SSID6, MAC6, Frequncy6, Signal6, SSID7, MAC7, Frequncy7, Signal7,SSID8, MAC8, Frequncy8, Signal8, SSID9, MAC9, Frequncy9, Signal9,SSID10, MAC10, Frequncy10, Signal10");
 			for(int i=0;i<dataBase.size();i++){
 				outs.println(dataBase.elementAt(i).toStringForCsv());
 			}
@@ -61,13 +58,7 @@ public class CSV {
 		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();
 		FileReader fr = new FileReader(path);
 		BufferedReader br = new BufferedReader(fr);
-		String str;
-		str = br.readLine();
-		if (!str.equals("Time, ID, Lat, Lon, Alt, #WiFi networks (up to 10), SSID1, MAC1, Frequncy1, Signal1,SSID2, MAC2, Frequncy2, Signal2, SSID3, MAC3, Frequncy3, Signal3,SSID4, MAC4, Frequncy4, Signal4, SSID5, MAC5, Frequncy5, Signal5,SSID6, MAC6, Frequncy6, Signal6, SSID7, MAC7, Frequncy7, Signal7,SSID8, MAC8, Frequncy8, Signal8, SSID9, MAC9, Frequncy9, Signal9,SSID10, MAC10, Frequncy10, Signal10" )){
-			br.close();
-			throw Exception;
-		}
-		for (int i=1;i<genericFunctions.countLines(path);i++){
+		for (int i=0;i<genericFunctions.countLines(path);i++){
 			sameScanWifi tempSameScanWifi=new sameScanWifi();
 			String[] parts = br.readLine().split(",");
 			tempSameScanWifi.setAltitude(parts[4]);
