@@ -2,18 +2,23 @@ import java.util.Vector;
 
 public class cal {
 
-	/*
-	 * for example: avg0+=arr[i][0]/math.pow(arr[i][4],2); avg1+=arr[i][1]/math.pow(arr[i][4],2);
-	 * avg2+=arr[i][2]/math.pow(arr[i][4],2);avg3[i][3]/math.pow(arr[i][4],2);avg4+=(1/math.pow(arr[i][4],2));
+	/**
+	 * 
+	 * @param sameWifi, sort vector of wifiWithCoordinate
+	 * @param num of points to check with
+	 * @return the estimated place of the router in wifiWithCoordinate object
 	 */
-	public static wifiWithCoordinate avgcomp(Vector<wifiWithCoordinate> sameWifi)
+	public static wifiWithCoordinate avgcomp(Vector<wifiWithCoordinate> sameWifi,int num)
 	{
 		double avgAltitude=0,avgLatitude=0,avLongitude=0,avg=0;
+		
 		for (wifiWithCoordinate wifi: sameWifi) {
+			num--;
 			avgAltitude += wifi.getAltitude()/Math.pow(wifi.getRSSI(),2); 
 			avgLatitude += wifi.getLatitude()/Math.pow(wifi.getRSSI(),2); 
 			avLongitude += wifi.getLongitude()/Math.pow(wifi.getRSSI(),2);
 			avg += (1/Math.pow(wifi.getRSSI(),2));
+			if(num==0) break;
 		}
 		wifiWithCoordinate realPlace=new wifiWithCoordinate();
 		realPlace.setAltitude(avgAltitude/avg);

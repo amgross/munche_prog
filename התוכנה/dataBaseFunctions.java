@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -90,8 +91,12 @@ public class dataBaseFunctions {
 			}
 		}
 	}
-
+	
 	private static Scanner console;
+	/**
+	 * ask the user in which filter he whant to use
+	 * @return the filter
+	 */
 	public static filter chooseFilter(){
 		String userAns;
 		
@@ -155,7 +160,12 @@ public class dataBaseFunctions {
 		filter.parm.setParm(userAns);			
 		return myFilter;
 	}
-	
+	/**
+	 * 
+	 * @param myFilter get filter
+	 * @param dataBase to filter it
+	 * filtering the database with the filter
+	 */
 	public static void filterDataBase(filter myFilter,Vector<sameScanWifi> dataBase){
 		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
 			 if(!myFilter.filters(sameScanWifiIterator.next())){
@@ -164,10 +174,17 @@ public class dataBaseFunctions {
 		 }
 
 	}
-	public static Vector<wifiWithCoordinate> realPlaces(Vector<Vector<wifiWithCoordinate>> IdenticalMAC){
+	/**
+	 * 
+	 * @param IdenticalMAC vector that every object in it is vector of the same ruter from diffrent scan from the same placr
+	 * @param num of points to check with
+	 * @return the real places of the routers in vector of wifiWithCoordinate
+	 */
+	public static Vector<wifiWithCoordinate> realPlaces(Vector<Vector<wifiWithCoordinate>> IdenticalMAC,int num){
 		Vector<wifiWithCoordinate> realePlace=new Vector<wifiWithCoordinate>();
 		for(Vector<wifiWithCoordinate> sameWifi: IdenticalMAC ){
-			realePlace.add(cal.avgcomp(sameWifi));
+			sameWifi.sort(Comparator.comparing(sample -> -sample.getRSSI()));
+			realePlace.add(cal.avgcomp(sameWifi,num));
 		}
 		
 		
