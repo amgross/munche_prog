@@ -13,7 +13,8 @@ public class cal3 {
 	private final double _NO_SIGNAL = -120;
 	private final double _DIFF_NO_SIGNAL = 100;
 	public wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
-		
+		int num_of_scans= manScans.size();
+		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
 		
 		return null;
 		
