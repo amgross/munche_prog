@@ -25,6 +25,17 @@ public class cal3 {
 		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
 			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
 		}
+		for(sameScanWifi currentScan:manScans){
+			double wheight=1;
+			for(wifi currentWifi:currentScan){
+				wheight*=findWheight(currentWifi.getRSSI(),hmap.get(currentWifi.getMAC()));
+			}
+			for(Vector<wifiWithCoordinate> router: sortByMAC){
+				if(!currentScan.exist(router.firstElement().getMAC()){
+					
+				}
+			}
+		}
 	}
 	private double[] arrsort(double[] arr, double num)
 	{
