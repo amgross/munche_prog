@@ -3,8 +3,7 @@ import java.util.Vector;
 
 import org.omg.CORBA._PolicyStub;
 
-public class cal3 {
-//  still not working
+public class cal2 {
 
 	private final int _POWER = 2;
 	private final double _NORM = 10000;
@@ -12,39 +11,7 @@ public class cal3 {
 	private final double _MIN_DIFF = 3;
 	private final double _NO_SIGNAL = -120;
 	private final double _DIFF_NO_SIGNAL = 100;
-	
-	public static wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
-		HashMap<String,Integer> hmap = new HashMap<String,Integer>();
-		getWhights( manScans,hmap);
-		
-		double[] array=new double[num_of_points];
-		for (HashMap<String, Integer> d : hmap) {
-			
-		}
 
-			
-		return null;
-		
-	}
-	private static void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Integer> hmap) {
-		// TODO Auto-generated method stub
-		int num_of_scans= manScans.size();
-		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
-		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
-			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
-		}
-		for(sameScanWifi currentScan:manScans){
-			double Weight=1;
-			for(wifi currentWifi:currentScan){
-				Weight*=findWheight(currentWifi.getRSSI(),hmap.get(currentWifi.getMAC()));
-			}
-			for(Vector<wifiWithCoordinate> router: sortByMAC){
-				if(!currentScan.exist(router.firstElement().getMAC())){
-					Weight*=findWheight(_DIFF_NO_SIGNAL,router.firstElement().getRSSI());
-				}
-			}
-		}
-	}
 	private double[] arrsort(double[] arr, double num)
 	{
 		double temp;
@@ -52,20 +19,20 @@ public class cal3 {
 			if(num>arr[i]){
 				temp=arr[i];
 				arr[i]=num;
-				arrsort(arr,temp);//×¨×§×•×¨×¡×™×”
+				arrsort(arr,temp);
 			}
 		}
 		return arr;
 	}
 	
-	public static double findWheight(int realSig,Integer avgSig)
-	{ 
-
-			return ((_NORM/((Math.pow(Math.max(Math.abs(realSig-avgSig),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(avgSig, _POWER))))));
+	public void cal2(double[][] arr,double[] arr1,int j)
+	{
+		for (int i = 0; i < arr1.length; i++) {
+		double a=((_NORM/((Math.pow(Math.max(Math.abs(arr[i][j]-arr1[i]),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(arr1[i], _POWER))))));
 		
-		
+		}
 	}
-/*	public void avgcomppers(String path1, String path2,String pathOut,int numOfPoint)
+	public void avgcomppers(String path1, String path2,String pathOut,int numOfPoint)
 	{
 		int i=0, j=0;
 		
@@ -86,7 +53,7 @@ public class cal3 {
 		{
 		for(wifi rssi: wifi)
 		{
-			data[i][j]=rssi.getRSSI();
+			data[i][j]=rssi.getRSSI();//îèøéöä äôåëä
 			i++;
 			avgRssi[j]=rssi.getRSSI();
 		}
@@ -100,7 +67,7 @@ public class cal3 {
 
 	}
 
-*/
+
 
 
 	/*
