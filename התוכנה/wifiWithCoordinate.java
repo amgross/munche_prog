@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 import de.micromata.opengis.kml.v_2_2_0.Folder;
 
 public class wifiWithCoordinate extends wifi {
@@ -34,6 +36,23 @@ public class wifiWithCoordinate extends wifi {
 		y.createAndAddPlacemark().withName(super.getMAC()).withDescription(getDiscription()).withOpen(Boolean.TRUE)  
 		.createAndSetPoint().addToCoordinates(this.longitude, this.Latitude);
 	}
+
+	public static double RSSIavg(Vector<wifiWithCoordinate> e){
+		for(wifiWithCoordinate wifi: e)
+		{
+			for(wifi rssi: wifi)
+			{
+				data[i][j]=rssi.getRSSI();
+				i++;
+				avgRssi[j]=rssi.getRSSI();
+			}
+			avgRssi[j]/=i;
+			i=0;
+			j++;
+			//	input/=avg1;
+			//	avg1=(Math.abs(input)-Math.abs(a)
+		}
+	}
 	/**
 	 * 
 	 * @return String of all the discription of wifi's in the point for kml
@@ -51,5 +70,5 @@ public class wifiWithCoordinate extends wifi {
 	public void setLatitude(double latitude) {
 		Latitude = latitude;
 	}
-	
+
 }

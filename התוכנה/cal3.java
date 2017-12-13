@@ -12,16 +12,21 @@ public class cal3 {
 	private final double _MIN_DIFF = 3;
 	private final double _NO_SIGNAL = -120;
 	private final double _DIFF_NO_SIGNAL = 100;
-	public wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
+	public static wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
 		HashMap<String,Double> hmap = new HashMap<String,Double>();
 		getWhights( manScans,hmap);
 		return null;
 		
 	}
-	private void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Double> hmap) {
+	private static void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Double> hmap) {
 		// TODO Auto-generated method stub
 		int num_of_scans= manScans.size();
 		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
+		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
+			
+			
+			
+		}
 	}
 	private double[] arrsort(double[] arr, double num)
 	{
