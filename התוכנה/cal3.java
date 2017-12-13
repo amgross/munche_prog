@@ -13,19 +13,17 @@ public class cal3 {
 	private final double _NO_SIGNAL = -120;
 	private final double _DIFF_NO_SIGNAL = 100;
 	public static wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
-		HashMap<String,Double> hmap = new HashMap<String,Double>();
+		HashMap<String,Integer> hmap = new HashMap<String,Integer>();
 		getWhights( manScans,hmap);
 		return null;
 		
 	}
-	private static void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Double> hmap) {
+	private static void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Integer> hmap) {
 		// TODO Auto-generated method stub
 		int num_of_scans= manScans.size();
 		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
 		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
-			
-			
-			
+			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
 		}
 	}
 	private double[] arrsort(double[] arr, double num)
@@ -43,9 +41,8 @@ public class cal3 {
 	
 	public void cal2(double[][] arr,double[] arr1,int j)
 	{ 
-	
 		for (int i = 0; i < arr1.length; i++) {
-		double a=((_NORM/((Math.pow(Math.max(Math.abs(arr[i][j]-arr1[i]),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(arr1[i], _POWER))))));
+			double a=((_NORM/((Math.pow(Math.max(Math.abs(arr[i][j]-arr1[i]),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(arr1[i], _POWER))))));
 		
 		}
 	}

@@ -37,8 +37,8 @@ public class wifiWithCoordinate extends wifi {
 		.createAndSetPoint().addToCoordinates(this.longitude, this.Latitude);
 	}
 
-	public static double RSSIavg(Vector<wifiWithCoordinate> wifis){
-		double sum=0;
+	public static int RSSIavg(Vector<wifiWithCoordinate> wifis){
+		int sum=0;
 		for(wifiWithCoordinate wifi: wifis)
 		{
 				sum+=wifi.getRSSI();
