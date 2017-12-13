@@ -45,7 +45,7 @@ public class sameScanWifi implements Iterable<wifi>{
 	 */
 	public boolean exist(wifi a){
 		for(int i=0;i<num;i++){
-			if(a.getMAC()==wifis[i].getMAC()&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID()==wifis[i].getSSID()){
+			if(a.getMAC().equals(wifis[i].getMAC())&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID().equals(wifis[i].getSSID())){
 				return true;
 			}
 		}
@@ -118,13 +118,13 @@ public class sameScanWifi implements Iterable<wifi>{
 	 */
 	public boolean remove(wifi delete){
 		for(int i=0;i<this.num-1;i++){
-			if(delete==this.wifis[i]){
+			if(delete.equals(this.wifis[i])){
 				this.wifis[i]=this.wifis[this.num-1];
 				this.num--;
 				return true;
 			}
 		}
-		if(delete==this.wifis[this.num-1]){
+		if(delete.equals(this.wifis[this.num-1])){
 			this.num--;
 		}
 		if(this.num==0)return false;

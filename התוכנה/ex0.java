@@ -4,7 +4,7 @@ public class ex0 {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		fromAppToCSV("C:\\Download\\mytest");
+		fromAppToCSV("C:\\munche\\ex2\\a");
 		fromoCSVToKML("test\\writeKmlTest\\good1.csv","test\\writeKmlTest");
 	}
 
