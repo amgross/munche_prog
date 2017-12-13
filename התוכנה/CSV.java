@@ -80,5 +80,28 @@ public class CSV {
 		br.close();
 		return dataBase;
 	}
+	/**
+	 * 
+	 * @param writing_path to print in this folder the places of the routers
+	 * @param realPlaces vector of wifiWithCoordinate 
+	 * print the routers with their coordinates into csv file
+	 */
+	public static void printFileFromWifiWithCoordinateToCSV(String writing_path, Vector<wifiWithCoordinate> realPlaces) {
+		// TODO Auto-generated method stub
+		FileWriter fw;             // statement
+		try {                 //   try write the file 
+			fw = new FileWriter(writing_path+"\\wifi.csv");
+			PrintWriter outs = new PrintWriter(fw);
+			for(int i=0;i<realPlaces.size();i++){
+				outs.println(realPlaces.elementAt(i).toStringForCsv());
+			}
+
+			fw.close();      // close fw writer
+			outs.close();     //close outs writer
+		} catch (IOException e) {     // exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -42,7 +42,7 @@ public class KML {
 	}
 	
 	/**
-	 * Write the KML file from databace to folder.
+	 * Write the KML file from database to folder.
 	 * @param filePlace-
 	 * @return 0 if the csv file was'nt good, else return 1
 	 */

@@ -16,6 +16,7 @@ public class ex2 {
 		Vector<sameScanWifi> dataBase=WiggleWifi.collectInfoFromWiggleWifi(reading_path);	
 		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
 		Vector<wifiWithCoordinate> realPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
+		CSV.printFileFromWifiWithCoordinateToCSV(writing_path, realPlaces);
 		KML.printFileFromWifiWithCoordinateToKML(writing_path, realPlaces);
 	}
 	

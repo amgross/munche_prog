@@ -49,7 +49,12 @@ public class wifiWithCoordinate extends wifi {
 		this.longitude = longitude;
 	}
 	public void setLatitude(double latitude) {
-		Latitude = latitude;
+		this.Latitude = latitude;
+	}
+	public String toStringForCsv() {
+		// TODO Auto-generated method stub
+		String st=super.getMAC()+","+super.getSSID()+","+this.longitude+","+this.Latitude+","+this.altitude;
+		return st;
 	}
 	
 }
