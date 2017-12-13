@@ -37,21 +37,13 @@ public class wifiWithCoordinate extends wifi {
 		.createAndSetPoint().addToCoordinates(this.longitude, this.Latitude);
 	}
 
-	public static double RSSIavg(Vector<wifiWithCoordinate> e){
-		for(wifiWithCoordinate wifi: e)
+	public static double RSSIavg(Vector<wifiWithCoordinate> wifis){
+		double sum=0;
+		for(wifiWithCoordinate wifi: wifis)
 		{
-			for(wifi rssi: wifi)
-			{
-				data[i][j]=rssi.getRSSI();
-				i++;
-				avgRssi[j]=rssi.getRSSI();
-			}
-			avgRssi[j]/=i;
-			i=0;
-			j++;
-			//	input/=avg1;
-			//	avg1=(Math.abs(input)-Math.abs(a)
+				sum+=wifi.getRSSI();
 		}
+		return sum/wifis.size();
 	}
 	/**
 	 * 
