@@ -20,14 +20,15 @@ public class cal1 {
 			if(num>arr[i]){
 				temp=arr[i];
 				arr[i]=num;
-				arrsort(arr,temp);
+				arrsort(arr,temp);//רקורסיה
 			}
 		}
 		return arr;
 	}
 	
-	public void cal2(double[][] arr,double[] arr1,int j)
-	{
+	public void cal2(double[][] arr,double[] arr1,int j)//הפונקציה מקבלת מערך דו ממדי ממוינת לפי מא"ק, מערך חד ממדי של ממוצעים ושורה למטריצה הראשונה
+	{ 
+	
 		for (int i = 0; i < arr1.length; i++) {
 		double a=((_NORM/((Math.pow(Math.max(Math.abs(arr[i][j]-arr1[i]),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(arr1[i], _POWER))))));
 		
