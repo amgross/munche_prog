@@ -19,4 +19,7 @@ public class ex2 {
 		KML.printFileFromWifiWithCoordinateToKML(writing_path, realPlaces);
 	}
 	
+	public static void algorithm_2(String reading_database_pathCSV,String reading_man_pathCSV,String writing_path,int num_of_points) throws Exception{
+		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV(reading_database_pathCSV);
+	}
 }
