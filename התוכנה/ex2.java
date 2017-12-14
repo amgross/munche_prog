@@ -19,11 +19,12 @@ public class ex2 {
 		KML.printFileFromWifiWithCoordinateToKML(writing_path, realPlaces);
 	}
 	
-	public static void algorithm_2(String reading_database_pathCSV,String reading_man_pathCSV,String writing_path,int num_of_points) throws Exception{
+	public static void algorithm_2(String reading_database_pathCSV,String reading_without_coordinate_pathCSV,String writing_path,int num_of_points) throws Exception{
 		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV(reading_database_pathCSV);
-		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
-		Vector<wifiWithCoordinate> routerPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
-		Vector<sameScanWifi> manScans=CSV.collectInfoFromCSV( reading_man_pathCSV);
-		wifiWithCoordinate manPlace=cal3.findManPlace(routerPlaces,manScans,num_of_points);
+//		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
+//		Vector<wifiWithCoordinate> routerPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
+		Vector<sameScanWifi> manScans=BOAZCSV.collectInfoFromBOAZCSV(  reading_without_coordinate_pathCSV);
+		cal3.findManPlace(dataBase,manScans,num_of_points);
+		CSV.printFileFromDataBaseToCSV( manScans, writing_path);
 	}
 }

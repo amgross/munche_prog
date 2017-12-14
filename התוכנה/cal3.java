@@ -14,16 +14,36 @@ public class cal3 {
 	private static final int _NO_SIGNAL = -120;
 	private static final int _DIFF_NO_SIGNAL = 100;
 	
-	public static wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
-		HashMap<sameScanWifi,Double> hmap1= new HashMap<sameScanWifi,Double>();
-		getWhights( manScans,hmap1);
-		manScans.sort(Comparator.comparing(sample -> -hmap1.get(sample)));
+	public static void findManPlace(Vector<sameScanWifi> database,Vector<sameScanWifi> manScans,int num_of_points){
+		for(sameScanWifi fixingNow : manScans){
+			HashMap<sameScanWifi,Double> scansWeight= new HashMap<sameScanWifi,Double>();
+			for(sameScanWifi gettingWeight : database){				
+				scansWeight.put(gettingWeight, getScanWeight(gettingWeight,fixingNow));
+			}
+			
+		}
+		
+//		getWhights( manScans,hmap1);
+//		manScans.sort(Comparator.comparing(sample -> -hmap1.get(sample)));
 		//double[] array=new double[num_of_points];
 		
 
 			
-		return null;
 		
+	}
+	private static double getScanWeight(sameScanWifi gettingWeight, sameScanWifi fixingNow) {
+		// TODO Auto-generated method stub
+		double scanWeight=1;
+		for(wifi currentWifi : fixingNow){
+			wifi same=gettingWeight.getWifi(currentWifi.getMAC());
+			if(same!=null){
+				scanWeight*=findWheight(same.getRSSI(),currentWifi.getRSSI());
+			}
+			else{
+				scanWeight *= findWheight(_DIFF_NO_SIGNAL + currentWifi.getRSSI(),currentWifi.getRSSI());
+			}
+		}
+		return scanWeight;
 	}
 	private static void getWhights(Vector<sameScanWifi> manScans,HashMap<sameScanWifi,Double> hmap1) {
 		// TODO Auto-generated method stub
@@ -58,10 +78,10 @@ public class cal3 {
 		return arr;
 	}
 	
-	public static double findWheight(int realSig,Integer avgSig)
+	public static double findWheight(int check,int input)
 	{ 
 
-			return ((_NORM/((Math.pow(Math.max(Math.abs(realSig-avgSig),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(avgSig, _POWER))))));
+			return ((_NORM/((Math.pow(Math.max(Math.abs(check-input),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(input, _POWER))))));
 		
 		
 	}

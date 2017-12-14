@@ -59,6 +59,16 @@ public class sameScanWifi implements Iterable<wifi>{
 		}
 		return false;
 	}
+	
+	public wifi getWifi(String MAC){
+		for(int i=0;i<num;i++){
+			if(MAC.equals(wifis[i].getMAC())){
+				return wifis[i];
+			}
+		}
+		return null;
+
+	}
 	/**
 	 * insert new wifi, if their are already ten delete the one with the min rssi
 	 * @param wifi
