@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -6,29 +7,27 @@ import org.omg.CORBA._PolicyStub;
 public class cal3 {
 //  still not working
 
-	private final int _POWER = 2;
-	private final double _NORM = 10000;
-	private final double _SIGNAL_DIFF = 0.4;
-	private final double _MIN_DIFF = 3;
-	private final double _NO_SIGNAL = -120;
-	private final double _DIFF_NO_SIGNAL = 100;
+	private static final int _POWER = 2;
+	private static final int _NORM = 10000;
+	private static final double _SIGNAL_DIFF = 0.4;
+	private static final int _MIN_DIFF = 3;
+	private static final int _NO_SIGNAL = -120;
+	private static final int _DIFF_NO_SIGNAL = 100;
 	
 	public static wifiWithCoordinate findManPlace(Vector<wifiWithCoordinate> routerPlaces,Vector<sameScanWifi> manScans,int num_of_points){
-		HashMap<String,Integer> hmap = new HashMap<String,Integer>();
-		getWhights( manScans,hmap);
+		HashMap<sameScanWifi,Double> hmap1= new HashMap<sameScanWifi,Double>();
+		getWhights( manScans,hmap1);
+		manScans.sort(Comparator.comparing(sample -> -hmap1.get(sample)));
+		//double[] array=new double[num_of_points];
 		
-		double[] array=new double[num_of_points];
-		for (HashMap<String, Integer> d : hmap) {
-			
-		}
 
 			
 		return null;
 		
 	}
-	private static void getWhights(Vector<sameScanWifi> manScans, HashMap<String, Integer> hmap) {
+	private static void getWhights(Vector<sameScanWifi> manScans,HashMap<sameScanWifi,Double> hmap1) {
 		// TODO Auto-generated method stub
-		int num_of_scans= manScans.size();
+		 HashMap<String, Integer> hmap = new HashMap<String, Integer>();
 		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
 		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
 			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
@@ -40,9 +39,10 @@ public class cal3 {
 			}
 			for(Vector<wifiWithCoordinate> router: sortByMAC){
 				if(!currentScan.exist(router.firstElement().getMAC())){
-					Weight*=findWheight(_DIFF_NO_SIGNAL,router.firstElement().getRSSI());
+					Weight*=findWheight((int)_DIFF_NO_SIGNAL,hmap.get(router.firstElement().getMAC()));
 				}
 			}
+			hmap1.put(currentScan, Weight);
 		}
 	}
 	private double[] arrsort(double[] arr, double num)
