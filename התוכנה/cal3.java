@@ -17,11 +17,16 @@ public class cal3 {
 	public static void findManPlace(Vector<sameScanWifi> database,Vector<sameScanWifi> manScans,int num_of_points){
 		for(sameScanWifi fixingNow : manScans){
 			HashMap<sameScanWifi,Double> scansWeight= new HashMap<sameScanWifi,Double>();
+			
 			for(sameScanWifi gettingWeight : database){				
 				scansWeight.put(gettingWeight, getScanWeight(gettingWeight,fixingNow));
 			}
-			
+			 database.sort(Comparator.comparing(scan -> -scansWeight.get(scan)));
+			 ///////a(database,hashmap,manScans,num_of_points);
+			 for
+			 scansWeight.get(key)
 		}
+		for(Vector<sameScanWifi> w:database)
 		
 //		getWhights( manScans,hmap1);
 //		manScans.sort(Comparator.comparing(sample -> -hmap1.get(sample)));
