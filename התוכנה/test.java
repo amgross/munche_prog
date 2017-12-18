@@ -215,6 +215,7 @@ public class test {
 		tempScan.setAltitude("660");tempScan.setLatitude("32.105");tempScan.setLongitude("35.205");
 		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-82"); tempScan.insert(temp);
 		temp=new wifi(); temp.setMAC("cc:cc:cc:cc"); temp.setSSID("c"); temp.setRSSI("-82"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("dd:dd:dd:dd"); temp.setSSID("c"); temp.setRSSI("-10000"); tempScan.insert(temp);
 		dataBase.add(tempScan);
 		tempScan=new sameScanWifi();
 		tempScan.setAltitude("680");tempScan.setLatitude("32.103");tempScan.setLongitude("35.307");
