@@ -2,7 +2,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.omg.CORBA._PolicyStub;
+//import org.omg.CORBA._PolicyStub;
 
 public class cal3 {
 	//  still not working
@@ -12,7 +12,7 @@ public class cal3 {
 	private static final int _NORM = 10000;
 	private static final double _SIGNAL_DIFF = 0.4;
 	private static final int _MIN_DIFF = 3;
-	private static final int _NO_SIGNAL = -120;
+//	private static final int _NO_SIGNAL = -120;
 	private static final int _DIFF_NO_SIGNAL = 100;
 
 
@@ -64,39 +64,39 @@ public class cal3 {
 		}
 		return scanWeight;
 	}
-	private static void getWhights(Vector<sameScanWifi> manScans,HashMap<sameScanWifi,Double> hmap1) {
-		// TODO Auto-generated method stub
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
-		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
-			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
-		}
-		for(sameScanWifi currentScan:manScans){
-			double Weight=1;
-			for(wifi currentWifi:currentScan){
-				Weight*=findWheight(currentWifi.getRSSI(),hmap.get(currentWifi.getMAC()));
-			}
-			for(Vector<wifiWithCoordinate> router: sortByMAC){
-				if(!currentScan.exist(router.firstElement().getMAC())){
-					Weight*=findWheight((int)_DIFF_NO_SIGNAL,hmap.get(router.firstElement().getMAC()));
-				}
-			}
-
-			hmap1.put(currentScan, Weight);
-		}
-	}
-	private double[] arrsort(double[] arr, double num)
-	{
-		double temp;
-		for (int i = 0; i < arr.length; i++) {
-			if(num>arr[i]){
-				temp=arr[i];
-				arr[i]=num;
-				arrsort(arr,temp);//רקורסיה
-			}
-		}
-		return arr;
-	}
+//	private static void getWhights(Vector<sameScanWifi> manScans,HashMap<sameScanWifi,Double> hmap1) {
+//		// TODO Auto-generated method stub
+//		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+//		Vector<Vector<wifiWithCoordinate>> sortByMAC=dataBaseFunctions.collectIdenticalMAC(manScans);
+//		for(Vector<wifiWithCoordinate> currentRouter:sortByMAC){
+//			hmap.put(currentRouter.firstElement().getMAC(), wifiWithCoordinate.RSSIavg(currentRouter));
+//		}
+//		for(sameScanWifi currentScan:manScans){
+//			double Weight=1;
+//			for(wifi currentWifi:currentScan){
+//				Weight*=findWheight(currentWifi.getRSSI(),hmap.get(currentWifi.getMAC()));
+//			}
+//			for(Vector<wifiWithCoordinate> router: sortByMAC){
+//				if(!currentScan.exist(router.firstElement().getMAC())){
+//					Weight*=findWheight((int)_DIFF_NO_SIGNAL,hmap.get(router.firstElement().getMAC()));
+//				}
+//			}
+//
+//			hmap1.put(currentScan, Weight);
+//		}
+//	}
+//	private double[] arrsort(double[] arr, double num)
+//	{
+//		double temp;
+//		for (int i = 0; i < arr.length; i++) {
+//			if(num>arr[i]){
+//				temp=arr[i];
+//				arr[i]=num;
+//				arrsort(arr,temp);//רקורסיה
+//			}
+//		}
+//		return arr;
+//	}
 
 	public static double findWheight(int check,int input)
 	{ 
@@ -143,26 +143,26 @@ public class cal3 {
 	 */
 
 
-	/*
-	 * for example: avg0+=arr[i][0]/math.pow(arr[i][4],2); avg1+=arr[i][1]/math.pow(arr[i][4],2);
-	 * avg2+=arr[i][2]/math.pow(arr[i][4],2);avg3[i][3]/math.pow(arr[i][4],2);avg4+=(1/math.pow(arr[i][4],2));
-	 */
-	public static wifiWithCoordinate avgcomp(Vector<wifiWithCoordinate> sameWifi)
-	{
-		double avgAltitude=0,avgLatitude=0,avLongitude=0,avg=0;
-		for (wifiWithCoordinate wifi: sameWifi) {
-			avgAltitude += wifi.getAltitude()/Math.pow(wifi.getRSSI(),2); 
-			avgLatitude += wifi.getLatitude()/Math.pow(wifi.getRSSI(),2); 
-			avLongitude += wifi.getLongitude()/Math.pow(wifi.getRSSI(),2);
-			avg += (1/Math.pow(wifi.getRSSI(),2));
-		}
-		wifiWithCoordinate realPlace=new wifiWithCoordinate();
-		realPlace.setAltitude(avgAltitude/avg);
-		realPlace.setLatitude(avgLatitude/avg);
-		realPlace.setLongitude(avLongitude/avg);
-		realPlace.setMAC(sameWifi.firstElement().getMAC());
-		realPlace.setSSID(sameWifi.firstElement().getSSID());
-
-		return realPlace;
-	}
+//	/*
+//	 * for example: avg0+=arr[i][0]/math.pow(arr[i][4],2); avg1+=arr[i][1]/math.pow(arr[i][4],2);
+//	 * avg2+=arr[i][2]/math.pow(arr[i][4],2);avg3[i][3]/math.pow(arr[i][4],2);avg4+=(1/math.pow(arr[i][4],2));
+//	 */
+//	public static wifiWithCoordinate avgcomp(Vector<wifiWithCoordinate> sameWifi)
+//	{
+//		double avgAltitude=0,avgLatitude=0,avLongitude=0,avg=0;
+//		for (wifiWithCoordinate wifi: sameWifi) {
+//			avgAltitude += wifi.getAltitude()/Math.pow(wifi.getRSSI(),2); 
+//			avgLatitude += wifi.getLatitude()/Math.pow(wifi.getRSSI(),2); 
+//			avLongitude += wifi.getLongitude()/Math.pow(wifi.getRSSI(),2);
+//			avg += (1/Math.pow(wifi.getRSSI(),2));
+//		}
+//		wifiWithCoordinate realPlace=new wifiWithCoordinate();
+//		realPlace.setAltitude(avgAltitude/avg);
+//		realPlace.setLatitude(avgLatitude/avg);
+//		realPlace.setLongitude(avLongitude/avg);
+//		realPlace.setMAC(sameWifi.firstElement().getMAC());
+//		realPlace.setSSID(sameWifi.firstElement().getSSID());
+//
+//		return realPlace;
+//	}
 }
