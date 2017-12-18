@@ -25,7 +25,7 @@ public class cal3 {
 			}
 			database.sort(Comparator.comparing(scan -> -scansWeight.get(scan)));
 			///////a(database,hashmap,manScans,num_of_points);
-			double lat=1,lon=1,alt=1,weight=1;
+			double lat=0,lon=0,alt=0,weight=0;
 			for(sameScanWifi currentScan : database){	
 				num_of_points--;
 				lat+= scansWeight.get(currentScan)*currentScan.getLatitude();
