@@ -23,6 +23,7 @@ public class dataBaseFunctions {
 						if(sameMac.getMAC().equals(currentWifi.getMAC())){
 							if(sameMac.getRSSI()>currentWifi.getRSSI()){
 								iter.remove();
+								break;
 							}
 							else{
 								hmap.get(currentWifi.getMAC()).remove(sameMac);
