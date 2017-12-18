@@ -4,7 +4,7 @@ public class ex2 {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		//algorithm_1("C:\\munche\\ex2\\bm3\\wifi.csv","C:\\munche\\ex2\\bm3\\router.csv",20);
-		algorithm_2("C:\\munche\\ex2\\bm3TS1\\wifi.csv","C:\\munche\\ex2\\bm3TS1\\_comb_no_gps_ts1.csv","C:\\munche\\ex2\\bm3TS1\\router.csv",4);
+		algorithm_2("C:\\munche\\ex2\\bm3TS1\\wifi.csv","C:\\munche\\ex2\\bm3TS1\\_comb_no_gps_ts1.csv","C:\\munche\\ex2\\bm3TS1\\router.csv",20);
 	}
 	/**
 	 * 
@@ -27,11 +27,11 @@ public class ex2 {
 		}	
 	}
 	
-	public static void algorithm_2(String reading_database_pathCSV,String reading_without_coordinate_pathWiggle,String writing_path,int num_of_points) throws Exception{
+	public static void algorithm_2(String reading_database_pathCSV,String reading_without_coordinate_path,String writing_path,int num_of_points) throws Exception{
 		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV(reading_database_pathCSV);
 //		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
 //		Vector<wifiWithCoordinate> routerPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
-		Vector<sameScanWifi> manScans=CSV.collectInfoFromCSV(  reading_without_coordinate_pathWiggle);
+		Vector<sameScanWifi> manScans=CSV.collectInfoFromCSV(  reading_without_coordinate_path);
 		cal3.findManPlace(dataBase,manScans,num_of_points);
 		CSV.printFileFromDataBaseToCSV( manScans, writing_path);
 	}

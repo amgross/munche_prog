@@ -4,8 +4,8 @@ public class ex0 {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		fromAppToCSV("C:\\munche\\ex2\\bm3","C:\\munche\\ex2\\bm3\\wifi.csv");
-		//fromoCSVToKML("test\\writeKmlTest\\good1.csv","test\\writeKmlTest\\wifi.kml");
+		fromAppToCSV("C:\\munche\\ex2\\a","C:\\munche\\ex2\\a\\wifi.csv");
+		fromoCSVToKML("C:\\munche\\ex2\\a\\wifi.csv","C:\\munche\\ex2\\a\\wifi.kml");
 	}
 
 	public static void fromAppToCSV(String wiggleFolder, String printCsvFile){

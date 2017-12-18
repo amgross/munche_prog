@@ -101,7 +101,7 @@ public class cal3 {
 	public static double findWheight(int check,int input)
 	{ 
 
-		return ((_NORM/((Math.pow(Math.max(Math.abs(check-input),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(input, _POWER))))));
+		return (_NORM/(Math.pow(Math.max(Math.abs(check-input),_MIN_DIFF), _SIGNAL_DIFF)*(Math.pow(input, _POWER))));
 
 
 	}
