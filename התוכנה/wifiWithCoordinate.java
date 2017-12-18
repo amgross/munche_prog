@@ -62,5 +62,14 @@ public class wifiWithCoordinate extends wifi {
 	public void setLatitude(double latitude) {
 		Latitude = latitude;
 	}
+	
+	/**
+	 * 
+	 * @return the router in the format for csv
+	 */
+	public String toStringForCsv(){
 
+		String toCsv=super.getMAC()+","+super.getSSID()+","+this.Latitude+","+this.longitude+","+this.altitude;
+		return toCsv;
+	}
 }

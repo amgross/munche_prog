@@ -25,7 +25,7 @@ import java.util.Vector;
 public class CSV {
 
 	/** 
-	 *  gets vector of the info and PrintWriter to wifi.csv (format)
+	 *  gets vector of the info and PrintWriter to csv (format)
 	 *  printing into the new csv file all the data
 	 * 
 	 * @param info-
@@ -34,7 +34,24 @@ public class CSV {
 	public static void printFileFromDataBaseToCSV(Vector<sameScanWifi> dataBase,String path){
 		FileWriter fw;             // statement
 		try {                 //   try write the file 
-			fw = new FileWriter(path+"\\wifi.csv");
+			fw = new FileWriter(path);
+			PrintWriter outs = new PrintWriter(fw);
+			for(int i=0;i<dataBase.size();i++){
+				outs.println(dataBase.elementAt(i).toStringForCsv());
+			}
+
+			fw.close();      // close fw writer
+			outs.close();     //close outs writer
+		} catch (IOException e) {     // exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void printFileFromWifiWithCoordinateToCSV(Vector<wifiWithCoordinate> dataBase,String path){
+		FileWriter fw;             // statement
+		try {                 //   try write the file 
+			fw = new FileWriter(path);
 			PrintWriter outs = new PrintWriter(fw);
 			for(int i=0;i<dataBase.size();i++){
 				outs.println(dataBase.elementAt(i).toStringForCsv());
@@ -49,10 +66,10 @@ public class CSV {
 	}
 
 	/**
-	 * collect the info into Vector<sameScanWifi> with the filter
+	 * collect the info into Vector<sameScanWifi> 
 	 * @param path of csv file that our function made
 	 * @return data base from it
-	 * @throws Exception if the csv file is'nt good
+	 * @throws Exception if the csv file or path is'nt good
 	 */
 	public static Vector<sameScanWifi> collectInfoFromCSV(String path) throws Exception{
 		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();

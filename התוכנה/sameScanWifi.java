@@ -59,7 +59,7 @@ public class sameScanWifi implements Iterable<wifi>{
 		}
 		return false;
 	}
-	
+
 	public wifi getWifi(String MAC){
 		for(int i=0;i<num;i++){
 			if(MAC.equals(wifis[i].getMAC())){
@@ -154,26 +154,41 @@ public class sameScanWifi implements Iterable<wifi>{
 	 * setters return exception if the values are non good
 	 */
 	public void setAltitude(String altitude) {
-		this.altitude = Double.parseDouble(altitude);
+		if(altitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			this.altitude = Double.parseDouble(altitude);
+		}
 	}
 
 
 
 	public void setLongitude(String longtitude) {
-		this.longitude = Double.parseDouble(longtitude);
+		if(longtitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			this.longitude = Double.parseDouble(longtitude);
+		}
 	}
 
 
 
 	public void setLatitude(String latitude) {
-		Latitude = Double.parseDouble(latitude);
+		if(latitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			Latitude = Double.parseDouble(latitude);
+		}
 	}
 
 
 
 	public void setTime(String time) throws Exception {
 		this.time = time;
-		check.checkTime(time);
+		//check.checkTime(time);
 	}
 
 
@@ -213,29 +228,29 @@ public class sameScanWifi implements Iterable<wifi>{
 	public Iterator<wifi> iterator() {
 		// TODO Auto-generated method stub
 		Iterator<wifi> iter=new Iterator<wifi>(){
-		private int next=0;
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			wifis[next-1]=wifis[num-1];
-			num--;
-			next--;
-		}
-		@Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			if(next<num){
-				return true;
+			private int next=0;
+			@Override
+			public void remove() {
+				// TODO Auto-generated method stub
+				wifis[next-1]=wifis[num-1];
+				num--;
+				next--;
 			}
-			return false;
-		}
+			@Override
+			public boolean hasNext() {
+				// TODO Auto-generated method stub
+				if(next<num){
+					return true;
+				}
+				return false;
+			}
 
-		@Override
-		public wifi next() {
-			// TODO Auto-generated method stub
-			next++;
-			return wifis[next-1];
-		}
+			@Override
+			public wifi next() {
+				// TODO Auto-generated method stub
+				next++;
+				return wifis[next-1];
+			}
 
 		};
 		return iter;
