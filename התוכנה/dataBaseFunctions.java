@@ -10,39 +10,39 @@ public class dataBaseFunctions {
 	 * @param database
 	 */
 	public static void deleteDoubleMacFromDataBase(Vector<sameScanWifi> dataBase){
-		 HashMap< String,sameScanWifi> hmap = new HashMap< String,sameScanWifi>();
-		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
-			 sameScanWifi currentSameScanWifi=sameScanWifiIterator.next();
-			 for(Iterator<wifi> iter = currentSameScanWifi.iterator(); iter.hasNext(); ) {
-				 wifi currentWifi=iter.next();
-	    		  if(hmap.get(currentWifi.getMAC())==null){
-	    			  hmap.put(currentWifi.getMAC(), currentSameScanWifi);
-	    		  }
-	    		  else{
-	    			  for(wifi sameMac:hmap.get(currentWifi.getMAC())){
-	    				  if(sameMac.getMAC().equals(currentWifi.getMAC())){
-	    					  if(sameMac.getRSSI()>currentWifi.getRSSI()){
-	    						  iter.remove();
-	    					  }
-	    					  else{
-	    						  hmap.get(currentWifi.getMAC()).remove(sameMac);
-	    						  hmap.replace(currentWifi.getMAC(),  currentSameScanWifi);
-	    					  }
-	    				  }
-	    			  }
-	    		  }
-	    	  }
-	      }
-		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
-			 if(sameScanWifiIterator.next().size()==0){
-	    		  sameScanWifiIterator.remove();
-	    	  }
-		 }
+		HashMap< String,sameScanWifi> hmap = new HashMap< String,sameScanWifi>();
+		for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			sameScanWifi currentSameScanWifi=sameScanWifiIterator.next();
+			for(Iterator<wifi> iter = currentSameScanWifi.iterator(); iter.hasNext(); ) {
+				wifi currentWifi=iter.next();
+				if(hmap.get(currentWifi.getMAC())==null){
+					hmap.put(currentWifi.getMAC(), currentSameScanWifi);
+				}
+				else{
+					for(wifi sameMac:hmap.get(currentWifi.getMAC())){
+						if(sameMac.getMAC().equals(currentWifi.getMAC())){
+							if(sameMac.getRSSI()>currentWifi.getRSSI()){
+								iter.remove();
+							}
+							else{
+								hmap.get(currentWifi.getMAC()).remove(sameMac);
+								hmap.replace(currentWifi.getMAC(),  currentSameScanWifi);
+							}
+						}
+					}
+				}
+			}
+		}
+		for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			if(sameScanWifiIterator.next().size()==0){
+				sameScanWifiIterator.remove();
+			}
+		}
 
 	}
-	
-	
-	
+
+
+
 	/**
 	 * every wifi with the same mac collected into one vector of wifi with coordinate and all the vectors in one vector
 	 * @param database
@@ -50,24 +50,24 @@ public class dataBaseFunctions {
 	 */
 	public static Vector<Vector<wifiWithCoordinate>> collectIdenticalMAC(Vector<sameScanWifi> database){
 		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=new Vector<Vector<wifiWithCoordinate>>();
-		 HashMap< String,Vector<wifiWithCoordinate>> hmap = new HashMap< String,Vector<wifiWithCoordinate>>();
-		 for (sameScanWifi currentSameScanWifi: database) {
-	    	  for(wifi currentWifi:currentSameScanWifi){
-	    		  if(hmap.get(currentWifi.getMAC())==null){
-	    			  Vector<wifiWithCoordinate> temp=new Vector<wifiWithCoordinate>();
-	    			  IdenticalMAC.add(temp);
-	    			  temp.add((new wifiWithCoordinate(currentSameScanWifi,currentWifi)));
-	    			  hmap.put(currentWifi.getMAC(), temp);
-	    		  }
-	    		  else{
-	    			  hmap.get(currentWifi.getMAC()).add(new wifiWithCoordinate(currentSameScanWifi,currentWifi));
-	    		  }
-	    	  }
-	      }
-		 return IdenticalMAC;
+		HashMap< String,Vector<wifiWithCoordinate>> hmap = new HashMap< String,Vector<wifiWithCoordinate>>();
+		for (sameScanWifi currentSameScanWifi: database) {
+			for(wifi currentWifi:currentSameScanWifi){
+				if(hmap.get(currentWifi.getMAC())==null){
+					Vector<wifiWithCoordinate> temp=new Vector<wifiWithCoordinate>();
+					IdenticalMAC.add(temp);
+					temp.add((new wifiWithCoordinate(currentSameScanWifi,currentWifi)));
+					hmap.put(currentWifi.getMAC(), temp);
+				}
+				else{
+					hmap.get(currentWifi.getMAC()).add(new wifiWithCoordinate(currentSameScanWifi,currentWifi));
+				}
+			}
+		}
+		return IdenticalMAC;
 	}
 
-	
+
 	/**
 	 * add all the sameScanWifi that in tempSameScanWifiVector into  wifis
 	 * if their was an ellement from the same scan it units them,
@@ -91,7 +91,7 @@ public class dataBaseFunctions {
 			}
 		}
 	}
-	
+
 	private static Scanner console;
 	/**
 	 * ask the user in which filter he whant to use
@@ -99,8 +99,8 @@ public class dataBaseFunctions {
 	 */
 	public static filter chooseFilter(){
 		String userAns;
-		
-		
+
+
 		filter myFilter=null;
 		console = new Scanner(System.in);
 		do{
@@ -130,7 +130,7 @@ public class dataBaseFunctions {
 				System.out.println("what is the ID?");
 				console.nextLine();
 				userAns=console.nextLine();
-				
+
 				myFilter=new filterByID();
 
 
@@ -167,11 +167,11 @@ public class dataBaseFunctions {
 	 * filtering the database with the filter
 	 */
 	public static void filterDataBase(filter myFilter,Vector<sameScanWifi> dataBase){
-		 for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
-			 if(!myFilter.filters(sameScanWifiIterator.next())){
-				 sameScanWifiIterator.remove();
-			 }
-		 }
+		for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
+			if(!myFilter.filters(sameScanWifiIterator.next())){
+				sameScanWifiIterator.remove();
+			}
+		}
 
 	}
 	/**
@@ -186,9 +186,9 @@ public class dataBaseFunctions {
 			sameWifi.sort(Comparator.comparing(sample -> -sample.getRSSI()));
 			realePlace.add(cal.avgcomp(sameWifi,num));
 		}
-		
-		
-		
+
+
+
 		return realePlace;
 	}
 }
