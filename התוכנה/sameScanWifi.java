@@ -31,7 +31,11 @@ public class sameScanWifi implements Iterable<wifi>{
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * @param a
+	 * insert all the wifis that in scan a to the current scan
+	 */
 	public void insert(sameScanWifi a){
 		for(wifi current:a){
 			this.insert(current);
@@ -43,15 +47,22 @@ public class sameScanWifi implements Iterable<wifi>{
 	 * @param wifi
 	 * @return true if this wifi exist as is and false else
 	 */
-	public boolean exist(wifi a){
+	private boolean exist(wifi a){
 		for(int i=0;i<num;i++){
-			if(a.getMAC()==wifis[i].getMAC()&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID()==wifis[i].getSSID()){
+			if(a.getMAC().equals(wifis[i].getMAC())&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID().equals(wifis[i].getSSID())){
 				return true;
 			}
 		}
 		return false;
 	}
-	public boolean exist(String mac){
+	
+
+	/**
+	 * 
+	 * @param mac
+	 * @return true if this mac exist as is and false else
+	 */
+	private boolean exist(String mac){
 		for(int i=0;i<num;i++){
 			if(mac.equals(wifis[i].getMAC())){
 				return true;

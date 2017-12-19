@@ -175,21 +175,5 @@ public class dataBaseFunctions {
 		}
 
 	}
-	/**
-	 * 
-	 * @param IdenticalMAC vector that every object in it is vector of the same ruter from diffrent scan from the same placr
-	 * @param num of points to check with
-	 * @return the real places of the routers in vector of wifiWithCoordinate
-	 */
-	public static Vector<wifiWithCoordinate> realPlaces(Vector<Vector<wifiWithCoordinate>> IdenticalMAC,int num){
-		Vector<wifiWithCoordinate> realePlace=new Vector<wifiWithCoordinate>();
-		for(Vector<wifiWithCoordinate> sameWifi: IdenticalMAC ){
-			sameWifi.sort(Comparator.comparing(sample -> -sample.getRSSI()));
-			realePlace.add(cal.avgcomp(sameWifi,num));
-		}
-
-
-
-		return realePlace;
-	}
+	
 }

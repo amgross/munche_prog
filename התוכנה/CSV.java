@@ -48,6 +48,11 @@ public class CSV {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param dataBase of Vector<wifiWithCoordinate>
+	 * @param path to print all the data from th database in it
+	 */
 	public static void printFileFromWifiWithCoordinateToCSV(Vector<wifiWithCoordinate> dataBase,String path){
 		FileWriter fw;             // statement
 		try {                 //   try write the file 

@@ -191,6 +191,9 @@ public class test {
 		assertTrue((ans.firstElement().size()==3&&ans.lastElement().size()==5)||
 				(ans.firstElement().size()==5&&ans.lastElement().size()==3));
 	}
+	/**
+	 * test algorithm 2 with the database that we got in the excel
+	 */
 	@Test
 	public void algo2FromExelExample(){
 		sameScanWifi input=new sameScanWifi();
@@ -226,7 +229,7 @@ public class test {
 		tempScan.setAltitude("1000000");tempScan.setLatitude("1000000");tempScan.setLongitude("1000000");
 		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-91"); tempScan.insert(temp);
 		dataBase.add(tempScan);
-		cal3.findManPlace(dataBase,man,3);
+		findPlaces.findManPlace(dataBase,man,3);
 		assertEquals(658.0198453,input.getAltitude(),0.0001);
 		assertEquals(32.1034296,input.getLatitude(),0.0001);
 		assertEquals(35.22673264,input.getLongitude(),0.0001);

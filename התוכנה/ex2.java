@@ -4,7 +4,7 @@ public class ex2 {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		//algorithm_1("C:\\munche\\ex2\\bm3\\wifi.csv","C:\\munche\\ex2\\bm3\\router.csv",20);
-		algorithm_2("C:\\munche\\ex2\\bm3TS1\\wifi.csv","C:\\munche\\ex2\\bm3TS1\\_comb_no_gps_ts1.csv","C:\\munche\\ex2\\bm3TS1\\router.csv",20);
+		algorithm_2("C:\\munche\\ex2\\bm3TS1\\wifi.csv","C:\\munche\\ex2\\bm3TS1\\_comb_no_gps_ts1.csv","C:\\munche\\ex2\\bm3TS1\\router.csv",3);
 	}
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class ex2 {
 		try {
 			dataBase = CSV.collectInfoFromCSV(reading_path);
 			Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
-			Vector<wifiWithCoordinate> realPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
+			Vector<wifiWithCoordinate> realPlaces=findPlaces.realPlaces(IdenticalMAC,num_of_points);
 			CSV.printFileFromWifiWithCoordinateToCSV( realPlaces, writing_path);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -27,12 +27,18 @@ public class ex2 {
 		}	
 	}
 	
+	/**
+	 * 
+	 * @param reading_database_pathCSV = regiler csv file
+	 * @param reading_without_coordinate_path = csv file that we want to revalue his coordinates
+	 * @param writing_path = file to write in it the csv after revaluing its coordinates
+	 * @param num_of_points = with how many points in the data base to revalue the coordinates
+	 * @throws Exception = if the pathes are wrong/the files in them have problems
+	 */
 	public static void algorithm_2(String reading_database_pathCSV,String reading_without_coordinate_path,String writing_path,int num_of_points) throws Exception{
 		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV(reading_database_pathCSV);
-//		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(dataBase);
-//		Vector<wifiWithCoordinate> routerPlaces=dataBaseFunctions.realPlaces(IdenticalMAC,num_of_points);
 		Vector<sameScanWifi> manScans=CSV.collectInfoFromCSV(  reading_without_coordinate_path);
-		cal3.findManPlace(dataBase,manScans,num_of_points);
+		findPlaces.findManPlace(dataBase,manScans,num_of_points);
 		CSV.printFileFromDataBaseToCSV( manScans, writing_path);
 	}
 }
