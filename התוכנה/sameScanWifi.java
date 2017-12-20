@@ -31,7 +31,11 @@ public class sameScanWifi implements Iterable<wifi>{
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * @param a
+	 * insert all the wifis that in scan a to the current scan
+	 */
 	public void insert(sameScanWifi a){
 		for(wifi current:a){
 			this.insert(current);
@@ -43,13 +47,38 @@ public class sameScanWifi implements Iterable<wifi>{
 	 * @param wifi
 	 * @return true if this wifi exist as is and false else
 	 */
-	public boolean exist(wifi a){
+	private boolean exist(wifi a){
 		for(int i=0;i<num;i++){
-			if(a.getMAC()==wifis[i].getMAC()&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID()==wifis[i].getSSID()){
+			if(a.getMAC().equals(wifis[i].getMAC())&&a.getChannel()==wifis[i].getChannel()&&a.getRSSI()==wifis[i].getRSSI()&&a.getSSID().equals(wifis[i].getSSID())){
 				return true;
 			}
 		}
 		return false;
+	}
+	
+
+	/**
+	 * 
+	 * @param mac
+	 * @return true if this mac exist as is and false else
+	 */
+	private boolean exist(String mac){
+		for(int i=0;i<num;i++){
+			if(mac.equals(wifis[i].getMAC())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public wifi getWifi(String MAC){
+		for(int i=0;i<num;i++){
+			if(MAC.equals(wifis[i].getMAC())){
+				return wifis[i];
+			}
+		}
+		return null;
+
 	}
 	/**
 	 * insert new wifi, if their are already ten delete the one with the min rssi
@@ -136,26 +165,41 @@ public class sameScanWifi implements Iterable<wifi>{
 	 * setters return exception if the values are non good
 	 */
 	public void setAltitude(String altitude) {
-		this.altitude = Double.parseDouble(altitude);
+		if(altitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			this.altitude = Double.parseDouble(altitude);
+		}
 	}
 
 
 
 	public void setLongitude(String longtitude) {
-		this.longitude = Double.parseDouble(longtitude);
+		if(longtitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			this.longitude = Double.parseDouble(longtitude);
+		}
 	}
 
 
 
 	public void setLatitude(String latitude) {
-		Latitude = Double.parseDouble(latitude);
+		if(latitude.equals("?")){
+			this.altitude=-1;
+		}
+		else{
+			Latitude = Double.parseDouble(latitude);
+		}
 	}
 
 
 
 	public void setTime(String time) throws Exception {
 		this.time = time;
-		check.checkTime(time);
+		//check.checkTime(time);
 	}
 
 
@@ -195,29 +239,29 @@ public class sameScanWifi implements Iterable<wifi>{
 	public Iterator<wifi> iterator() {
 		// TODO Auto-generated method stub
 		Iterator<wifi> iter=new Iterator<wifi>(){
-		private int next=0;
-		@Override
-		public void remove() {
-			// TODO Auto-generated method stub
-			wifis[next-1]=wifis[num-1];
-			num--;
-			next--;
-		}
-		@Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
-			if(next<num){
-				return true;
+			private int next=0;
+			@Override
+			public void remove() {
+				// TODO Auto-generated method stub
+				wifis[next-1]=wifis[num-1];
+				num--;
+				next--;
 			}
-			return false;
-		}
+			@Override
+			public boolean hasNext() {
+				// TODO Auto-generated method stub
+				if(next<num){
+					return true;
+				}
+				return false;
+			}
 
-		@Override
-		public wifi next() {
-			// TODO Auto-generated method stub
-			next++;
-			return wifis[next-1];
-		}
+			@Override
+			public wifi next() {
+				// TODO Auto-generated method stub
+				next++;
+				return wifis[next-1];
+			}
 
 		};
 		return iter;
