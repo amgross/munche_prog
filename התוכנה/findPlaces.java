@@ -43,9 +43,9 @@ public class findPlaces {
 	
 	/**
 	 * 
-	 * @param gettingWeight=scan that we 'wheghiting' now how much it close
+	 * @param gettingWeight=scan that we 'weighting' now how much it close
 	 * @param fixingNow=scan that we want now to find his coordinates
-	 * @return the 'weghit' as double
+	 * @return the 'weight' as double
 	 */
 	private static double getScanWeight(sameScanWifi gettingWeight, sameScanWifi fixingNow) {
 		// TODO Auto-generated method stub
@@ -65,10 +65,10 @@ public class findPlaces {
 
 	/**
 	 * 
-	 * @param check=rssi of a mac in the scan that we 'wheghiting' now how much it close
+	 * @param check=rssi of a mac in the scan that we 'weighting' now how much it close
 	 * @param input=rssi of a mac in scan that we want now to find his coordinates
 	 * (bose are the same mac)
-	 * @return double of the 'weghit' of this current mac in the scan that we 'wheghiting' now how much it close
+	 * @return double of the 'weight' of this current mac in the scan that we 'weighting' now how much it close
 	 */
 	private static double findWheight(int check,int input)
 	{ 
