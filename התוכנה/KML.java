@@ -42,7 +42,7 @@ public class KML {
 	}
 	
 	/**
-	 * Write the KML file from database to folder.
+	 * Write the KML file from databace to new kml file.
 	 * @param filePlace-
 	 * @return 0 if the csv file was'nt good, else return 1
 	 */
@@ -55,7 +55,7 @@ public class KML {
 				current.placeMark(y);
 			}
 			//marshals into file
-			kml.marshal(new File(folderPath+"\\wifi.kml"));
+			kml.marshal(new File(folderPath));
 			return 1;
 		}
 		catch(Exception ex) {                            // exception

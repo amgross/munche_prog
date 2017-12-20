@@ -190,6 +190,49 @@ public class test {
 		
 		assertTrue((ans.firstElement().size()==3&&ans.lastElement().size()==5)||
 				(ans.firstElement().size()==5&&ans.lastElement().size()==3));
-	} 
+	}
+	/**
+	 * test algorithm 2 with the database that we got in the excel
+	 */
+	@Test
+	public void algo2FromExelExample(){
+		sameScanWifi input=new sameScanWifi();
+		wifi temp;
+		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-50"); input.insert(temp);
+		temp=new wifi(); temp.setMAC("bb:bb:bb:bb"); temp.setSSID("b"); temp.setRSSI("-70"); input.insert(temp);
+		temp=new wifi(); temp.setMAC("cc:cc:cc:cc"); temp.setSSID("c"); temp.setRSSI("-90"); input.insert(temp);
+		Vector<sameScanWifi> man=new Vector<sameScanWifi>();
+		man.add(input);
+		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();
+		sameScanWifi tempScan;
+		tempScan=new sameScanWifi();
+		tempScan.setAltitude("650");tempScan.setLatitude("32.103");tempScan.setLongitude("35.208");
+		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-62"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("bb:bb:bb:bb"); temp.setSSID("b"); temp.setRSSI("-79"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("cc:cc:cc:cc"); temp.setSSID("c"); temp.setRSSI("-71"); tempScan.insert(temp);
+		dataBase.add(tempScan);
+		tempScan=new sameScanWifi();
+		tempScan.setAltitude("1000000");tempScan.setLatitude("1000000");tempScan.setLongitude("1000000");
+		dataBase.add(tempScan);
+		tempScan=new sameScanWifi();
+		tempScan.setAltitude("660");tempScan.setLatitude("32.105");tempScan.setLongitude("35.205");
+		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-82"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("cc:cc:cc:cc"); temp.setSSID("c"); temp.setRSSI("-82"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("dd:dd:dd:dd"); temp.setSSID("c"); temp.setRSSI("-10000"); tempScan.insert(temp);
+		dataBase.add(tempScan);
+		tempScan=new sameScanWifi();
+		tempScan.setAltitude("680");tempScan.setLatitude("32.103");tempScan.setLongitude("35.307");
+		temp=new wifi(); temp.setMAC("bb:bb:bb:bb"); temp.setSSID("b"); temp.setRSSI("-89"); tempScan.insert(temp);
+		temp=new wifi(); temp.setMAC("cc:cc:cc:cc"); temp.setSSID("c"); temp.setRSSI("-73"); tempScan.insert(temp);
+		dataBase.add(tempScan);
+		tempScan=new sameScanWifi();
+		tempScan.setAltitude("1000000");tempScan.setLatitude("1000000");tempScan.setLongitude("1000000");
+		temp=new wifi(); temp.setMAC("aa:aa:aa:aa"); temp.setSSID("a"); temp.setRSSI("-91"); tempScan.insert(temp);
+		dataBase.add(tempScan);
+		findPlaces.findManPlace(dataBase,man,3);
+		assertEquals(658.0198453,input.getAltitude(),0.0001);
+		assertEquals(32.1034296,input.getLatitude(),0.0001);
+		assertEquals(35.22673264,input.getLongitude(),0.0001);
+	}
 
 }

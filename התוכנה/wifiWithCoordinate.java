@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 import de.micromata.opengis.kml.v_2_2_0.Folder;
 
 public class wifiWithCoordinate extends wifi {
@@ -34,6 +36,15 @@ public class wifiWithCoordinate extends wifi {
 		y.createAndAddPlacemark().withName(super.getMAC()).withDescription(getDiscription()).withOpen(Boolean.TRUE)  
 		.createAndSetPoint().addToCoordinates(this.longitude, this.Latitude);
 	}
+
+	public static int RSSIavg(Vector<wifiWithCoordinate> wifis){
+		int sum=0;
+		for(wifiWithCoordinate wifi: wifis)
+		{
+				sum+=wifi.getRSSI();
+		}
+		return sum/wifis.size();
+	}
 	/**
 	 * 
 	 * @return String of all the discription of wifi's in the point for kml
@@ -51,10 +62,15 @@ public class wifiWithCoordinate extends wifi {
 	public void setLatitude(double latitude) {
 		this.Latitude = latitude;
 	}
-	public String toStringForCsv() {
-		// TODO Auto-generated method stub
-		String st=super.getMAC()+","+super.getSSID()+","+this.longitude+","+this.Latitude+","+this.altitude;
-		return st;
-	}
+
 	
+	/**
+	 * 
+	 * @return the router in the format for csv
+	 */
+	public String toStringForCsv(){
+
+		String toCsv=super.getMAC()+","+super.getSSID()+","+this.Latitude+","+this.longitude+","+this.altitude;
+		return toCsv;
+	}
 }
