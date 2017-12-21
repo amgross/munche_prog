@@ -25,6 +25,7 @@ import java.util.Vector;
 public class CSV {
 
 	/** 
+	 *  print File From Data Base of vector of samaScanWifi object To CSV
 	 *  gets vector of the info and PrintWriter to csv (format)
 	 *  printing into the new csv file all the data
 	 * 
@@ -49,7 +50,7 @@ public class CSV {
 	}
 	
 	/**
-	 * 
+	 * print File From data base of WifiWithCoordinate To CSV format
 	 * @param dataBase of Vector<wifiWithCoordinate>
 	 * @param path to print all the data from th database in it
 	 */
@@ -103,7 +104,7 @@ public class CSV {
 		return dataBase;
 	}
 	/**
-	 * 
+	 * print File From vocter of WifiWithCoordinate object To CSV format
 	 * @param writing_path to print in this folder the places of the routers
 	 * @param realPlaces vector of wifiWithCoordinate 
 	 * print the routers with their coordinates into csv file
