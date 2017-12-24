@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class dataBaseFunctions {
+public class dataBaseFunctions{
 	/**
 	 * delete double mac from database
 	 * @param database
@@ -70,7 +70,7 @@ public class dataBaseFunctions {
 
 
 	/**
-	 * add all the sameScanWifi that in tempSameScanWifiVector into  wifis
+	 * add all the sameScanWifi that in tempSameScanWifiVector into  database
 	 * if their was an ellement from the same scan it units them,
 	 *  else it add it to the end of the vector
 	 * @param dataBase
@@ -174,6 +174,24 @@ public class dataBaseFunctions {
 			}
 		}
 
+	}
+	
+	public static Vector<sameScanWifi> clone(Vector<sameScanWifi> database){
+		 Vector<sameScanWifi> ans = new Vector<sameScanWifi>();
+		for (int i=0;i<database.size();i++){
+			ans.addElement(database.elementAt(i).clone());
+		}
+		return ans;
+	}
+	
+	public static boolean contain(Vector<sameScanWifi> database, sameScanWifi check) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<database.size();i++){
+				if(check.compare(database.elementAt(i))){
+					return true;
+				}
+		}
+		return false;
 	}
 	
 }

@@ -7,7 +7,7 @@ import de.micromata.opengis.kml.v_2_2_0.Folder;
  * @author אריה גרוס
  *
  */
-public class sameScanWifi implements Iterable<wifi>{
+public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 	private int num;
 	private double altitude;
 	private double longitude;
@@ -55,7 +55,7 @@ public class sameScanWifi implements Iterable<wifi>{
 		}
 		return false;
 	}
-	
+
 
 	/**
 	 * 
@@ -266,6 +266,21 @@ public class sameScanWifi implements Iterable<wifi>{
 		};
 		return iter;
 	}
+
+	public sameScanWifi clone(){
+		sameScanWifi clone = new sameScanWifi();
+		clone.altitude = this.altitude;
+		clone.ID = this.ID;
+		clone.Latitude=this.Latitude;
+		clone.longitude = this.longitude;
+		clone.time=this.time;
+		clone.wifis=new wifi[10];
+		for(int i=0;i<num;i++){
+			clone.wifis[i]=this.wifis[i].clone();
+		}
+		clone.num=this.num;
+		return clone;  
+	}  
 
 
 }

@@ -19,7 +19,7 @@ public class ex0 {
 		filter myFilter=dataBaseFunctions.chooseFilter();
 		dataBaseFunctions.filterDataBase(myFilter, dataBase);
 		dataBaseFunctions.deleteDoubleMacFromDataBase(dataBase);
-		KML.printFileFromDataBaseToKML(KMLPath, dataBase);
+		KML.printFileFromDataBaseToKML(dataBase, KMLPath);
 	}
 
 }

@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class CSV {
 	 */
 	public static void printFileFromDataBaseToCSV(Vector<sameScanWifi> dataBase,String path){
 		FileWriter fw;             // statement
-		try {                 //   try write the file 
+		try {
 			fw = new FileWriter(path);
 			PrintWriter outs = new PrintWriter(fw);
 			for(int i=0;i<dataBase.size();i++){
@@ -43,16 +44,18 @@ public class CSV {
 
 			fw.close();      // close fw writer
 			outs.close();     //close outs writer
-		} catch (IOException e) {     // exception
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			///////////////////////////
+			System.out.println("cant write into: " + path + "\n mabe it open?\n" + e.getMessage());
+			///////////////////////////
 		}
 	}
-	
+
 	/**
 	 * print File From data base of WifiWithCoordinate To CSV format
 	 * @param dataBase of Vector<wifiWithCoordinate>
-	 * @param path to print all the data from th database in it
+	 * @param path to print all the data from the database in it
 	 */
 	public static void printFileFromWifiWithCoordinateToCSV(Vector<wifiWithCoordinate> dataBase,String path){
 		FileWriter fw;             // statement
@@ -75,9 +78,11 @@ public class CSV {
 	 * collect the info into Vector<sameScanWifi> 
 	 * @param path of csv file that our function made
 	 * @return data base from it
+	 * @throws IOException 
+	 * @throws NumberFormatException 
 	 * @throws Exception if the csv file or path is'nt good
 	 */
-	public static Vector<sameScanWifi> collectInfoFromCSV(String path) throws Exception{
+	public static Vector<sameScanWifi> collectInfoFromCSV(String path) throws NumberFormatException, IOException, Exception {
 		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();
 		FileReader fr = new FileReader(path);
 		BufferedReader br = new BufferedReader(fr);
@@ -99,32 +104,9 @@ public class CSV {
 			}
 			dataBase.add(tempSameScanWifi);
 		}
-		
+
 		br.close();
 		return dataBase;
 	}
-	/**
-	 * print File From vocter of WifiWithCoordinate object To CSV format
-	 * @param writing_path to print in this folder the places of the routers
-	 * @param realPlaces vector of wifiWithCoordinate 
-	 * print the routers with their coordinates into csv file
-	 */
-	public static void printFileFromWifiWithCoordinateToCSV(String writing_path, Vector<wifiWithCoordinate> realPlaces) {
-		// TODO Auto-generated method stub
-		FileWriter fw;             // statement
-		try {                 //   try write the file 
-			fw = new FileWriter(writing_path+"\\wifi.csv");
-			PrintWriter outs = new PrintWriter(fw);
-			for(int i=0;i<realPlaces.size();i++){
-				outs.println(realPlaces.elementAt(i).toStringForCsv());
-			}
 
-			fw.close();      // close fw writer
-			outs.close();     //close outs writer
-		} catch (IOException e) {     // exception
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 }

@@ -8,7 +8,7 @@ public class main {
 		filter.parm.setParm("Nizri");
 		dataBaseFunctions.filterDataBase(shiluvim2, dataBase);
 		CSV.printFileFromDataBaseToCSV(dataBase,"C:\\munche\\ex2\\a"); 
-		KML.printFileFromDataBaseToKML("C:\\munche\\ex2\\a", dataBase);
+		KML.printFileFromDataBaseToKML(dataBase, "C:\\munche\\ex2\\a");
 		
 	}
 }

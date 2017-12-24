@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Vector;
 
 import de.micromata.opengis.kml.v_2_2_0.Document;
@@ -18,13 +19,7 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
 public class KML {
 	
 	
-	/**
-	 * Write the KML file from database to folder.
-	 * @param filePlace-
-	 * @return 0 if the csv file was'nt good, else return 1
-	 */
-	public static int printFileFromDataBaseToKML(String folderPath,Vector<sameScanWifi> dataBase){
-		try {
+	public static void printFileFromDataBaseToKML(Vector<sameScanWifi> dataBase, String path){
 			final Kml kml = new Kml();
 			Document document = kml.createAndSetDocument().withName("MyWifi");
 			for(sameScanWifi current:dataBase){
@@ -32,13 +27,15 @@ public class KML {
 				current.placeMark(y);
 			}
 			//marshals into file
-			kml.marshal(new File(folderPath+"\\wifi.kml"));
-			return 1;
-		}
-		catch(Exception ex) {                            // exception
-			//System.exit(2);
-			return 0;
-		}
+			try {
+				kml.marshal(new File(path));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				///////////////////////////
+				System.out.println("cant write into: " + path + "\n mabe it open?\n" + e.getMessage());
+				///////////////////////////
+			}
+		
 	}
 	
 	/**

@@ -15,24 +15,25 @@ public class WiggleWifi {
 	private static String[] whichFiles(String path){
 		try{
 			File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-		String[] pathes=new String[listOfFiles.length];
-		int counter=0;
-		for (int i=0;i<listOfFiles.length;i++) {
-			File file=listOfFiles[i];
-			if (file.getName().endsWith(".csv")&&file.isFile()&&!file.getName().equals("wifi.csv")) {
-				pathes[counter] = file.getPath();
-				counter++;   // another relevant file 
+			File[] listOfFiles = folder.listFiles();
+			String[] pathes=new String[listOfFiles.length];
+			int counter=0;
+			for (int i=0;i<listOfFiles.length;i++) {
+				File file=listOfFiles[i];
+				if (file.getName().endsWith(".csv")&&file.isFile()) {
+					pathes[counter] = file.getPath();
+					counter++;   // another relevant file 
+				}
 			}
-		}
-		String[] finalPathes=new String[counter];
-		for(int i=0;i<counter;i++){
-			finalPathes[i]=pathes[i];
-		}
-		return finalPathes;
+			String[] finalPathes=new String[counter];
+			for(int i=0;i<counter;i++){
+				finalPathes[i]=pathes[i];
+			}
+			return finalPathes;
 		}catch(NullPointerException ex){
+			///////////////////////////////
 			System.out.println("there is no folder in that path");
-			ex.printStackTrace();
+			///////////////////////////////
 		}
 		return null;
 	}
@@ -51,7 +52,8 @@ public class WiggleWifi {
 				num_of_lines[i]=genericFunctions.countLines(pathes[i])-2;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				num_of_lines[i]=0;
+				System.out.println("problem with counting lines of: " + pathes[i]);
 			}
 		}
 		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();
@@ -99,12 +101,18 @@ public class WiggleWifi {
 				dataBaseFunctions.unit(dataBase,tempSameScanWifiVector);
 				scanner.close();
 				br.close();
+				///////////////////////////////////
+				System.out.println("add: " +pathes[i]);
+				///////////////////////////////////
 			} catch (Exception e) {               // if their is a problem with the csv file, it won't convert to the new csv file
 				// TODO Auto-generated catch block
+				////////////////////////////////
+				System.out.println(pathes[i] + "   is csv file but not good app file");
+				///////////////////////////////
 			}
-			
+
 		}
-		
+
 		return dataBase;
 
 	}

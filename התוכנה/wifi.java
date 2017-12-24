@@ -1,5 +1,5 @@
 
-public class wifi {
+public class wifi implements  Cloneable {
 	
 	private String _MAC;
 	private String _SSID;
@@ -39,5 +39,12 @@ public class wifi {
 		return _RSSI;
 	}
 	
-
+	public wifi clone(){  
+		wifi clone= new wifi();
+		clone._Channel=this._Channel;
+		clone._MAC=this._MAC;
+		clone._RSSI=this._RSSI;
+		clone._SSID=this._SSID;
+		return clone;  
+	}  
 }

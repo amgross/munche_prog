@@ -3,7 +3,9 @@ import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Vector;
 
 import org.junit.Test;
@@ -71,14 +73,36 @@ public class test {
 	 */
 	@Test
 	public void test3WriteKml() throws Exception {
+		FileWriter fw;             // statement
+		try {                 //   try write the file 
+			fw = new FileWriter("test\\writeKmlTest\\wifi.kml");
+			PrintWriter outs = new PrintWriter(fw);
+			outs.print("");
+			fw.close();      // close fw writer
+			outs.close();     //close outs writer
+		} catch (IOException e) {     // exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV("test\\writeKmlTest\\good1.csv");
-		assertEquals(1,KML.printFileFromDataBaseToKML("test\\writeKmlTest",dataBase));
+		KML.printFileFromDataBaseToKML(dataBase, "test\\writeKmlTest\\wifi.kml");
 		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>100);
 	}
 	@Test
 	public void test4WriteKml() throws Exception {
+		FileWriter fw;             // statement
+		try {                 //   try write the file 
+			fw = new FileWriter("test\\writeKmlTest\\wifi.kml");
+			PrintWriter outs = new PrintWriter(fw);
+			outs.print("");
+			fw.close();      // close fw writer
+			outs.close();     //close outs writer
+		} catch (IOException e) {     // exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Vector<sameScanWifi> dataBase=CSV.collectInfoFromCSV("test\\writeKmlTest\\good2.csv");
-		assertEquals(1,KML.printFileFromDataBaseToKML("test\\writeKmlTest",dataBase));
+		KML.printFileFromDataBaseToKML(dataBase, "test\\writeKmlTest\\wifi.kml");
 		assertTrue(genericFunctions.countLines("test\\writeKmlTest\\wifi.kml")>18);
 	}
 	
@@ -113,50 +137,51 @@ public class test {
 	@Test
 	public void FilterByTimeGoodTest() throws Exception {
 		sameScanWifi checkTime=new  sameScanWifi();
-		checkTime.setTime("2007-12-01 23:00:59");
-		filter TimeFilterTest= new filterByTime();
-		filter.parm.setParm("95-04-26 15:25:56");
-		assertTrue(TimeFilterTest.filters(checkTime));
-		filter.parm.setParm("2007-12-01 22:15:59");
-		assertTrue(TimeFilterTest.filters(checkTime));
-		filter.parm.setParm(checkTime.getTime());
-		assertTrue(TimeFilterTest.filters(checkTime));
+		checkTime.setTime("2010-12-01 23:00:59");
+		Vector<sameScanWifi> test = new Vector<sameScanWifi>();
+		test.add(checkTime);
+		filter TimeFilterTest= new filterByTime("2007-12-01 23:00:59", "2020-12-01 23:00:59");
+		assertEquals(1, TimeFilterTest.filt(test, null).size());
+		TimeFilterTest= new filterByTime("2010-12-01 23:00:59", "2010-12-01 23:00:59");
+		assertEquals(1, TimeFilterTest.filt(test, null).size());
 	} 
 	@Test
 	public void FilterByTimeBadTest() throws Exception {
 		sameScanWifi checkTime=new  sameScanWifi();
-		checkTime.setTime("2007-12-01 23:00:59");
-		filter TimeFilterTest= new filterByTime();
-		filter.parm.setParm("2008-04-26 15:25:56");
-		assertFalse(TimeFilterTest.filters(checkTime));
-		filter.parm.setParm("2007-12-01 23:01:00");
-		assertFalse(TimeFilterTest.filters(checkTime));
+		checkTime.setTime("2010-12-01 23:00:59");
+		Vector<sameScanWifi> test = new Vector<sameScanWifi>();
+		test.add(checkTime);
+		filter TimeFilterTest= new filterByTime("2015-12-01 23:00:59", "2020-12-01 23:00:59");
+		assertEquals(0, TimeFilterTest.filt(test, null).size());
+		test.add(checkTime);
+		TimeFilterTest= new filterByTime("2010-12-01 23:01:00", "2010-12-01 23:01:00");
+		assertEquals(0, TimeFilterTest.filt(test, null).size());
 	} 
 	
 	
-	@Test
-	public void FilterByRXLAndRemoveTest() {
-		sameScanWifi checkRXL=new  sameScanWifi();
-		wifi test=new wifi();
-		test.setRSSI("-87");
-		test.setChannel("0");
-		test.setMAC("");
-		test.setSSID("");
-		checkRXL.insert(test);
-		test=new wifi();
-		test.setRSSI("-86");
-		test.setChannel("0");
-		test.setMAC("");
-		test.setSSID("");
-		checkRXL.insert(test);
-		filter RXLFilterTest= new filterByRXL();
-		filter.parm.setParm("-88");
-		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==2);
-		filter.parm.setParm("-86");
-		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==1);
-		filter.parm.setParm("-85");
-		assertFalse(RXLFilterTest.filters(checkRXL)||checkRXL.size()!=0);
-	} 
+//	@Test
+//	public void FilterByRXLAndRemoveTest() {
+//		sameScanWifi checkRXL=new  sameScanWifi();
+//		wifi test=new wifi();
+//		test.setRSSI("-87");
+//		test.setChannel("0");
+//		test.setMAC("");
+//		test.setSSID("");
+//		checkRXL.insert(test);
+//		test=new wifi();
+//		test.setRSSI("-86");
+//		test.setChannel("0");
+//		test.setMAC("");
+//		test.setSSID("");
+//		checkRXL.insert(test);
+//		filter RXLFilterTest= new filterByRXL();
+//		filter.parm.setParm("-88");
+//		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==2);
+//		filter.parm.setParm("-86");
+//		assertTrue(RXLFilterTest.filters(checkRXL)&&checkRXL.size()==1);
+//		filter.parm.setParm("-85");
+//		assertFalse(RXLFilterTest.filters(checkRXL)||checkRXL.size()!=0);
+//	} 
 	
 	/**
 	 * check that the counting line function returns the right numbers
@@ -240,5 +265,60 @@ public class test {
 		assertEquals(32.1034296,input.getLatitude(),0.0001);
 		assertEquals(35.22673264,input.getLongitude(),0.0001);
 	}
-
+	/**
+	 * test of little database
+	 */
+	@Test
+	public void simpleDatabase(){
+		Database a=new Database();
+		a.editCsv("test\\writeKmlTest\\good2.csv");
+		assertEquals(1, a.getNumOfScans());
+		assertEquals(4, a.getNum_of_routers());
+	}
+	
+	/**
+	 * test the filterTree toString
+	 */
+	@Test
+	public void filterToString(){
+		filterTree test = new filterTree((filter)null);
+		assertEquals("null", test.toString());
+		test.current = new filterByTime("2015-12-01 23:00:59", "2020-12-01 23:00:59");
+		assertEquals("2015-12-01 23:00:59 < time < 2020-12-01 23:00:59", test.toString());
+		test = new filterTree(new andGate(), test, test);
+		assertEquals("(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)AND(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)", test.toString());
+		
+	}
+	@Test
+	public void filterFromStringToString(){
+		filterTree test = new filterTree(new andGate(),new filterTree(new notGate(), (filterTree)null, new filterTree(new filterByCoordinates("234.5", "3000", "20", "50.987"))),new filterTree(new orGate(),new filterTree(new filterByID("arye")),new filterTree( new filterByTime("2015-12-01 23:00:59", "2020-12-01 23:00:59"))));
+		assertEquals("(NOT(234.5 < longitude < 3000 AND 20 < latitude < 50.987))AND((device ID = arye)OR(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59))", test.toString());
+		test = new filterTree(new andGate(), test, test);
+	}
+	
+	/**
+	 * test the filterTree fromString
+	 */
+	@Test
+	public void filterFromStringAndTime(){
+		filterTree test = new filterTree("(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)AND(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)");
+		assertEquals("(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)AND(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59)", test.toString());
+	}
+	@Test
+	public void filterFromStringOrCoordinates(){
+		filterTree test = new filterTree("54.77 < longitude < 58.99 AND 43.66 < latitude < 556.9");
+		assertEquals("54.77 < longitude < 58.99 AND 43.66 < latitude < 556.9", test.toString());
+	}
+	
+	@Test
+	public void filterFromStringNotID(){
+		filterTree test = new filterTree("NOT(device ID = erty)");
+		assertEquals("NOT(device ID = erty)", test.toString());
+	}
+	
+	@Test
+	public void filterFromString(){
+		filterTree test = new filterTree("(NOT(234.5 < longitude < 3000 AND 20 < latitude < 50.987))AND((device ID = arye)OR(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59))");
+		assertEquals("(NOT(234.5 < longitude < 3000 AND 20 < latitude < 50.987))AND((device ID = arye)OR(2015-12-01 23:00:59 < time < 2020-12-01 23:00:59))",test.toString());
+	}
 }
