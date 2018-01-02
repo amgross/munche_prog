@@ -73,4 +73,8 @@ public class wifiWithCoordinate extends wifi {
 		String toCsv=super.getMAC()+","+super.getSSID()+","+this.Latitude+","+this.longitude+","+this.altitude;
 		return toCsv;
 	}
+	@Override
+	public String toString() {
+		return  "MAC=" + getMAC() + ", SSID=" + getSSID() + ", altitude=" + altitude + ", longitude=" + longitude + ", Latitude=" + Latitude;
+	}
 }

@@ -199,10 +199,14 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 
 	public void setTime(String time) throws Exception {
 		this.time = time;
-		//check.checkTime(time);
+		check.checkTime(time);
 	}
 
 
+
+	public String coordinatesToString() {
+		return "altitude=" + altitude + ", longitude=" + longitude + ", Latitude=" + Latitude;
+	}
 
 	public void setID(String iD) {
 		ID = iD;

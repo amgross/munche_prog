@@ -91,7 +91,7 @@ public class Database {
 	public int getNumOfScans(){
 		return current_dataBase.size();
 	}
-	
+
 	public String getFilter(){
 		return currentFilter.toString();
 	}
@@ -197,6 +197,68 @@ public class Database {
 			/////////////////////////////
 			System.out.println("cant read from: " + path +"\n mabe it open?\n" + e.getMessage());
 			/////////////////////////////
+		}
+	}
+
+	public void printRoutersPlaces(){
+		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(this.current_dataBase);
+		Vector<wifiWithCoordinate> realPlaces=findPlaces.realPlaces(IdenticalMAC,3);
+		for (wifiWithCoordinate wifiWithCoordinate : realPlaces) {
+			System.out.println(wifiWithCoordinate);
+		}
+	}
+
+	public void getScanPlaceFromString(String withoutCoordinates){
+		try{
+			Vector<sameScanWifi> check=new Vector<sameScanWifi>();
+			sameScanWifi tempSameScanWifi=new sameScanWifi();
+			String[] parts = withoutCoordinates.split(",");
+			tempSameScanWifi.setID(parts[1]);
+			tempSameScanWifi.setTime(parts[0]);
+			for(int j=6;j<Integer.parseInt(parts[5])*4+6;j+=4){
+				wifi tempWifi=new wifi();
+				tempWifi.setChannel(parts[j+2]);
+				tempWifi.setMAC(parts[j+1]);
+				tempWifi.setRSSI(parts[j+3]);
+				tempWifi.setSSID(parts[j]);
+				tempSameScanWifi.insert(tempWifi);
+			}
+			check.add(tempSameScanWifi);
+			findPlaces.findManPlace(this.current_dataBase,check,3);
+			System.out.println(tempSameScanWifi.coordinatesToString());
+		}catch(Exception e){
+			//////////////
+			System.out.println("bad input");
+			///////////////
+		}
+	}
+	public void getScanPlaceFromUserInput(String Mac1, String RSSI1, String Mac2, String RSSI2, String Mac3, String RSSI3h){
+		try{
+			Vector<sameScanWifi> check=new Vector<sameScanWifi>();
+			sameScanWifi tempSameScanWifi=new sameScanWifi();
+			wifi tempWifi=new wifi();
+			tempWifi.setMAC(Mac1);
+			tempWifi.setRSSI(RSSI1);
+			tempSameScanWifi.insert(tempWifi);
+			if(Mac2!=null){
+				tempWifi=new wifi();
+				tempWifi.setMAC(Mac1);
+				tempWifi.setRSSI(RSSI1);
+				tempSameScanWifi.insert(tempWifi);
+				if(Mac3!=null){
+					tempWifi=new wifi();
+					tempWifi.setMAC(Mac1);
+					tempWifi.setRSSI(RSSI1);
+					tempSameScanWifi.insert(tempWifi);
+					}
+			}
+			check.add(tempSameScanWifi);
+			findPlaces.findManPlace(this.current_dataBase,check,3);
+			System.out.println(tempSameScanWifi.coordinatesToString());
+		}catch(Exception e){
+			//////////////
+			System.out.println("bad input");
+			///////////////
 		}
 	}
 }
