@@ -56,12 +56,12 @@ public class Menus extends JFrame
 				jfilechooser_javatutorial.JavaMyFrame.main(args);
 				System.out.println("hh");
 				//txtPath.setText(sc.next());
-				//String s="";//JOptionPane.showInputDialog("");
+				String s=JOptionPane.showInputDialog("path");
 				//lblNewLabel = new JLabel(s);
 
 				lblNewLabel.setBounds(104, 145, 46, 14);
 				while(s==null);
-				System.out.println(s);
+				//System.out.println(s);
 				getContentPane().add(lblNewLabel);
 			}
 		});
