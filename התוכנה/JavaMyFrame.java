@@ -1,4 +1,3 @@
-package jfilechooser_javatutorial;
  
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,7 +14,7 @@ import javax.swing.SwingUtilities;
 /**
  * @web http://java-buddy.blogspot.com/
  */
-public class JavaMyFrame extends JFrame //מציג את התיקיות כמו שאני רוצה
+public class JavaMyFrame extends JFrame //ֳ®ֳ¶ֳ©ֳ¢ ֳ ֳ÷ ֳ₪ֳ÷ֳ©ֳ·ֳ©ֳ¥ֳ÷ ֳ«ֳ®ֳ¥ ֳ¹ֳ ֳ°ֳ© ֳ¸ֳ¥ֳ¶ֳ₪
     implements ActionListener{
 	public JavaMyFrame() {
 	}
@@ -60,7 +59,7 @@ public class JavaMyFrame extends JFrame //מציג את התיקיות כמו שאני רוצה
         getContentPane().add(buttonOpenFile, BorderLayout.PAGE_END);
     }
  public static void set() {
-	 first.Menus.set(gets());
+	Menus.set(gets());
  }
     @Override
     public void actionPerformed(ActionEvent e) {
