@@ -2,8 +2,8 @@
 
 import java.awt.Component;
 import java.awt.EventQueue;
-import java.awt.desktop.OpenFilesEvent;
-import java.awt.desktop.OpenFilesHandler;
+//import java.awt.desktop.OpenFilesEvent;
+//import java.awt.desktop.OpenFilesHandler;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -56,7 +56,7 @@ public class Menus extends JFrame
 				JavaMyFrame.main(args);
 				System.out.println("hh");
 				//txtPath.setText(sc.next());
-				String s=JOptionPane.showInputDialog("path");
+//				String s=JOptionPane.showInputDialog("path");
 				//lblNewLabel = new JLabel(s);
 
 				lblNewLabel.setBounds(104, 145, 46, 14);
@@ -80,7 +80,7 @@ public class Menus extends JFrame
 		saveKml = new JMenuItem("save to Kml...");
 		saveKml.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				KML.printFileFromDataBaseToKML(dataBase, path);
+//				KML.printFileFromDataBaseToKML(dataBase, path);
 			}
 		});
 		file.add(saveKml);
@@ -88,7 +88,7 @@ public class Menus extends JFrame
 		deleteDB = new JMenuItem("delete data base...");
 		deleteDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				database=null;
+//				database=null;
 			}
 		});
 		file.add(deleteDB);

@@ -41,6 +41,7 @@ public class gui {
 		mainFrame.add(statusLabel);
 		mainFrame.setVisible(true);  
 	}
+	//from https://www.tutorialspoint.com/swing/swing_jfilechooser.htm
 	private void showFileChooserDemo(){
 		headerLabel.setText("Control in action: JFileChooser"); 
 		final JFileChooser  folderDialog = new JFileChooser();
@@ -49,6 +50,7 @@ public class gui {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//from https://stackoverflow.com/questions/10083447/selecting-folder-destination-in-java
 				// TODO Auto-generated method stub
 				folderDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
 				folderDialog.showSaveDialog(null);
