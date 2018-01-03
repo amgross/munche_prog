@@ -1,4 +1,4 @@
-package first;
+
 
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -53,7 +53,7 @@ public class Menus extends JFrame
 		openFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		String[] args = null;
-				jfilechooser_javatutorial.JavaMyFrame.main(args);
+				JavaMyFrame.main(args);
 				System.out.println("hh");
 				//txtPath.setText(sc.next());
 				String s=JOptionPane.showInputDialog("path");
@@ -71,15 +71,34 @@ public class Menus extends JFrame
 		file.add(openDir);
 		
 		saveCsv = new JMenuItem("save to csv format...");
+		saveCsv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		file.add(saveCsv);
 		
 		saveKml = new JMenuItem("save to Kml...");
+		saveKml.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				KML.printFileFromDataBaseToKML(dataBase, path);
+			}
+		});
 		file.add(saveKml);
 		
 		deleteDB = new JMenuItem("delete data base...");
+		deleteDB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				database=null;
+			}
+		});
 		file.add(deleteDB);
 		
 		exit = new JMenuItem("exit");
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		file.add(exit);
 		
 		
