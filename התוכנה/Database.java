@@ -28,7 +28,7 @@ public class Database {
 		newDatabase();
 	}
 
-	public void newDatabase(){
+	private void newDatabase(){
 		sourceData = new Vector<Vector<sameScanWifi>>();
 		sourceDataPath = new HashMap<Vector<sameScanWifi>,String>();
 		local_dataBase = new Vector<sameScanWifi>();
