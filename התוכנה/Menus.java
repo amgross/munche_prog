@@ -33,10 +33,10 @@ public class Menus extends JFrame
 	private JMenuBar bar;
 	private JMenu file;
 	private JMenuItem exit;
-	private JMenuItem openFile;
-	private JMenuItem openDir;
-	private JMenuItem saveCsv;
-	private JMenuItem saveKml;
+	private JMenuItem uploadFromCsv;
+	private JMenuItem uploadFromWiggle;
+	private JMenuItem saveAsCsv;
+	private JMenuItem saveAsKml;
 	private JMenuItem deleteDB;
 	private JMenuItem printRoutersPlaces;
 	private JMenuItem getScanPlaceFromString;
@@ -55,8 +55,6 @@ public class Menus extends JFrame
 
 	public Menus()
 	{
-		Scanner sc = new Scanner(System.in);
-		// int i;
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(104, 145, 46, 14);
 		getContentPane().add(lblNewLabel);
@@ -65,32 +63,19 @@ public class Menus extends JFrame
 
 		file = new JMenu("File");
 		bar.add(file);
-		final JFileChooser fc = new JFileChooser();
-
-
-		openFile = new JMenuItem("open File...");
-		openFile.addActionListener(new ActionListener() {
+		uploadFromCsv = new JMenuItem("upload from csv file");
+		uploadFromCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String args = null;
-				//gui swingControlDemo  = new gui(); 
-				//gui.mains(swingControlDemo);
-				//System.out.println(swingControlDemo.s+"hhhhhhh");
-				//txtPath.setText(sc.next());
-				String s=JOptionPane.showInputDialog("file path");
-				//lblNewLabel = new JLabel(s);
-				//		db.editCsv(s);
 				lblNewLabel.setBounds(104, 145, 46, 14);
-				//System.out.println(s);
 				getContentPane().add(lblNewLabel);
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
-		file.add(openFile);
+		file.add(uploadFromCsv);
 
-		openDir = new JMenuItem("open directory...");
-		openDir.addActionListener(new ActionListener() {
+		uploadFromWiggle = new JMenuItem("upload from directory with wiggle");
+		uploadFromWiggle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String s=JOptionPane.showInputDialog("directory");
 				System.out.println(s);
@@ -99,28 +84,28 @@ public class Menus extends JFrame
 				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
-		file.add(openDir);
+		file.add(uploadFromWiggle);
 
-		saveCsv = new JMenuItem("save to csv format...");
-		saveCsv.addActionListener(new ActionListener() {
+		saveAsCsv = new JMenuItem("save to csv format");
+		saveAsCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String s=JOptionPane.showInputDialog("save as CSV to (path)");
 				db.saveAsCSV(s);
 			}
 		});
-		file.add(saveCsv);
+		file.add(saveAsCsv);
 
-		saveKml = new JMenuItem("save to Kml...");
-		saveKml.addActionListener(new ActionListener() {
+		saveAsKml = new JMenuItem("save to Kml format");
+		saveAsKml.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String s=JOptionPane.showInputDialog("save as KML to (path)");
 				db.saveAsKML(s);
 			}
 		});
-		file.add(saveKml);
+		file.add(saveAsKml);
 
-		deleteDB = new JMenuItem("delete data base...");
+		deleteDB = new JMenuItem("delete data base");
 		deleteDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -147,7 +132,6 @@ public class Menus extends JFrame
 			public void actionPerformed(ActionEvent arg0) {
 				String withoutCoordinates=JOptionPane.showInputDialog("press path without coordinates");
 				db.getScanPlaceFromString(withoutCoordinates);
-
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
@@ -179,10 +163,6 @@ public class Menus extends JFrame
 		});
 		file.add(exit);
 
-
-		//	bar = new JMenuBar();
-		//setJMenuBar(bar);
-
 		filter = new JMenu("Filter");
 		bar.add(filter);
 
@@ -195,7 +175,7 @@ public class Menus extends JFrame
 		});
 		filter.add(uploadFilter);
 
-		IDFilter = new JMenuItem("filter by ID...");
+		IDFilter = new JMenuItem("filter by ID");
 		IDFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(db.getFilter()==null||db.getFilter().equals("")) {
@@ -215,7 +195,7 @@ public class Menus extends JFrame
 						if(s.equals("And Not")||s.equals("not and"))
 						{
 							String deviceName=JOptionPane.showInputDialog("name of device");
-							db.or_not_DeviceFilter(deviceName);;
+							db.or_not_DeviceFilter(deviceName);
 						}
 					}
 					if(s.equals("Or")||s.equals("or"))
@@ -343,11 +323,6 @@ public class Menus extends JFrame
 		getContentPane().add(txtScans);
 		txtScans.setColumns(10);
 
-		/*JLabel lblHhhh = new JLabel("hhhh");
-		lblHhhh.setToolTipText("nn");
-		lblHhhh.setBounds(74, 42, 76, 82);
-		getContentPane().add(lblHhhh);*/
-
 		JLabel lblNumruoter = new JLabel("num of routers");
 		lblNumruoter.setBounds(10, 58, 86, 20);
 		getContentPane().add(lblNumruoter);
@@ -356,28 +331,6 @@ public class Menus extends JFrame
 		lblScans.setBounds(10, 100, 86, 20);
 		getContentPane().add(lblScans);
 
-
-		/*
-		JButton btnButton = new JButton("button1");
-		btnButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 if (e.getSource() == Button1) {
-				        int returnVal = fc.showOpenDialog(FileChooserDemo.this);
-
-				        if (returnVal == JFileChooser.APPROVE_OPTION) {
-				            File file = fc.getSelectedFile();
-				            //This is where a real application would open the file.
-				            log.append("Opening: " + file.getName() + "." + newline);
-				        } else {
-				            log.append("Open command cancelled by user." + newline);
-				        }
-				   }
-			}
-		});
-		btnButton.setBounds(10, 11, 89, 23);
-		getContentPane().add(btnButton);*/
-
-		//frame.add(bar);
 		initialize();
 	}
 
@@ -403,69 +356,17 @@ public class Menus extends JFrame
 	}
 
 	/**
-	 * Create the application.
-	 */
-	/*public Menus() {
-		initialize();
-	}*/
-
-	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JPanel();
 		frame.setBounds(100,100, 450, 300);
-		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//		frame.getContentPane().setLayout(null);
 	}
 	public String mains(String args){
-		gui swingControlDemo  = new gui(); 
 		System.out.println(headerLabel+"   "+statusLabel+"  "+controlPanel );    
-		//	swingControlDemo.showFileChooserDemo();
 
 		return s;
 	}
-	/*
-	private void showFileChooserDemo(gui  swingControlDemo){
-		swingControlDemo.headerLabel.setText("Control in action: JFileChooser"); 
-		final JFileChooser  folderDialog = new JFileChooser();
-		JButton showFoldeeDialogButton = new JButton("Open Folder");/////////////
-		showFoldeeDialogButton.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				folderDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
-				folderDialog.showSaveDialog(null);
-				s=folderDialog.getSelectedFile().toString();
-				//System.out.println(s+"aaaaa");//////////////
-
-			}
-
-		});
-		final JFileChooser  fileDialog = new JFileChooser();
-		JButton showFileDialogButton = new JButton("Open File");////////////////
-
-		showFileDialogButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int returnVal = fileDialog.showOpenDialog(mainFrame);
-
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					java.io.File file = fileDialog.getSelectedFile();
-					swingControlDemo.statusLabel.setText("File Selected :" + file.getPath());//////////////
-					Menus.s=file.getPath();
-				} else {
-					swingControlDemo.statusLabel.setText("Open command cancelled by user." );           
-				}      
-			}
-		});
-
-		swingControlDemo.controlPanel.add(showFileDialogButton);
-		swingControlDemo.controlPanel.add(showFoldeeDialogButton);
-		mainFrame.setVisible(true);  
-
-
-	}*/
 }
 
