@@ -251,7 +251,7 @@ public class Database {
 					tempWifi.setMAC(Mac1);
 					tempWifi.setRSSI(RSSI1);
 					tempSameScanWifi.insert(tempWifi);
-					}
+				}
 			}
 			check.add(tempSameScanWifi);
 			findPlaces.findManPlace(this.current_dataBase,check,3);

@@ -38,8 +38,8 @@ public class Menus extends JFrame
 	private JMenuItem saveCsv;
 	private JMenuItem saveKml;
 	private JMenuItem deleteDB;
-    private JMenuItem printRoutersPlaces;
-    private JMenuItem getScanPlaceFromString;
+	private JMenuItem printRoutersPlaces;
+	private JMenuItem getScanPlaceFromString;
 	private JMenuItem getScanPlaceFromUserInput;
 	private JMenu filter;
 	private JMenuItem uploadFilter;
@@ -77,7 +77,7 @@ public class Menus extends JFrame
 				//gui.mains(swingControlDemo);
 				//System.out.println(swingControlDemo.s+"hhhhhhh");
 				//txtPath.setText(sc.next());
-					String s=JOptionPane.showInputDialog("file path");
+				String s=JOptionPane.showInputDialog("file path");
 				//lblNewLabel = new JLabel(s);
 				//		db.editCsv(s);
 				lblNewLabel.setBounds(104, 145, 46, 14);
@@ -130,30 +130,30 @@ public class Menus extends JFrame
 			}
 		});
 		file.add(deleteDB);
-		
+
 		printRoutersPlaces = new JMenuItem("print Routers Places");
 		printRoutersPlaces.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				db.printRoutersPlaces();
-				
+
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(printRoutersPlaces);
-		
+
 		getScanPlaceFromString = new JMenuItem("getScanPlaceFromString");
 		getScanPlaceFromString.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String withoutCoordinates=JOptionPane.showInputDialog("press path without coordinates");
 				db.getScanPlaceFromString(withoutCoordinates);
-				
+
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(getScanPlaceFromString);
-		
+
 		getScanPlaceFromUserInput = new JMenuItem("getScanPlaceFromUserInput");
 		getScanPlaceFromUserInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -164,13 +164,13 @@ public class Menus extends JFrame
 				String Mac3=JOptionPane.showInputDialog("press mac3");
 				String RSSI3=JOptionPane.showInputDialog("press RSSI3");
 				db.getScanPlaceFromUserInput(Mac1, RSSI1, Mac2, RSSI2, Mac3, RSSI3);
-				
+
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(getScanPlaceFromString);
-		
+
 		exit = new JMenuItem("exit");
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -203,36 +203,36 @@ public class Menus extends JFrame
 					db.deviceFilter(s);
 				}
 				else {
-				String s=JOptionPane.showInputDialog("Please press Not/Or/And");
-				if(s.equals("Not")||s.equals("not"))
-				{
-					s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
-					if(s.equals("And Not")||s.equals("and not"))
+					String s=JOptionPane.showInputDialog("Please press Not/Or/And");
+					if(s.equals("Not")||s.equals("not"))
+					{
+						s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
+						if(s.equals("And Not")||s.equals("and not"))
+						{
+							String deviceName=JOptionPane.showInputDialog("name of device");
+							db.and_not_deviceFilter(deviceName);
+						}
+						if(s.equals("And Not")||s.equals("not and"))
+						{
+							String deviceName=JOptionPane.showInputDialog("name of device");
+							db.or_not_DeviceFilter(deviceName);;
+						}
+					}
+					if(s.equals("Or")||s.equals("or"))
 					{
 						String deviceName=JOptionPane.showInputDialog("name of device");
-						db.and_not_deviceFilter(deviceName);
+						db.or_deviceFilter(deviceName);
 					}
-					if(s.equals("And Not")||s.equals("not and"))
+					if(s.equals("And")||s.equals("and"))
 					{
 						String deviceName=JOptionPane.showInputDialog("name of device");
-						db.or_not_DeviceFilter(deviceName);;
+						db.and_deviceFilter(deviceName);;
 					}
 				}
-				if(s.equals("Or")||s.equals("or"))
-				{
-					String deviceName=JOptionPane.showInputDialog("name of device");
-					db.or_deviceFilter(deviceName);
-				}
-				if(s.equals("And")||s.equals("and"))
-				{
-					String deviceName=JOptionPane.showInputDialog("name of device");
-					db.and_deviceFilter(deviceName);;
-				}
-			}
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
-			
+
 		});
 		filter.add(IDFilter);
 
@@ -244,35 +244,35 @@ public class Menus extends JFrame
 					String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
 					String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
 					String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
-					
+
 					db.coordinateFilter(minLon, maxLon, minLat, maxLat);
-					
+
 				}
 				else {
-				String s=JOptionPane.showInputDialog("Please press Or/And");
+					String s=JOptionPane.showInputDialog("Please press Or/And");
 
-				if(s.equals("Or")||s.equals("or"))
-				{
-					String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
-					String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
-					String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
-					String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
-					db.or_coordinateFilter(minLon, maxLon, minLat, maxLat);
+					if(s.equals("Or")||s.equals("or"))
+					{
+						String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
+						String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
+						String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
+						String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
+						db.or_coordinateFilter(minLon, maxLon, minLat, maxLat);
+					}
+					if(s.equals("And")||s.equals("and"))
+					{
+						String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
+						String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
+						String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
+						String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
+
+						db.and_coordinateFilter(minLon, maxLon, minLat, maxLat);
+					}
 				}
-				if(s.equals("And")||s.equals("and"))
-				{
-					String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
-					String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
-					String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
-					String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
-					
-					db.and_coordinateFilter(minLon, maxLon, minLat, maxLat);
-				}
-			}
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
-			
+
 		});
 		filter.add(placeFilter);
 
@@ -285,40 +285,40 @@ public class Menus extends JFrame
 					db.timeFilter(begin, end);
 				}
 				else {
-				String s=JOptionPane.showInputDialog("Please press Not/Or/And");
-				if(s.equals("Not")||s.equals("not"))
-				{
-					s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
-					if(s.equals("And Not")||s.equals("and not"))
+					String s=JOptionPane.showInputDialog("Please press Not/Or/And");
+					if(s.equals("Not")||s.equals("not"))
+					{
+						s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
+						if(s.equals("And Not")||s.equals("and not"))
+						{
+							String begin=JOptionPane.showInputDialog("Please choose the begin time");
+							String end=JOptionPane.showInputDialog("Please choose the end time");
+							db.and_not_timeFilter(begin, end);
+						}
+						if(s.equals("And Not")||s.equals("not and"))
+						{
+							String begin=JOptionPane.showInputDialog("Please choose the begin time");
+							String end=JOptionPane.showInputDialog("Please choose the end time");
+							db.or_not_timeFilter(begin, end);
+						}
+					}
+					if(s.equals("Or")||s.equals("or"))
 					{
 						String begin=JOptionPane.showInputDialog("Please choose the begin time");
 						String end=JOptionPane.showInputDialog("Please choose the end time");
-						db.and_not_timeFilter(begin, end);
+						db.or_timeFilter(begin, end);
 					}
-					if(s.equals("And Not")||s.equals("not and"))
+					if(s.equals("And")||s.equals("and"))
 					{
 						String begin=JOptionPane.showInputDialog("Please choose the begin time");
 						String end=JOptionPane.showInputDialog("Please choose the end time");
-						db.or_not_timeFilter(begin, end);
+						db.and_timeFilter(begin, end);
 					}
 				}
-				if(s.equals("Or")||s.equals("or"))
-				{
-					String begin=JOptionPane.showInputDialog("Please choose the begin time");
-					String end=JOptionPane.showInputDialog("Please choose the end time");
-					db.or_timeFilter(begin, end);
-				}
-				if(s.equals("And")||s.equals("and"))
-				{
-					String begin=JOptionPane.showInputDialog("Please choose the begin time");
-					String end=JOptionPane.showInputDialog("Please choose the end time");
-					db.and_timeFilter(begin, end);
-				}
-			}
 				txtPath.setText(""+db.getNum_of_routers());
 				txtScans.setText(""+db.getNumOfScans());
 			}
-			
+
 		});
 		filter.add(TimeFilter);
 
@@ -342,7 +342,7 @@ public class Menus extends JFrame
 		txtScans.setBounds(100, 100, 86, 20);
 		getContentPane().add(txtScans);
 		txtScans.setColumns(10);
-		
+
 		/*JLabel lblHhhh = new JLabel("hhhh");
 		lblHhhh.setToolTipText("nn");
 		lblHhhh.setBounds(74, 42, 76, 82);
@@ -351,7 +351,7 @@ public class Menus extends JFrame
 		JLabel lblNumruoter = new JLabel("num of routers");
 		lblNumruoter.setBounds(10, 58, 86, 20);
 		getContentPane().add(lblNumruoter);
-		
+
 		JLabel lblScans = new JLabel("num of scans");
 		lblScans.setBounds(10, 100, 86, 20);
 		getContentPane().add(lblScans);
@@ -415,8 +415,8 @@ public class Menus extends JFrame
 	private void initialize() {
 		frame = new JPanel();
 		frame.setBounds(100,100, 450, 300);
-//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.getContentPane().setLayout(null);
+		//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//		frame.getContentPane().setLayout(null);
 	}
 	public String mains(String args){
 		gui swingControlDemo  = new gui(); 
