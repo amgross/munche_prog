@@ -54,8 +54,7 @@ public class gui {
 				// TODO Auto-generated method stub
 				folderDialog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
 				folderDialog.showSaveDialog(null);
-
-				System.out.println(folderDialog.getSelectedFile());
+				System.out.println(folderDialog.getSelectedFile().toString());
 			}
 
 		});

@@ -8,13 +8,15 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Menus extends JFrame 
 	{
+	Vector<sameScanWifi> database;
 	public static String s;
 	protected static final Object Button1 = null;
 	final JFileChooser fc = new JFileChooser();
-	private JFrame frame;
+	private JPanel frame;
 	private JMenuBar bar;
 	private JMenu file;
 	private JMenuItem exit;
@@ -56,7 +58,7 @@ public class Menus extends JFrame
 				JavaMyFrame.main(args);
 				System.out.println("hh");
 				//txtPath.setText(sc.next());
-//				String s=JOptionPane.showInputDialog("path");
+				//String s=JOptionPane.showInputDialog("path");
 				//lblNewLabel = new JLabel(s);
 
 				lblNewLabel.setBounds(104, 145, 46, 14);
@@ -80,7 +82,8 @@ public class Menus extends JFrame
 		saveKml = new JMenuItem("save to Kml...");
 		saveKml.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				KML.printFileFromDataBaseToKML(dataBase, path);
+
+			//	KML.printFileFromDataBaseToKML(database, path);
 			}
 		});
 		file.add(saveKml);
@@ -191,10 +194,10 @@ public class Menus extends JFrame
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		frame = new JPanel();
 		frame.setBounds(100,100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.getContentPane().setLayout(null);
 	}
 }
 
