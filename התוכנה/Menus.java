@@ -198,7 +198,7 @@ public class Menus extends JFrame
 		IDFilter = new JMenuItem("filter by ID...");
 		IDFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(db.getFilter().equals("")) {
+				if(db.getFilter()==null||db.getFilter().equals("")) {
 					String s=JOptionPane.showInputDialog("Please choose Not/Or/And");
 					db.deviceFilter(s);
 				}
@@ -239,7 +239,7 @@ public class Menus extends JFrame
 		placeFilter = new JMenuItem("filter by place");
 		placeFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(db.getFilter()==null) {
+				if(db.getFilter()==null||db.getFilter().equals("")) {
 					String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
 					String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
 					String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
@@ -279,7 +279,7 @@ public class Menus extends JFrame
 		TimeFilter = new JMenuItem("filter by time");
 		TimeFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(db.getFilter()==null) {
+				if(db.getFilter()==null||db.getFilter().equals("")) {
 					String begin=JOptionPane.showInputDialog("Please choose the begin time");
 					String end=JOptionPane.showInputDialog("Please choose the end time");
 					db.timeFilter(begin, end);

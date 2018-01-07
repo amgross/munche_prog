@@ -93,6 +93,7 @@ public class Database {
 	}
 
 	public String getFilter(){
+		if(currentFilter==null) return null;
 		return currentFilter.toString();
 	}
 
