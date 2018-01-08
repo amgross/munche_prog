@@ -33,7 +33,7 @@ public class filterTree {
 		return print;
 	}
 
-	public filterTree(String filter){
+	public filterTree(String filter) throws Exception{
 		current = null;
 		left = null;
 		right = null;
@@ -83,7 +83,7 @@ public class filterTree {
 			}
 		}
 	}
-	private filter filterFromString(String filter) {
+	private filter filterFromString(String filter) throws Exception {
 		// TODO Auto-generated method stub
 		if(filter.equals("AND")){
 			return new andGate();

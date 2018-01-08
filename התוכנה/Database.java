@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Vector;
 
+import javax.swing.JTextField;
+
 public class Database {
 	private Vector<Vector<sameScanWifi>> sourceData;
 	private HashMap<Vector<sameScanWifi>,String> sourceDataPath;
@@ -107,39 +109,95 @@ public class Database {
 
 
 	public void timeFilter(String begin, String end){
-		currentFilter = new filterTree(new filterByTime(begin, end));
-		createCurrent_dataBase();
+		try {
+			filterTree temp = new filterTree(new filterByTime(begin, end));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			///////////////////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			///////////////////////////////
+		}
 	}
 	public void and_timeFilter(String begin, String end){
-		currentFilter = new filterTree(new andGate(), currentFilter, new filterTree(new filterByTime(begin, end)));
-		createCurrent_dataBase();
+		try {
+			filterTree temp = new filterTree(new andGate(), currentFilter, new filterTree(new filterByTime(begin, end)));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			///////////////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			///////////////////////////
+		}
 	}
 	public void or_timeFilter(String begin, String end){
-		currentFilter = new filterTree(new orGate(), currentFilter, new filterTree(new filterByTime(begin, end)));
-		createCurrent_dataBase();
+		try {
+			filterTree temp = new filterTree(new orGate(), currentFilter, new filterTree(new filterByTime(begin, end)));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			/////////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			//////////////////////
+		}
 	}
 	public void and_not_timeFilter(String begin, String end){
-		filterTree temp = new filterTree(new notGate(), null, new filterTree(new filterByTime(begin, end)));
-		currentFilter = new filterTree(new andGate(), currentFilter, temp);
-		createCurrent_dataBase();
+		try {
+			filterTree temp = new filterTree(new notGate(), null, new filterTree(new filterByTime(begin, end)));
+			currentFilter = new filterTree(new andGate(), currentFilter, temp);
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			/////////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			//////////////////////
+		}
 	}
 	public void or_not_timeFilter(String begin, String end){
-		filterTree temp = new filterTree(new notGate(), null, new filterTree(new filterByTime(begin, end)));
-		currentFilter = new filterTree(new orGate(), currentFilter, temp);
-		createCurrent_dataBase();
+		try {
+			filterTree temp = new filterTree(new notGate(), null, new filterTree(new filterByTime(begin, end)));
+			currentFilter = new filterTree(new orGate(), currentFilter, temp);
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			///////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			///////////////////
+		}
 	}
 
 	public void coordinateFilter(String minLon, String maxLon, String minLat, String maxLat){
-		currentFilter = new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat));
-		createCurrent_dataBase();
+		try{
+			filterTree temp= new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("you supose to insert double");
+		}
 	}
 	public void and_coordinateFilter(String minLon, String maxLon, String minLat, String maxLat){
-		currentFilter = new filterTree(new andGate(), currentFilter, new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat)));
-		createCurrent_dataBase();
+		try{
+			filterTree temp=new filterTree(new andGate(), currentFilter, new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat)));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("you supose to insert double");
+		}
 	}
 	public void or_coordinateFilter(String minLon, String maxLon, String minLat, String maxLat){
-		currentFilter = new filterTree(new orGate(), currentFilter, new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat)));
-		createCurrent_dataBase();
+		try{
+			filterTree temp=new filterTree(new orGate(), currentFilter, new filterTree(new filterByCoordinates(minLon, maxLon, minLat, maxLat)));
+			currentFilter = temp;
+			createCurrent_dataBase();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("you supose to insert double");
+		}
 	}
 
 	public void deviceFilter(String deviceName){
@@ -260,6 +318,20 @@ public class Database {
 			//////////////
 			System.out.println("bad input");
 			///////////////
+		}
+	}
+	
+	public Runnable updateGui(JTextField txtPath, JTextField txtScans, JTextField showFilter){
+		while(true){
+			try {
+				Thread.sleep(1000);
+				txtPath.setText(""+getNum_of_routers());
+				txtScans.setText(""+getNumOfScans());
+				showFilter.setText(""+currentFilter);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

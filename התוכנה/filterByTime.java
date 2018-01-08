@@ -12,8 +12,10 @@ public class filterByTime extends filter{
 		return par1 +" < time < " + par2;
 	}
 
-	public filterByTime(String minTime, String maxTime) {
+	public filterByTime(String minTime, String maxTime) throws Exception {
 		super(minTime, maxTime, null, null);
+		check.checkTime(minTime);
+		check.checkTime(maxTime);
 		// TODO Auto-generated constructor stub
 	}
 

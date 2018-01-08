@@ -9,6 +9,10 @@ public class filterByCoordinates  extends filter{
 
 	public filterByCoordinates(String minLon, String maxLon, String minLat, String maxLat) {
 		super(minLon, maxLon, minLat, maxLat);
+		Double.parseDouble(minLon);
+		Double.parseDouble(maxLon);
+		Double.parseDouble(minLat);
+		Double.parseDouble(maxLat);
 		// TODO Auto-generated constructor stub
 	}
 

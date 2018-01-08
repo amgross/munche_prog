@@ -49,6 +49,7 @@ public class Menus extends JFrame
 	private JMenuItem saveFilters;
 	private JTextField txtPath;
 	private JTextField txtScans;
+	private JTextField showFilter;
 	private JLabel lblNewLabel;
 	protected AbstractButton lblfileName;
 	protected String fileName;
@@ -60,16 +61,32 @@ public class Menus extends JFrame
 		getContentPane().add(lblNewLabel);
 		bar = new JMenuBar();
 		setJMenuBar(bar);
+		txtPath = new JTextField();
+		txtPath.setBounds(100, 58, 86, 20);
+		getContentPane().add(txtPath);
+		txtPath.setColumns(10);
 
+		txtScans = new JTextField();
+		txtScans.setBounds(100, 100, 86, 20);
+		getContentPane().add(txtScans);
+		txtScans.setColumns(10);
+		showFilter = new JTextField();
+		showFilter.setBounds(100, 150, 600, 20);
+		getContentPane().add(showFilter);
+		showFilter.setColumns(10);
+		Runnable updateDisplay = () -> {
+			db.updateGui(txtPath, txtScans, showFilter);
+		};
+		Thread t1 = new Thread(updateDisplay);
+		t1.start();
 		file = new JMenu("File");
 		bar.add(file);
 		uploadFromCsv = new JMenuItem("upload from csv file");
 		uploadFromCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblNewLabel.setBounds(104, 145, 46, 14);
-				getContentPane().add(lblNewLabel);
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
+				String s=JOptionPane.showInputDialog("csv file");
+				System.out.println(s);
+				db.editCsv(s);
 			}
 		});
 		file.add(uploadFromCsv);
@@ -80,8 +97,6 @@ public class Menus extends JFrame
 				String s=JOptionPane.showInputDialog("directory");
 				System.out.println(s);
 				db.editWiggle(s);
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(uploadFromWiggle);
@@ -110,8 +125,6 @@ public class Menus extends JFrame
 			public void actionPerformed(ActionEvent arg0) {
 
 				db.deleteDatabase();
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(deleteDB);
@@ -120,9 +133,6 @@ public class Menus extends JFrame
 		printRoutersPlaces.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				db.printRoutersPlaces();
-
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(printRoutersPlaces);
@@ -132,8 +142,6 @@ public class Menus extends JFrame
 			public void actionPerformed(ActionEvent arg0) {
 				String withoutCoordinates=JOptionPane.showInputDialog("press path without coordinates");
 				db.getScanPlaceFromString(withoutCoordinates);
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(getScanPlaceFromString);
@@ -148,9 +156,6 @@ public class Menus extends JFrame
 				String Mac3=JOptionPane.showInputDialog("press mac3");
 				String RSSI3=JOptionPane.showInputDialog("press RSSI3");
 				db.getScanPlaceFromUserInput(Mac1, RSSI1, Mac2, RSSI2, Mac3, RSSI3);
-
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 		});
 		file.add(getScanPlaceFromString);
@@ -209,8 +214,6 @@ public class Menus extends JFrame
 						db.and_deviceFilter(deviceName);;
 					}
 				}
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 
 		});
@@ -249,8 +252,6 @@ public class Menus extends JFrame
 						db.and_coordinateFilter(minLon, maxLon, minLat, maxLat);
 					}
 				}
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 
 		});
@@ -295,8 +296,6 @@ public class Menus extends JFrame
 						db.and_timeFilter(begin, end);
 					}
 				}
-				txtPath.setText(""+db.getNum_of_routers());
-				txtScans.setText(""+db.getNumOfScans());
 			}
 
 		});
@@ -313,16 +312,6 @@ public class Menus extends JFrame
 
 		getContentPane().setLayout(null);
 
-		txtPath = new JTextField();
-		txtPath.setBounds(100, 58, 86, 20);
-		getContentPane().add(txtPath);
-		txtPath.setColumns(10);
-
-		txtScans = new JTextField();
-		txtScans.setBounds(100, 100, 86, 20);
-		getContentPane().add(txtScans);
-		txtScans.setColumns(10);
-
 		JLabel lblNumruoter = new JLabel("num of routers");
 		lblNumruoter.setBounds(10, 58, 86, 20);
 		getContentPane().add(lblNumruoter);
@@ -330,6 +319,10 @@ public class Menus extends JFrame
 		JLabel lblScans = new JLabel("num of scans");
 		lblScans.setBounds(10, 100, 86, 20);
 		getContentPane().add(lblScans);
+		
+		JLabel lblFilter = new JLabel("filter");
+		lblFilter.setBounds(10, 150, 86, 20);
+		getContentPane().add(lblFilter);
 
 		initialize();
 	}
@@ -369,4 +362,5 @@ public class Menus extends JFrame
 	}
 
 }
+
 
