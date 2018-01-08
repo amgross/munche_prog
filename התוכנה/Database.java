@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,7 +12,10 @@ import javax.swing.JTextField;
 
 public class Database {
 	private Vector<Vector<sameScanWifi>> sourceData;
-	private HashMap<Vector<sameScanWifi>,String> sourceDataPath;
+	private HashMap<Vector<sameScanWifi>,String> sourceCSVDataPath;
+	private HashMap<String,Long> lastModifyCSV;
+	private HashMap<Vector<sameScanWifi>,String> sourceWiggleDataPath;
+	private HashMap<String,Long> lastModifyWiggle;
 	private Vector<sameScanWifi> local_dataBase;
 	private Vector<sameScanWifi> current_dataBase;
 	private int num_of_routers;
@@ -32,7 +36,10 @@ public class Database {
 
 	private void newDatabase(){
 		sourceData = new Vector<Vector<sameScanWifi>>();
-		sourceDataPath = new HashMap<Vector<sameScanWifi>,String>();
+		sourceCSVDataPath = new HashMap<Vector<sameScanWifi>,String>();
+		sourceWiggleDataPath = new HashMap<Vector<sameScanWifi>,String>();
+		lastModifyCSV = new HashMap<String,Long>();
+		lastModifyWiggle = new  HashMap<String,Long>() ;
 		local_dataBase = new Vector<sameScanWifi>();
 		current_dataBase = new Vector<sameScanWifi>();
 		num_of_routers = 0;
@@ -42,12 +49,10 @@ public class Database {
 
 
 	public void editCsv(String path){
+		Vector<sameScanWifi> csvData=new Vector<sameScanWifi>();
 		try {
-			Vector<sameScanWifi> csvData=CSV.collectInfoFromCSV(path);
-			sourceData.add(csvData);
-			sourceDataPath.put(csvData, path);
-			dataBaseFunctions.unit(local_dataBase, csvData);
-			createCurrent_dataBase();
+			Vector<sameScanWifi> temp=CSV.collectInfoFromCSV(path);
+			csvData=temp;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			/////////////////////////////////////////
@@ -65,14 +70,30 @@ public class Database {
 			System.out.println("not good file\n" + e.getMessage());
 			///////////////////////////////////////
 		}
+		sourceData.add(csvData);
+		sourceCSVDataPath.put(csvData, path);
+		lastModifyCSV.put(path, new File(path).lastModified());
+		createLocalDatabase();
+		createCurrent_dataBase();
 	}
 
 	public void editWiggle(String path){
-		Vector<sameScanWifi> csvData=WiggleWifi.collectInfoFromWiggleWifi(path);
-		sourceData.add(csvData);
-		sourceDataPath.put(csvData, path);
-		dataBaseFunctions.unit(local_dataBase, csvData);
+		Vector<sameScanWifi> wiggleData=WiggleWifi.collectInfoFromWiggleWifi(path);
+		sourceData.add(wiggleData);
+		sourceWiggleDataPath.put(wiggleData, path);
+		lastModifyWiggle.put(path, new File(path).lastModified());
+		createLocalDatabase();
+		//dataBaseFunctions.unit(local_dataBase, wiggleData);
 		createCurrent_dataBase();
+	}
+
+	private void createLocalDatabase() {
+		// TODO Auto-generated method stub
+		local_dataBase = new Vector<sameScanWifi>();
+		for (Vector<sameScanWifi> add : sourceData) {
+			dataBaseFunctions.unit(local_dataBase, add);
+		}
+		
 	}
 
 	private void createCurrent_dataBase() {
@@ -243,20 +264,26 @@ public class Database {
 		try {
 			fr = new FileReader(path);
 			br = new BufferedReader(fr);
-			filterTree temp = new filterTree(br.readLine());
-			currentFilter = temp;
+			filterTree temp;
+			try {
+				temp = new filterTree(br.readLine());
+				currentFilter = temp;
+			}catch (IOException e) {
+				// TODO Auto-generated catch block
+				/////////////////////////////
+				System.out.println("cant read from: " + path +"\n mabe it open?\n" + e.getMessage());
+				/////////////////////////////
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("problems with the filter in the file");
+			}
 			createCurrent_dataBase();
 		}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			//////////////////////////////
 			System.out.println("cant find: " + path +"\n" + e.getMessage());
 			/////////////////////////////
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			/////////////////////////////
-			System.out.println("cant read from: " + path +"\n mabe it open?\n" + e.getMessage());
-			/////////////////////////////
-		}
+		} 
 	}
 
 	public void printRoutersPlaces(){
@@ -320,7 +347,7 @@ public class Database {
 			///////////////
 		}
 	}
-	
+
 	public Runnable updateGui(JTextField txtPath, JTextField txtScans, JTextField showFilter){
 		while(true){
 			try {
@@ -334,6 +361,59 @@ public class Database {
 			}
 		}
 	}
+
+	public Runnable CSVdataChanged(){System.out.println(1);
+		while(true){
+			try {
+				Thread.sleep(1000);
+				for (String key : lastModifyCSV.keySet()) {
+					if ( new File(key).lastModified()!= lastModifyCSV.get(key)){
+						synchronized (sourceData) {
+							for (Vector<sameScanWifi> check :  sourceData) {
+								if(sourceCSVDataPath.get(check).equals(key)){System.out.println(2);
+									System.out.println(sourceData.remove(check));
+									break;
+								}
+							}
+							editCsv(key);
+						}
+					}
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	public Runnable WiggledataChanged(){
+		while(true){
+			try {
+				Thread.sleep(1000);
+				for (String key : lastModifyWiggle.keySet()) {
+					if ( new File(key).lastModified()!= lastModifyWiggle.get(key)){
+						synchronized (sourceData) {
+							for (Vector<sameScanWifi> check :  sourceData) {
+								if(sourceCSVDataPath.get(check).equals(key)){
+									sourceData.remove(check);
+									break;
+								}
+							}
+							editWiggle(key);
+						}
+					}
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+
+
 }
 
 

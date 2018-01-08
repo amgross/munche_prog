@@ -1,34 +1,18 @@
 
-import java.awt.*;
 import java.awt.event.*;
-import java.io.Console;
-import java.io.File;
-
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-
-import java.awt.Component;
 import java.awt.EventQueue;
-//import java.awt.desktop.OpenFilesEvent;
-//import java.awt.desktop.OpenFilesHandler;
 
-import javax.swing.*;
-import java.awt.event.*;
-import java.io.File;
-import java.util.Scanner;
-import java.util.Vector;
 
 public class Menus extends JFrame 
 {
-	Database db=new Database();
-	private JFrame mainFrame;
+	private static final long serialVersionUID = 1L;
+	private Database db=new Database();
 	private JLabel headerLabel;
 	private JLabel statusLabel;
 	private JPanel controlPanel;
 	public static String s;
 	protected static final Object Button1 = null;
-	final JFileChooser fc = new JFileChooser();
 	private JPanel frame;
 	private JMenuBar bar;
 	private JMenu file;
@@ -78,14 +62,23 @@ public class Menus extends JFrame
 			db.updateGui(txtPath, txtScans, showFilter);
 		};
 		Thread t1 = new Thread(updateDisplay);
+		Runnable updateCSVChange = () -> {
+			db.CSVdataChanged();
+		};
+		Thread t2 = new Thread(updateCSVChange);
+		Runnable updateWiggleChange = () -> {
+			db.WiggledataChanged();
+		};
+		Thread t3 = new Thread(updateWiggleChange);
 		t1.start();
+		t2.start();
+		t3.start();
 		file = new JMenu("File");
 		bar.add(file);
 		uploadFromCsv = new JMenuItem("upload from csv file");
 		uploadFromCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s=JOptionPane.showInputDialog("csv file");
-				System.out.println(s);
 				db.editCsv(s);
 			}
 		});
@@ -95,7 +88,6 @@ public class Menus extends JFrame
 		uploadFromWiggle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String s=JOptionPane.showInputDialog("directory");
-				System.out.println(s);
 				db.editWiggle(s);
 			}
 		});
