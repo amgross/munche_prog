@@ -1,3 +1,4 @@
+package mainProject;
 
 public class check {
 	public static final Exception Exception = null;

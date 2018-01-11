@@ -1,3 +1,4 @@
+package mainProject;
 import java.util.Vector;
 
 public class notGate extends filter {

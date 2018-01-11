@@ -1,3 +1,4 @@
+package mainProject;
 
 import java.awt.event.*;
 import javax.swing.*;
