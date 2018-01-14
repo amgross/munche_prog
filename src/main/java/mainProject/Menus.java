@@ -97,7 +97,7 @@ public class Menus extends JFrame
 						port = Integer.parseInt(JOptionPane.showInputDialog("port"));
 						break;
 					}catch(Exception ex){
-						
+
 					}
 				}
 				String user = JOptionPane.showInputDialog("user");
@@ -209,74 +209,75 @@ public class Menus extends JFrame
 		IDFilter = new JMenuItem("filter by ID");
 		IDFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(db.getFilter()==null||db.getFilter().equals("")) {
-					String s=JOptionPane.showInputDialog("Please choose Not/Or/And");
-					db.deviceFilter(s);
-				}
-				else {
-					String s=JOptionPane.showInputDialog("Please press Not/Or/And");
-					if(s.equals("Not")||s.equals("not"))
-					{
-						s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
-						if(s.equals("And Not")||s.equals("and not"))
-						{
-							String deviceName=JOptionPane.showInputDialog("name of device");
-							db.and_not_deviceFilter(deviceName);
+				String id=JOptionPane.showInputDialog("Please choose id to filter");
+				while(true){
+					String s=JOptionPane.showInputDialog("do you want just that id or don't want it? y/n");
+					if(s.equals("y")){
+						if(db.getFilter()==null||db.getFilter().equals("")) {
+							db.deviceFilter(id);
 						}
-						if(s.equals("And Not")||s.equals("not and"))
-						{
-							String deviceName=JOptionPane.showInputDialog("name of device");
-							db.or_not_DeviceFilter(deviceName);
+						else{
+							while(true){
+								String t=JOptionPane.showInputDialog("the current filter came to Comes to add to existing? (or subtract)  y/n");
+								if(t.equals("y")){
+									db.or_deviceFilter(id);	
+									break;
+								}
+								if(t.equals("n")){
+									db.and_deviceFilter(id);	
+									break;
+								}
+							}
 						}
+						break;
 					}
-					if(s.equals("Or")||s.equals("or"))
-					{
-						String deviceName=JOptionPane.showInputDialog("name of device");
-						db.or_deviceFilter(deviceName);
-					}
-					if(s.equals("And")||s.equals("and"))
-					{
-						String deviceName=JOptionPane.showInputDialog("name of device");
-						db.and_deviceFilter(deviceName);;
+					if(s.equals("n")){
+						if(db.getFilter()==null||db.getFilter().equals("")) {
+							db.not_deviceFilter(id);
+						}
+						else{
+							while(true){
+								String t=JOptionPane.showInputDialog("the current filter came to Comes to add to existing? (or subtract)  y/n");
+								if(t.equals("y")){
+									db.or_not_DeviceFilter(id);	
+									break;
+								}
+								if(t.equals("n")){
+									db.and_not_deviceFilter(id);	
+									break;
+								}
+							}
+						}
+						break;
 					}
 				}
 			}
-
 		});
 		filter.add(IDFilter);
 
 		placeFilter = new JMenuItem("filter by place");
 		placeFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
+				String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
+				String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
+				String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
 				if(db.getFilter()==null||db.getFilter().equals("")) {
-					String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
-					String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
-					String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
-					String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
-
 					db.coordinateFilter(minLon, maxLon, minLat, maxLat);
-
 				}
 				else {
-					String s=JOptionPane.showInputDialog("Please press Or/And");
-
-					if(s.equals("Or")||s.equals("or"))
-					{
-						String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
-						String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
-						String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
-						String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
-						db.or_coordinateFilter(minLon, maxLon, minLat, maxLat);
+					while(true){
+						String t=JOptionPane.showInputDialog("the current filter came to Comes to add to existing? (or subtract)  y/n");
+						if(t.equals("y")){
+							db.or_coordinateFilter(minLon, maxLon, minLat, maxLat);
+							break;
+						}
+						if(t.equals("n")){
+							db.and_coordinateFilter(minLon, maxLon, minLat, maxLat);
+							break;
+						}
 					}
-					if(s.equals("And")||s.equals("and"))
-					{
-						String minLon=JOptionPane.showInputDialog("Please press minimum of lon");
-						String maxLon=JOptionPane.showInputDialog("Please press maximum of lon");
-						String minLat=JOptionPane.showInputDialog("Please press minimum of lat");
-						String maxLat=JOptionPane.showInputDialog("Please press maximum of lat");
 
-						db.and_coordinateFilter(minLon, maxLon, minLat, maxLat);
-					}
 				}
 			}
 
@@ -286,44 +287,51 @@ public class Menus extends JFrame
 		TimeFilter = new JMenuItem("filter by time");
 		TimeFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(db.getFilter()==null||db.getFilter().equals("")) {
-					String begin=JOptionPane.showInputDialog("Please choose the begin time");
-					String end=JOptionPane.showInputDialog("Please choose the end time");
-					db.timeFilter(begin, end);
-				}
-				else {
-					String s=JOptionPane.showInputDialog("Please press Not/Or/And");
-					if(s.equals("Not")||s.equals("not"))
-					{
-						s=JOptionPane.showInputDialog("Please press 'And Not'/'Or Not' ");
-						if(s.equals("And Not")||s.equals("and not"))
-						{
-							String begin=JOptionPane.showInputDialog("Please choose the begin time");
-							String end=JOptionPane.showInputDialog("Please choose the end time");
-							db.and_not_timeFilter(begin, end);
+				String begin=JOptionPane.showInputDialog("Please choose the begin time");
+				String end=JOptionPane.showInputDialog("Please choose the end time");
+				while(true){
+					String s=JOptionPane.showInputDialog("do you want just that time or don't want it? y/n");
+					if(s.equals("y")){
+						if(db.getFilter()==null||db.getFilter().equals("")) {
+							db.timeFilter(begin, end);
 						}
-						if(s.equals("And Not")||s.equals("not and"))
-						{
-							String begin=JOptionPane.showInputDialog("Please choose the begin time");
-							String end=JOptionPane.showInputDialog("Please choose the end time");
-							db.or_not_timeFilter(begin, end);
+						else{
+							while(true){
+								String t=JOptionPane.showInputDialog("the current filter came to Comes to add to existing? (or subtract)  y/n");
+								if(t.equals("y")){
+									db.or_timeFilter(begin, end);
+									break;
+								}
+								if(t.equals("n")){
+									db.and_timeFilter(begin, end);
+									break;
+								}
+							}
 						}
+						break;
 					}
-					if(s.equals("Or")||s.equals("or"))
-					{
-						String begin=JOptionPane.showInputDialog("Please choose the begin time");
-						String end=JOptionPane.showInputDialog("Please choose the end time");
-						db.or_timeFilter(begin, end);
+					if(s.equals("n")){
+						if(db.getFilter()==null||db.getFilter().equals("")) {
+							db.not_timeFilter(begin, end);
+						}
+						else{
+							while(true){
+								String t=JOptionPane.showInputDialog("the current filter came to Comes to add to existing? (or subtract)  y/n");
+								if(t.equals("y")){
+									db.or_not_timeFilter(begin, end);
+									break;
+								}
+								if(t.equals("n")){
+									db.and_not_timeFilter(begin, end);
+									break;
+								}
+							}
+						}
+						break;
 					}
-					if(s.equals("And")||s.equals("and"))
-					{
-						String begin=JOptionPane.showInputDialog("Please choose the begin time");
-						String end=JOptionPane.showInputDialog("Please choose the end time");
-						db.and_timeFilter(begin, end);
-					}
+
 				}
 			}
-
 		});
 		filter.add(TimeFilter);
 
@@ -345,7 +353,7 @@ public class Menus extends JFrame
 		JLabel lblScans = new JLabel("num of scans");
 		lblScans.setBounds(10, 100, 86, 20);
 		getContentPane().add(lblScans);
-		
+
 		JLabel lblFilter = new JLabel("filter");
 		lblFilter.setBounds(10, 150, 86, 20);
 		getContentPane().add(lblFilter);

@@ -172,6 +172,20 @@ public class Database {
 			///////////////////////////////
 		}
 	}
+	
+	public void not_timeFilter(String begin, String end){
+		try {
+			filterTree temp = new filterTree(new filterByTime(begin, end));
+			temp = new filterTree(new notGate(), null, temp);
+			currentFilter = temp;
+			createCurrent_dataBase();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			///////////////////////////////
+			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			///////////////////////////////
+		}
+	}
 	public void and_timeFilter(String begin, String end){
 		try {
 			filterTree temp = new filterTree(new andGate(), currentFilter, new filterTree(new filterByTime(begin, end)));
@@ -254,6 +268,11 @@ public class Database {
 
 	public void deviceFilter(String deviceName){
 		currentFilter = new filterTree(new filterByID(deviceName));
+		createCurrent_dataBase();
+	}
+	public void not_deviceFilter(String deviceName){
+		filterTree temp = new filterTree(new notGate(), null, new filterTree(new filterByID(deviceName)));
+		currentFilter = temp;
 		createCurrent_dataBase();
 	}
 	public void and_deviceFilter(String deviceName){

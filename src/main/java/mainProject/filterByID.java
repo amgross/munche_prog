@@ -39,7 +39,7 @@ public class filterByID extends filter{
 		do{
 			change =false;
 			for (int i = 0; i < ans.size(); i++) {
-				if(ans.elementAt(i).getID().equals(par1)){
+				if(!ans.elementAt(i).getID().equals(par1)){
 					ans.remove(i);
 					change=true;
 					break;
