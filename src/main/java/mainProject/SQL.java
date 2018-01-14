@@ -16,20 +16,76 @@ import java.util.logging.Logger;
 
 import java.sql.Statement;
 
+
 public class SQL {
-	public static Vector<sameScanWifi> collectInfoFromWiggleWifi(String ip,String url,String user, String password){
+	private static Connection _con = null;
+	public static Vector<sameScanWifi> collectInfoFromWiggleWifi(String ip,int port,String user, String password,String table_schema,String table) throws java.lang.Exception{
 		Vector<sameScanWifi> dataBase=new Vector<sameScanWifi>();
-		
+		 Statement st = null;
+	     ResultSet rs = null;
+	     try {     
+	            _con = DriverManager.getConnection("jdbc:mysql://"+ip+":" + port +"/"+table_schema, user, password);
+	            PreparedStatement pst = _con.prepareStatement("SELECT * FROM "+ table);
+	            rs = pst.executeQuery();
+	            while (rs.next()) {
+	            	sameScanWifi tempSameScanWifi=new sameScanWifi();
+	    			tempSameScanWifi.setAltitude( String.valueOf(rs.getDouble(6)));
+	    			tempSameScanWifi.setID( String.valueOf(rs.getInt(3)));
+	    			tempSameScanWifi.setLatitude( String.valueOf(rs.getDouble(4)));
+	    			tempSameScanWifi.setLongitude( String.valueOf(rs.getDouble(5)));
+	    			tempSameScanWifi.setTime(rs.getString(2));
+	    			for(int j=7;j<rs.getInt(7)*2+7;j+=2){
+	    				wifi tempWifi=new wifi();
+	    				tempWifi.setMAC(rs.getString(j));
+	    				tempWifi.setRSSI( String.valueOf(rs.getInt(j+1)));
+	    				tempSameScanWifi.insert(tempWifi);
+	    			}
+	    			dataBase.add(tempSameScanWifi);
+//	            	int id = rs.getInt(1);
+//	            	if(id>max_id) {max_id=id;}
+//	                System.out.print(id);
+//	                System.out.print(": ");
+//	                System.out.print(rs.getString(2));
+//	                System.out.print(" (");
+//	                double lat = rs.getDouble(3);
+//	                System.out.print(lat);
+//	                System.out.print(", ");
+//	                double lon = rs.getDouble(4);
+//	                System.out.print(lon);
+//	                System.out.print(", ");
+//	                double alt = rs.getDouble(5);
+//	                System.out.print(alt);
+//	                System.out.print(", ");
+//	                String w = rs.getString(6);
+//	                System.out.print(w);
+//	                System.out.println(") ");
+	            }
+	        } catch (SQLException ex) {
+	            Logger lgr = Logger.getLogger(SQL.class.getName());
+	            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+	        } finally {
+	            try {
+	                if (rs != null) {rs.close();}
+	                if (st != null) { st.close(); }
+	                if (_con != null) { _con.close();  }
+	            } catch (SQLException ex) {
+	                
+	                Logger lgr = Logger.getLogger(SQL.class.getName());
+	                lgr.log(Level.WARNING, ex.getMessage(), ex);
+	            }
+	        }
+	            
 		return dataBase;
 	}
 	  private static String _ip = "5.29.193.52";
 	  private static String _url = "jdbc:mysql://"+_ip+":3306/oop_course_ariel";
 	  private static String _user = "oop1";
 	  private static String _password = "Lambda1();";
-	  private static Connection _con = null;
+//	  private static Connection _con = null;
       
     public static void main(String[] args) {
-    	test_101();
+    	
+    	//test_101();
     	//int max_id = test_ex4_db();
   //  	insert_table1(max_id);
     }

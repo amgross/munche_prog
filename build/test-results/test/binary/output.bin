@@ -1,0 +1,18 @@
+Ctest\toCsvTest\test1\wifi.csv   is csv file but not good app file
+8add: test\toCsvTest\test1\WigleWifi_20171027162905.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027162929.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027162958.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027163008.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027164505.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027164517.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027164529.csv
+8add: test\toCsvTest\test1\WigleWifi_20171027164539.csv
+Wtest\toCsvTest\test1\WigleWifi_20171028203300.csv   is csv file but not good app file
+8add: test\toCsvTest\test1\WigleWifi_20171107085918.csv
+Ctest\toCsvTest\test2\wifi.csv   is csv file but not good app file
+8add: test\toCsvTest\test2\WigleWifi_20171107085918.csv
+Btest\toCsvTest\test3\bad.csv   is csv file but not good app file
+Ctest\toCsvTest\test3\wifi.csv   is csv file but not good app file
+Btest\toCsvTest\test4\bad.csv   is csv file but not good app file
+$add: test\toCsvTest\test4\good.csv
+$add: test\toCsvTest\test4\wifi.csv

@@ -104,7 +104,7 @@ public class filterByTime extends filter{
 	}
 
 	@Override
-	Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> nothing) {
+	public Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> nothing) {
 		// TODO Auto-generated method stub
 		Vector<sameScanWifi> ans = dataBaseFunctions.clone(database1);
 		boolean change;

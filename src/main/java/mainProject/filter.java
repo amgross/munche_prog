@@ -13,5 +13,5 @@ public abstract class filter {
 		this.par3 = par3;
 		this.par4 = par4;
 	}
-	abstract Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> Database2);
+	public abstract Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> Database2);
 }

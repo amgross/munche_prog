@@ -11,7 +11,7 @@ import java.util.Vector;
 public class filterTree {
 	filterTree right;
 	filterTree left;
-	filter current;
+	public filter current;
 	public void setRight(filterTree right) {
 		this.right = right;
 	}

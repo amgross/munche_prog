@@ -9,7 +9,7 @@ public class notGate extends filter {
 	}
 
 	@Override
-	Vector<sameScanWifi> filt(Vector<sameScanWifi> currentDatabase, Vector<sameScanWifi> localDatabase) {
+	public Vector<sameScanWifi> filt(Vector<sameScanWifi> currentDatabase, Vector<sameScanWifi> localDatabase) {
 		// TODO Auto-generated method stub
 		Vector<sameScanWifi> ans = dataBaseFunctions.clone(localDatabase);
 		boolean change;

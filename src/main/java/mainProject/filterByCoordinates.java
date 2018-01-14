@@ -18,7 +18,7 @@ public class filterByCoordinates  extends filter{
 	}
 
 	@Override
-	Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> Database2) {
+	public Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> Database2) {
 		// TODO Auto-generated method stub
 		Vector<sameScanWifi> ans = dataBaseFunctions.clone(database1);
 		boolean change;

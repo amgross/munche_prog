@@ -1,5 +1,7 @@
 
 import static org.junit.Assert.*;
+import mainProject.*;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
