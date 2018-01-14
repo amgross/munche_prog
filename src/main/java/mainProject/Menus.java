@@ -38,6 +38,7 @@ public class Menus extends JFrame
 	private JLabel lblNewLabel;
 	protected AbstractButton lblfileName;
 	protected String fileName;
+	private JMenuItem uploadFromSQL;
 
 	public Menus()
 	{
@@ -71,11 +72,43 @@ public class Menus extends JFrame
 			db.WiggledataChanged();
 		};
 		Thread t3 = new Thread(updateWiggleChange);
+		Runnable updateSQLChange = () -> {
+			db.SQLdataChanged();
+		};
+		Thread t4 = new Thread(updateSQLChange);
+		Runnable output = () -> {
+			jtextPrint.printToGui();
+		};
+		Thread t5 = new Thread(output);
 		t1.start();
 		t2.start();
 		t3.start();
+		t4.start();
+		t5.start();
 		file = new JMenu("File");
 		bar.add(file);
+		uploadFromSQL = new JMenuItem("upload from sql table");
+		uploadFromSQL.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ip = JOptionPane.showInputDialog("ip");
+				int port;
+				while(true){
+					try{
+						port = Integer.parseInt(JOptionPane.showInputDialog("port"));
+						break;
+					}catch(Exception ex){
+						
+					}
+				}
+				String user = JOptionPane.showInputDialog("user");
+				String password = JOptionPane.showInputDialog("password");
+				String table_schema = JOptionPane.showInputDialog("table_schema");
+				String table = JOptionPane.showInputDialog("table");
+				SQL info= new SQL(ip, port, user, password, table_schema, table);
+				db.editSQL(info);
+			}
+		});
+		file.add(uploadFromSQL);
 		uploadFromCsv = new JMenuItem("upload from csv file");
 		uploadFromCsv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

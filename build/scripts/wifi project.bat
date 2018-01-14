@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\wifi project.jar;%APP_HOME%\lib\slf4j-api-1.7.21.jar;%APP_HOME%\lib\JavaAPIforKml-2.2.0.jar;%APP_HOME%\lib\mysql-connector-java-8.0.8-dmr.jar;%APP_HOME%\lib\jaxb-impl-2.2.jar;%APP_HOME%\lib\jaxb-xjc-2.2.jar;%APP_HOME%\lib\xmlunit-1.2.jar;%APP_HOME%\lib\jaxb-api-2.2.jar;%APP_HOME%\lib\stax-api-1.0-2.jar;%APP_HOME%\lib\activation-1.1.jar
+set CLASSPATH=%APP_HOME%\lib\wifi project.jar;%APP_HOME%\lib\slf4j-api-1.7.21.jar;%APP_HOME%\lib\JavaAPIforKml-2.2.0.jar;%APP_HOME%\lib\mysql-connector-java-5.1.39.jar;%APP_HOME%\lib\jaxb-impl-2.2.jar;%APP_HOME%\lib\jaxb-xjc-2.2.jar;%APP_HOME%\lib\xmlunit-1.2.jar;%APP_HOME%\lib\jaxb-api-2.2.jar;%APP_HOME%\lib\stax-api-1.0-2.jar;%APP_HOME%\lib\activation-1.1.jar
 
 @rem Execute wifi project
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %WIFI_PROJECT_OPTS%  -classpath "%CLASSPATH%" mainProject.Menus %CMD_LINE_ARGS%

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -13,6 +14,8 @@ import javax.swing.JTextField;
 
 public class Database {
 	private Vector<Vector<sameScanWifi>> sourceData;
+	private HashMap<SQL,String> lastModifySQL;
+	private HashMap<Vector<sameScanWifi>,SQL> sourceSQLData;
 	private HashMap<Vector<sameScanWifi>,String> sourceCSVDataPath;
 	private HashMap<String,Long> lastModifyCSV;
 	private HashMap<Vector<sameScanWifi>,String> sourceWiggleDataPath;
@@ -37,8 +40,10 @@ public class Database {
 
 	private void newDatabase(){
 		sourceData = new Vector<Vector<sameScanWifi>>();
+		sourceSQLData = new HashMap<Vector<sameScanWifi>,SQL>();
 		sourceCSVDataPath = new HashMap<Vector<sameScanWifi>,String>();
 		sourceWiggleDataPath = new HashMap<Vector<sameScanWifi>,String>();
+		lastModifySQL = new HashMap<SQL,String>();
 		lastModifyCSV = new HashMap<String,Long>();
 		lastModifyWiggle = new  HashMap<String,Long>() ;
 		local_dataBase = new Vector<sameScanWifi>();
@@ -47,7 +52,32 @@ public class Database {
 		currentFilter = null;
 	}
 
-
+	public void editSQL(SQL info){
+		try {
+			Vector<sameScanWifi> SQLData=SQL.collectInfoFromSQL(info);
+			lastModifySQL.put(info, SQL.lastModified(info));
+			sourceData.add(SQLData);
+			sourceSQLData.put(SQLData, info);
+			createLocalDatabase();
+			createCurrent_dataBase();
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			/////////////////////////////////////////
+			System.out.println("not good table because one of the numeric fields waswnt numeric\n" 
+					+ e.getMessage());
+			/////////////////////////////////////////
+		} catch (SQLException e) {
+			// TODO: handle exception
+			///////////////////////
+			e.printStackTrace();
+			System.out.println("problem with the sql connection/table");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			////////////////////////////////////////
+			System.out.println("not good table\n" + e.getMessage());
+			///////////////////////////////////////
+		}
+	}
 
 	public void editCsv(String path){
 		Vector<sameScanWifi> csvData=new Vector<sameScanWifi>();
@@ -363,7 +393,7 @@ public class Database {
 		}
 	}
 
-	public Runnable CSVdataChanged(){System.out.println(1);
+	public Runnable CSVdataChanged(){
 		while(true){
 			try {
 				Thread.sleep(1000);
@@ -371,8 +401,8 @@ public class Database {
 					if ( new File(key).lastModified()!= lastModifyCSV.get(key)){
 						synchronized (sourceData) {
 							for (Vector<sameScanWifi> check :  sourceData) {
-								if(sourceCSVDataPath.get(check).equals(key)){System.out.println(2);
-									System.out.println(sourceData.remove(check));
+								if(sourceCSVDataPath.get(check).equals(key)){
+									sourceData.remove(check);
 									break;
 								}
 							}
@@ -396,7 +426,7 @@ public class Database {
 					if ( new File(key).lastModified()!= lastModifyWiggle.get(key)){
 						synchronized (sourceData) {
 							for (Vector<sameScanWifi> check :  sourceData) {
-								if(sourceCSVDataPath.get(check).equals(key)){
+								if(sourceWiggleDataPath.get(check).equals(key)){
 									sourceData.remove(check);
 									break;
 								}
@@ -413,7 +443,32 @@ public class Database {
 			}
 		}
 	}
-
+	public Runnable SQLdataChanged(){
+		while(true){
+			try {
+				Thread.sleep(1000);
+				for (SQL key : lastModifySQL.keySet()) {
+					if ( SQL.lastModified(key)!= lastModifySQL.get(key)){
+						synchronized (sourceData) {
+							for (Vector<sameScanWifi> check :  sourceData) {
+								if(sourceSQLData.get(check).equals(key)){
+									sourceData.remove(check);
+									break;
+								}
+							}
+							editSQL(key);
+						}
+					}
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	
 
 }
 
