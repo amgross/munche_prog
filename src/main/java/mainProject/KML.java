@@ -33,7 +33,7 @@ public class KML {
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				///////////////////////////
-				System.out.println("cant write into: " + path + "\n mabe it open?\n" + e.getMessage());
+				System.out.println("\n\ncant write into: " + path + "\n mabe it open?\n" + e.getMessage()+"\n\n");
 				///////////////////////////
 			}
 		

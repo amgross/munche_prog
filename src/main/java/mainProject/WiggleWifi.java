@@ -33,7 +33,7 @@ public class WiggleWifi {
 			return finalPathes;
 		}catch(NullPointerException ex){
 			///////////////////////////////
-			System.out.println("there is no folder in that path");
+			System.out.println("\n\nthere is no folder in that path\n\n");
 			///////////////////////////////
 		}
 		return null;
@@ -103,12 +103,12 @@ public class WiggleWifi {
 				scanner.close();
 				br.close();
 				///////////////////////////////////
-				System.out.println("add: " +pathes[i]);
+				System.out.println("\nadd: " +pathes[i]);
 				///////////////////////////////////
 			} catch (Exception e) {               // if their is a problem with the csv file, it won't convert to the new csv file
 				// TODO Auto-generated catch block
 				////////////////////////////////
-				System.out.println(pathes[i] + "   is csv file but not good app file");
+				System.out.println("\n"+pathes[i] + "   is csv file but not good app file");
 				///////////////////////////////
 			}
 

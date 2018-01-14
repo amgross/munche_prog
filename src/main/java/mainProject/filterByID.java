@@ -21,16 +21,6 @@ public class filterByID extends filter{
 		// TODO Auto-generated constructor stub
 	}
 
-//	@Override
-//	public boolean filters(sameScanWifi info) {
-//		if(info.getID().equals(filter.parm.getParm())){
-//			
-//			return true;
-//		}
-//		return false;
-//		
-//	}
-
 	@Override
 	public Vector<sameScanWifi> filt(Vector<sameScanWifi> database1, Vector<sameScanWifi> nothing) {
 		// TODO Auto-generated method stub

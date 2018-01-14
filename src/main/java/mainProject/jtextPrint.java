@@ -65,15 +65,5 @@ public class jtextPrint extends OutputStream
         jtextPrint out = new jtextPrint (textArea);
         System.setOut (new PrintStream (out));
 
-//        while (true)
-//        {
-//            System.out.println ("Current time: " + System.currentTimeMillis ());
-//            try {
-//				Thread.sleep (1000L);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//        }
     }
 }

@@ -1,13 +1,9 @@
 package mainProject;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Scanner;
 import java.util.Vector;
 /**
  * 
@@ -48,7 +44,7 @@ public class CSV {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			///////////////////////////
-			System.out.println("cant write into: " + path + "\n mabe it open?\n" + e.getMessage());
+			System.out.println("\n\ncant write into: " + path + "\n mabe it open?\n" + e.getMessage()+"\n\n");
 			///////////////////////////
 		}
 	}

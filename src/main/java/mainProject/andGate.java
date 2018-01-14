@@ -1,5 +1,4 @@
 package mainProject;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class andGate extends filter {

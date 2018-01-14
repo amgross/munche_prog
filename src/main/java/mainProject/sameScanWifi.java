@@ -58,19 +58,6 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 	}
 
 
-	/**
-	 * 
-	 * @param mac
-	 * @return true if this mac exist as is and false else
-	 */
-	private boolean exist(String mac){
-		for(int i=0;i<num;i++){
-			if(mac.equals(wifis[i].getMAC())){
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public wifi getWifi(String MAC){
 		for(int i=0;i<num;i++){

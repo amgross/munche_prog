@@ -1,8 +1,6 @@
 package mainProject;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Scanner;
 import java.util.Vector;
 
 public class dataBaseFunctions{
@@ -94,90 +92,6 @@ public class dataBaseFunctions{
 		}
 	}
 	
-	////////////////////ex0 version
-
-//	private static Scanner console;
-//	/**
-//	 * ask the user in which filter he whant to use
-//	 * @return the filter
-//	 */
-//	public static filter chooseFilter(){
-//		String userAns;
-//
-//
-//		filter myFilter=null;
-//		console = new Scanner(System.in);
-//		do{
-//			System.out.println("do you want to filter the low rxl? y/n");
-//			userAns=console.next();
-//		}while(!userAns.equals("n")&&!userAns.equals("y"));
-//		if(userAns.equals("y")){
-//			while(true){
-//				try{
-//					System.out.println("what is the min rxl?");
-//					userAns=console.next();
-//					Integer.parseInt(userAns);
-//					break;
-//				}catch(Exception e){
-//
-//				}
-//			}
-//			myFilter=new filterByRXL();
-//
-//		}
-//		else{
-//			do{
-//				System.out.println("do you want to filter just one ID? y/n");
-//				userAns=console.next();
-//			}while(!userAns.equals("n")&&!userAns.equals("y"));
-//			if(userAns.equals("y")){
-//				System.out.println("what is the ID?");
-//				console.nextLine();
-//				userAns=console.nextLine();
-//
-//				myFilter=new filterByID();
-//
-//
-//			}else{
-//				do{
-//					System.out.println("do you want to filter just the recent time? y/n");
-//					userAns=console.next();
-//				}while(!userAns.equals("n")&&!userAns.equals("y"));
-//				if(userAns.equals("y")){
-//					System.out.println("data from which time you want? tipe it: year-month-day hour:minut:second");
-//					console.nextLine();
-//					while(true){
-//						try{
-//							userAns=console.nextLine();
-//							check.checkTime(userAns);
-//							myFilter=new filterByTime();
-//							break;
-//						}catch(Exception e){
-//							System.out.println("tipe it: year-month-day hour:minut:second");
-//						}
-//					}
-//				}else{
-//					myFilter=new dontFilter();
-//				}
-//			}
-//		}
-//		filter.parm.setParm(userAns);			
-//		return myFilter;
-//	}
-//	/**
-//	 * 
-//	 * @param myFilter get filter
-//	 * @param dataBase to filter it
-//	 * filtering the database with the filter
-//	 */
-//	public static void filterDataBase(filter myFilter,Vector<sameScanWifi> dataBase){
-//		for (Iterator<sameScanWifi> sameScanWifiIterator = dataBase.iterator(); sameScanWifiIterator.hasNext(); ) {
-//			if(!myFilter.filters(sameScanWifiIterator.next())){
-//				sameScanWifiIterator.remove();
-//			}
-//		}
-//
-//	}
 	
 	public static Vector<sameScanWifi> clone(Vector<sameScanWifi> database){
 		 Vector<sameScanWifi> ans = new Vector<sameScanWifi>();

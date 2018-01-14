@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 /**
  * @web http://java-buddy.blogspot.com/
  */
-public class JavaMyFrame extends JFrame //îöéâ àú äúé÷éåú ëîå ùàðé øåöä
+public class JavaMyFrame extends JFrame 
     implements ActionListener{
 	public JavaMyFrame() {
 	}
@@ -71,7 +71,6 @@ public class JavaMyFrame extends JFrame //îöéâ àú äúé÷éåú ëîå ù
             if(returnVal == JFileChooser.APPROVE_OPTION){
                 File file = jFileChooser.getSelectedFile();
                 textArea.setText("Selected file: " + file.getName());
-            //    System.out.println(file.getName());///////////////////
                 s=file.getName();
                 set();
             }else if(returnVal == JFileChooser.CANCEL_OPTION){

@@ -63,18 +63,18 @@ public class Database {
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			/////////////////////////////////////////
-			System.out.println("not good table because one of the numeric fields waswnt numeric\n" 
-					+ e.getMessage());
+			System.out.println("\n\nnot good table because one of the numeric fields waswnt numeric\n" 
+					+ e.getMessage()+"\n\n");
 			/////////////////////////////////////////
 		} catch (SQLException e) {
 			// TODO: handle exception
 			///////////////////////
 			e.printStackTrace();
-			System.out.println("problem with the sql connection/table");
+			System.out.println("\n\nproblem with the sql connection/table\n"+e.getMessage()+"\n\n");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			////////////////////////////////////////
-			System.out.println("not good table\n" + e.getMessage());
+			System.out.println("\n\nnot good table\n" + e.getMessage()+"\n\n");
 			///////////////////////////////////////
 		}
 	}
@@ -87,18 +87,18 @@ public class Database {
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			/////////////////////////////////////////
-			System.out.println("not good file because one of the numeric fields waswnt numeric\n" 
-					+ e.getMessage());
+			System.out.println("\n\nnot good file because one of the numeric fields waswnt numeric\n" 
+					+ e.getMessage()+"\n\n");
 			/////////////////////////////////////////
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			////////////////////////////////////////
-			System.out.println("the file in the path is open/not found\n" + e.getMessage());
+			System.out.println("\n\nthe file in the path is open/not found\n" + e.getMessage()+"\n\n");
 			////////////////////////////////////////
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			////////////////////////////////////////
-			System.out.println("not good file\n" + e.getMessage());
+			System.out.println("\n\nnot good file\n" + e.getMessage()+"\n\n");
 			///////////////////////////////////////
 		}
 		sourceData.add(csvData);
@@ -114,7 +114,6 @@ public class Database {
 		sourceWiggleDataPath.put(wiggleData, path);
 		lastModifyWiggle.put(path, new File(path).lastModified());
 		createLocalDatabase();
-		//dataBaseFunctions.unit(local_dataBase, wiggleData);
 		createCurrent_dataBase();
 	}
 
@@ -168,7 +167,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			///////////////////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			///////////////////////////////
 		}
 	}
@@ -182,7 +181,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			///////////////////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			///////////////////////////////
 		}
 	}
@@ -194,7 +193,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			///////////////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			///////////////////////////
 		}
 	}
@@ -206,7 +205,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/////////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			//////////////////////
 		}
 	}
@@ -218,7 +217,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			/////////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			//////////////////////
 		}
 	}
@@ -230,7 +229,7 @@ public class Database {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			///////////////////
-			System.out.println("the time need to be in format of  year-month-day hour:minut:second");
+			System.out.println("\n\nthe time need to be in format of  year-month-day hour:minut:second\n\n");
 			///////////////////
 		}
 	}
@@ -305,7 +304,7 @@ public class Database {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			///////////////////////////
-			System.out.println("cant write into: " + path + "\n mabe it open?\n" + e.getMessage());
+			System.out.println("\n\ncant write into: " + path + "\n mabe it open?\n" + e.getMessage()+"\n\n");
 			///////////////////////////
 		}
 	}
@@ -321,17 +320,17 @@ public class Database {
 			}catch (IOException e) {
 				// TODO Auto-generated catch block
 				/////////////////////////////
-				System.out.println("cant read from: " + path +"\n mabe it open?\n" + e.getMessage());
+				System.out.println("\n\ncant read from: " + path +"\n mabe it open?\n" + e.getMessage()+"\n\n");
 				/////////////////////////////
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				System.out.println("problems with the filter in the file");
+				System.out.println("\n\nproblems with the filter in the file\n"+e.getMessage()+"\n\n");
 			}
 			createCurrent_dataBase();
 		}catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			//////////////////////////////
-			System.out.println("cant find: " + path +"\n" + e.getMessage());
+			System.out.println("\n\ncant find: " + path +"\n" + e.getMessage()+"\n\n");
 			/////////////////////////////
 		} 
 	}
@@ -339,9 +338,12 @@ public class Database {
 	public void printRoutersPlaces(){
 		Vector<Vector<wifiWithCoordinate>> IdenticalMAC=dataBaseFunctions.collectIdenticalMAC(this.current_dataBase);
 		Vector<wifiWithCoordinate> realPlaces=findPlaces.realPlaces(IdenticalMAC,3);
+		System.out.println("\n\n\n////////////////////////////\n\n\n");
 		for (wifiWithCoordinate wifiWithCoordinate : realPlaces) {
 			System.out.println(wifiWithCoordinate);
 		}
+		System.out.println("\n\n\n////////////////////////////\n\n\n");
+
 	}
 
 	public void getScanPlaceFromString(String withoutCoordinates){
@@ -361,10 +363,12 @@ public class Database {
 			}
 			check.add(tempSameScanWifi);
 			findPlaces.findManPlace(this.current_dataBase,check,3);
+			System.out.println("\n\n\n////////////////////////////\n\n\n");
 			System.out.println(tempSameScanWifi.coordinatesToString());
+			System.out.println("\n\n\n////////////////////////////\n\n\n");
 		}catch(Exception e){
 			//////////////
-			System.out.println("bad input");
+			System.out.println("\n\nbad input\n\n");
 			///////////////
 		}
 	}
@@ -390,10 +394,12 @@ public class Database {
 			}
 			check.add(tempSameScanWifi);
 			findPlaces.findManPlace(this.current_dataBase,check,3);
+			System.out.println("\n\n\n////////////////////////////\n\n\n");
 			System.out.println(tempSameScanWifi.coordinatesToString());
+			System.out.println("\n\n\n////////////////////////////\n\n\n");
 		}catch(Exception e){
 			//////////////
-			System.out.println("bad input");
+			System.out.println("\n\nbad input\n\n");
 			///////////////
 		}
 	}
