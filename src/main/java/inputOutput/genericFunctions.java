@@ -6,7 +6,7 @@ import java.io.InputStream;
 
 public class genericFunctions {
 	/**
-	 * from https://stackoverflow.com/questions/453018/number-of-lines-in-a-file-in-java 
+	 * @author https://stackoverflow.com/questions/453018/number-of-lines-in-a-file-in-java 
 	 * Gets path of a file.  
 	 * Return the number of lines in it.
 	 * we changed the origin code that will work even when their is no enter in the end of the file

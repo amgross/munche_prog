@@ -24,7 +24,7 @@ public class filterByTime extends filter{
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean timeFilter(sameScanWifi info) {
+	private boolean timeFilter(sameScanWifi info) {
 
 		String[] partsCheck=info.getTime().split("-");
 		String[] partsChecker=par1.split("-");
