@@ -1,4 +1,4 @@
-package mainProject;
+package data;
 import java.util.Iterator;
 
 import de.micromata.opengis.kml.v_2_2_0.Folder;

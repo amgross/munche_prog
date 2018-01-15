@@ -1,4 +1,4 @@
-package mainProject;
+package data;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Vector;

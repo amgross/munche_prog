@@ -1,4 +1,4 @@
-package mainProject;
+package data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +11,18 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.JTextField;
+
+import filters.andGate;
+import filters.filterByCoordinates;
+import filters.filterByID;
+import filters.filterByTime;
+import filters.filterTree;
+import filters.notGate;
+import filters.orGate;
+import inputOutput.CSV;
+import inputOutput.KML;
+import inputOutput.SQL;
+import inputOutput.WiggleWifi;
 
 public class Database {
 	private Vector<Vector<sameScanWifi>> sourceData;

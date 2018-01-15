@@ -1,4 +1,4 @@
-package mainProject;
+package inputOutput;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import data.sameScanWifi;
+import data.wifi;
 
 import java.sql.Statement;
 

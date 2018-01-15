@@ -1,5 +1,7 @@
-package mainProject;
+package filters;
 import java.util.Vector;
+
+import data.sameScanWifi;
 
 public abstract class filter {
 	String par1;

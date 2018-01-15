@@ -1,6 +1,8 @@
-package mainProject;
+package filters;
 
 import java.util.Vector;
+
+import data.sameScanWifi;
 /**
  * 
  * interface of filter to 'sameScanWifi' for the kml file

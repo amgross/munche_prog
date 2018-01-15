@@ -1,46 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="test" tests="23" skipped="0" failures="0" errors="0" timestamp="2018-01-14T16:01:42" hostname="Android-37" time="2.785">
+<testsuite name="test" tests="23" skipped="0" failures="0" errors="0" timestamp="2018-01-15T10:18:25" hostname="Android-37" time="3.527">
   <properties/>
-  <testcase name="algo2FromExelExample" classname="test" time="0.014"/>
-  <testcase name="filterToString" classname="test" time="0.002"/>
+  <testcase name="algo2FromExelExample" classname="test" time="0.012"/>
+  <testcase name="filterToString" classname="test" time="0.003"/>
   <testcase name="checkBadTimeTest1" classname="test" time="0.0"/>
   <testcase name="checkBadTimeTest2" classname="test" time="0.0"/>
-  <testcase name="simpleDatabase" classname="test" time="0.006"/>
-  <testcase name="FilterByTimeBadTest" classname="test" time="0.001"/>
+  <testcase name="simpleDatabase" classname="test" time="0.018"/>
+  <testcase name="FilterByTimeBadTest" classname="test" time="0.002"/>
   <testcase name="FilterByTimeGoodTest" classname="test" time="0.002"/>
-  <testcase name="test3WriteKml" classname="test" time="1.623"/>
-  <testcase name="collectDoubleMACTest" classname="test" time="0.004"/>
-  <testcase name="filterFromStringNotID" classname="test" time="0.002"/>
+  <testcase name="test3WriteKml" classname="test" time="2.047"/>
+  <testcase name="collectDoubleMACTest" classname="test" time="0.0"/>
+  <testcase name="filterFromStringNotID" classname="test" time="0.001"/>
   <testcase name="filterFromStringToString" classname="test" time="0.001"/>
   <testcase name="test2collectInfoFromCSV" classname="test" time="0.001"/>
-  <testcase name="test1ToCsv" classname="test" time="0.554"/>
-  <testcase name="test2ToCsv" classname="test" time="0.062"/>
-  <testcase name="test3ToCsv" classname="test" time="0.017"/>
-  <testcase name="test4ToCsv" classname="test" time="0.013"/>
+  <testcase name="test1ToCsv" classname="test" time="0.754"/>
+  <testcase name="test2ToCsv" classname="test" time="0.081"/>
+  <testcase name="test3ToCsv" classname="test" time="0.029"/>
+  <testcase name="test4ToCsv" classname="test" time="0.025"/>
   <testcase name="CountLineTest" classname="test" time="0.001"/>
-  <testcase name="filterFromStringAndTime" classname="test" time="0.0"/>
-  <testcase name="test1collectInfoFromCSV" classname="test" time="0.003"/>
+  <testcase name="filterFromStringAndTime" classname="test" time="0.003"/>
+  <testcase name="test1collectInfoFromCSV" classname="test" time="0.03"/>
   <testcase name="checkGoodTimeTest" classname="test" time="0.0"/>
-  <testcase name="test4WriteKml" classname="test" time="0.435"/>
-  <testcase name="filterFromString" classname="test" time="0.0"/>
+  <testcase name="test4WriteKml" classname="test" time="0.446"/>
+  <testcase name="filterFromString" classname="test" time="0.004"/>
   <testcase name="filterFromStringOrCoordinates" classname="test" time="0.001"/>
-  <system-out><![CDATA[test\toCsvTest\test1\wifi.csv   is csv file but not good app file
+  <system-out><![CDATA[
+test\toCsvTest\test1\wifi.csv   is csv file but not good app file
+
 add: test\toCsvTest\test1\WigleWifi_20171027162905.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027162929.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027162958.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027163008.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027164505.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027164517.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027164529.csv
+
 add: test\toCsvTest\test1\WigleWifi_20171027164539.csv
+
 test\toCsvTest\test1\WigleWifi_20171028203300.csv   is csv file but not good app file
+
 add: test\toCsvTest\test1\WigleWifi_20171107085918.csv
+
 test\toCsvTest\test2\wifi.csv   is csv file but not good app file
+
 add: test\toCsvTest\test2\WigleWifi_20171107085918.csv
+
 test\toCsvTest\test3\bad.csv   is csv file but not good app file
+
 test\toCsvTest\test3\wifi.csv   is csv file but not good app file
+
 test\toCsvTest\test4\bad.csv   is csv file but not good app file
+
 add: test\toCsvTest\test4\good.csv
+
 add: test\toCsvTest\test4\wifi.csv
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

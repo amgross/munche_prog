@@ -1,5 +1,8 @@
-package mainProject;
+package filters;
 import java.util.Vector;
+
+import data.dataBaseFunctions;
+import data.sameScanWifi;
 
 public class notGate extends filter {
 

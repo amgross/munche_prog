@@ -2,6 +2,10 @@ package mainProject;
 
 import java.awt.event.*;
 import javax.swing.*;
+
+import data.Database;
+import inputOutput.SQL;
+
 import java.awt.EventQueue;
 
 

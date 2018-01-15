@@ -1,4 +1,4 @@
-package mainProject;
+package data;
 
 public class wifi implements  Cloneable {
 	

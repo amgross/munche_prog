@@ -1,7 +1,8 @@
 
 import static org.junit.Assert.*;
-import mainProject.*;
-
+import data.*;
+import filters.*;
+import inputOutput.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.Vector;
 
 import org.junit.Test;
+
+
 
 public class test {
 	/**

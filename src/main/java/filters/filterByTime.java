@@ -1,5 +1,9 @@
-package mainProject;
+package filters;
 import java.util.Vector;
+
+import data.check;
+import data.dataBaseFunctions;
+import data.sameScanWifi;
 
 /**
  * 

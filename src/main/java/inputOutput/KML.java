@@ -1,8 +1,10 @@
-package mainProject;
+package inputOutput;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Vector;
 
+import data.sameScanWifi;
+import data.wifiWithCoordinate;
 import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Folder;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
