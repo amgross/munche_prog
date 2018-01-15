@@ -45,7 +45,7 @@ public class WiggleWifi {
 	/**
 	 * Get an path of folder that contains wiggle wifi files. 
 	 * Return the relevant info from the files in dataBase
-	 * @param pathes-
+	 * @param path-
 	 * @return info-matrix of parameters 
 	 */
 	public static Vector<sameScanWifi> collectInfoFromWiggleWifi(String path){

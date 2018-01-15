@@ -6,7 +6,7 @@ import java.util.Vector;
 public class dataBaseFunctions{
 	/**
 	 * delete double mac from database
-	 * @param database
+	 * @param dataBase
 	 */
 	public static void deleteDoubleMacFromDataBase(Vector<sameScanWifi> dataBase){
 		HashMap< String,sameScanWifi> hmap = new HashMap< String,sameScanWifi>();
@@ -73,7 +73,7 @@ public class dataBaseFunctions{
 	 * if their was an ellement from the same scan it units them,
 	 *  else it add it to the end of the vector
 	 * @param dataBase
-	 * @param tempDataBase
+	 * @param tempDataBase to insert into database
 	 */
 	public static void unit(Vector<sameScanWifi> dataBase, Vector<sameScanWifi> tempDataBase) {
 		// TODO Auto-generated method stub

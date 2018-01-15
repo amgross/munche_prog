@@ -6,12 +6,12 @@ public class check {
 	
 	/**
 	 * if the string is not good, throws exeption
-	 * @param userAns
-	 * @throws java.lang.Exception
+	 * @param time spose to be string of time
+	 * @throws java.lang.Exception if it is not in our format
 	 */
-	public static void checkTime(String userAns) throws java.lang.Exception {
+	public static void checkTime(String time) throws java.lang.Exception {
 		// TODO Auto-generated method stub
-		String[] Checker=userAns.split("-");
+		String[] Checker=time.split("-");
 		Integer.parseInt(Checker[0]);
 		if(Integer.parseInt(Checker[1])>12||Integer.parseInt(Checker[1])<1){
 			throw Exception;

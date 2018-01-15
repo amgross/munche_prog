@@ -17,7 +17,6 @@ import de.micromata.opengis.kml.v_2_2_0.Kml;
  * this program get path of the csv file that the function 'toCsv' made
  * Write it to KML file 
  * if their are problems with the csv file this function will stop in the middle
- * @param path,
  */
 public class KML {
 	
@@ -43,7 +42,8 @@ public class KML {
 	
 	/**
 	 * Write the KML file from databace to new kml file.
-	 * @param filePlace-
+	 * @param folderPath-
+	 * @param dataBase
 	 * @return 0 if the csv file was'nt good, else return 1
 	 */
 	public static int printFileFromWifiWithCoordinateToKML(String folderPath,Vector<wifiWithCoordinate> dataBase){

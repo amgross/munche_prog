@@ -23,7 +23,12 @@ import inputOutput.CSV;
 import inputOutput.KML;
 import inputOutput.SQL;
 import inputOutput.WiggleWifi;
-
+/**
+ * 
+ * @author arye gross
+ * object of database with filters
+ *
+ */
 public class Database {
 	private Vector<Vector<sameScanWifi>> sourceData;
 	private HashMap<SQL,String> lastModifySQL;
@@ -49,7 +54,7 @@ public class Database {
 	public void deleteDatabase(){
 		newDatabase();
 	}
-
+	
 	private void newDatabase(){
 		sourceData = new Vector<Vector<sameScanWifi>>();
 		sourceSQLData = new HashMap<Vector<sameScanWifi>,SQL>();

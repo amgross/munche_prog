@@ -23,6 +23,8 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 
 	/**
 	 * this methode get another sameScanWifi and check if they are from the same scan
+	 * @param a scan
+	 * @return true if they are same, else return false
 	 */
 	public boolean compare(sameScanWifi a){
 		if(a.getAltitude()==this.altitude&&a.getID().equals(this.ID)&&
@@ -70,7 +72,7 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 	}
 	/**
 	 * insert new wifi, if their are already ten delete the one with the min rssi
-	 * @param wifi
+	 * @param a wifi
 	 */
 	public void insert(wifi a){
 		if (exist(a)){
@@ -108,6 +110,7 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 
 	/**
 	 * add placeMark to folder
+	 * @param y folder
 	 */
 	public void placeMark(Folder y){
 		String[] time = this.time.split(" ");
@@ -130,7 +133,7 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 
 	/**
 	 *  remove one wifi
-	 * @param wifi
+	 * @param delete wifi to remove
 	 * @return true if the object didn't emptied, else false
 	 */
 	public boolean remove(wifi delete){
@@ -150,7 +153,7 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 
 	/**
 	 * 
-	 * setters return exception if the values are non good
+	 *  return exception if the values are non good
 	 */
 	public void setAltitude(String altitude) {
 		if(altitude.equals("?")){
@@ -173,7 +176,10 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 	}
 
 
-
+	/**
+	 * 
+	 *  return exception if the values are non good
+	 */
 	public void setLatitude(String latitude) {
 		if(latitude.equals("?")){
 			this.altitude=-1;
@@ -184,7 +190,10 @@ public class sameScanWifi implements Iterable<wifi>,  Cloneable{
 	}
 
 
-
+	/**
+	 * 
+	 *  return exception if the values are non good
+	 */
 	public void setTime(String time) throws Exception {
 		this.time = time;
 		check.checkTime(time);

@@ -22,7 +22,7 @@ import data.wifiWithCoordinate;
  * Print a file name wifi.csv to the given path, with the information 
  * collected in this application
  * 
- * @param path-
+
  */
 public class CSV {
 
@@ -31,8 +31,8 @@ public class CSV {
 	 *  gets vector of the info and PrintWriter to csv (format)
 	 *  printing into the new csv file all the data
 	 * 
-	 * @param info-
-	 * @param outs-
+	 * @param dataBase-
+	 * @param path-to print there
 	 */
 	public static void printFileFromDataBaseToCSV(Vector<sameScanWifi> dataBase,String path){
 		FileWriter fw;             // statement
@@ -55,7 +55,7 @@ public class CSV {
 
 	/**
 	 * print File From data base of WifiWithCoordinate To CSV format
-	 * @param dataBase of Vector<wifiWithCoordinate>
+	 * @param dataBase 
 	 * @param path to print all the data from the database in it
 	 */
 	public static void printFileFromWifiWithCoordinateToCSV(Vector<wifiWithCoordinate> dataBase,String path){
@@ -76,7 +76,7 @@ public class CSV {
 	}
 
 	/**
-	 * collect the info into Vector<sameScanWifi> 
+	 * collect the info into database
 	 * @param path of csv file that our function made
 	 * @return data base from it
 	 * @throws IOException 

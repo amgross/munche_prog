@@ -13,14 +13,14 @@ public class findPlaces {
 	private static final int _DIFF_NO_SIGNAL = 100;
 
 	/**
-	 * the program getting two databases of Vector<sameScanWifi>
+	 * the program getting two databases 
 	 * every scan from the second the program will take the most close scans from the first and will revalue the coordinates of the scan with them.
 	 * @param database 
-	 * @param manScans
+	 * @param database_without_coordinates
 	 * @param num_of_points-how many scans from the first to use for revalue
 	 */
-	public static void findManPlace(Vector<sameScanWifi> database,Vector<sameScanWifi> manScans,int num_of_points){
-		for(sameScanWifi fixingNow : manScans){
+	public static void findManPlace(Vector<sameScanWifi> database,Vector<sameScanWifi> database_without_coordinates,int num_of_points){
+		for(sameScanWifi fixingNow : database_without_coordinates){
 			HashMap<sameScanWifi,Double> scansWeight= new HashMap<sameScanWifi,Double>();
 
 			for(sameScanWifi gettingWeight : database){				
